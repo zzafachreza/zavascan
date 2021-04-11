@@ -74,7 +74,7 @@ export default function Login({navigation}) {
               color: colors.black,
               // maxWidth: 230,
             }}>
-            Silahkan login untuk masuk ke aplikasi ZAVASCAN
+            Silahkan login untuk masuk ke aplikasi CINDY SCAN
           </Text>
           <MyGap jarak={10} />
           <MyInput

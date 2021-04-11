@@ -113,7 +113,7 @@ export default function Splash({navigation}) {
             color: colors.secondary,
             bottom: -30,
           }}>
-          ZAVA
+          CINDY
         </Text>
         <Text
           style={{

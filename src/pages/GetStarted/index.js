@@ -51,7 +51,7 @@ export default function GetStarted({navigation}) {
           color: colors.secondary,
           bottom: -30,
         }}>
-        ZAVA
+        CINDY
       </Text>
       <Text
         style={{
