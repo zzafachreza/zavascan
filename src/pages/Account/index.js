@@ -32,7 +32,6 @@ export default function Account({navigation}) {
 
   return (
     <ImageBackground
-      source={require('../../assets/back-beton.png')}
       style={{
         flex: 1,
       }}>

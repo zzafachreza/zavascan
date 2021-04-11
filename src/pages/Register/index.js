@@ -56,9 +56,7 @@ export default function Register({navigation}) {
     });
   };
   return (
-    <ImageBackground
-      style={styles.page}
-      source={require('../../assets/back-beton.png')}>
+    <ImageBackground style={styles.page}>
       <ScrollView style={styles.page}>
         {/* <Image
         source={require('../../assets/logooren.png')}

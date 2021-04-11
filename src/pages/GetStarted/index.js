@@ -11,8 +11,8 @@ import {
 } from 'react-native';
 import {MyButton, MyGap} from '../../components';
 import {colors} from '../../utils/colors';
-import {color} from 'react-native-reanimated';
 import {fonts} from '../../utils/fonts';
+import LottieView from 'lottie-react-native';
 
 export default function GetStarted({navigation}) {
   const windowWidth = Dimensions.get('window').width;
@@ -41,61 +41,40 @@ export default function GetStarted({navigation}) {
   }).start();
 
   return (
-    <ImageBackground style={styles.page}>
+    <ImageBackground
+      source={require('../../assets/back.jpg')}
+      style={styles.page}>
+      <Text
+        style={{
+          fontSize: windowWidth / 6,
+          fontFamily: fonts.secondary[900],
+          color: colors.secondary,
+          bottom: -30,
+        }}>
+        ZAVA
+      </Text>
+      <Text
+        style={{
+          fontSize: windowWidth / 6,
+          fontFamily: fonts.secondary[900],
+          color: colors.primary,
+        }}>
+        SCAN
+      </Text>
+
       <View
         style={{
           flex: 1,
-          // backgroundColor: 'yellow',
-          justifyContent: 'center',
-          alignItems: 'center',
+          justifyContent: 'flex-end',
         }}>
-        <Animated.Image
-          source={require('../../assets/beton.png')}
-          resizeMode="contain"
-          style={{
-            top: '30%',
-            aspectRatio: 0.7,
-          }}
+        <MyButton
+          title="LOGIN"
+          Icons="log-in"
+          warna={colors.primary}
+          onPress={() => navigation.navigate('Login')}
         />
       </View>
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text
-          style={{
-            fontSize: windowWidth / 5,
-            fontFamily: fonts.secondary[900],
-            color: colors.secondary,
-            bottom: -40,
-          }}>
-          ZAVA
-        </Text>
-        <Text
-          style={{
-            fontSize: windowWidth / 5,
-            fontFamily: fonts.secondary[900],
-            color: colors.primary,
-          }}>
-          STOCK
-        </Text>
-      </View>
 
-      <MyButton
-        title="LOGIN"
-        Icons="log-in"
-        warna={colors.primary}
-        onPress={() => navigation.navigate('Login')}
-      />
-
-      <MyGap jarak={20} />
-      <MyButton
-        title="REGISTER"
-        Icons="book"
-        warna={colors.secondary}
-        onPress={() => navigation.navigate('Register')}
-      />
       <Animated.View style={{height: top}} />
     </ImageBackground>
   );

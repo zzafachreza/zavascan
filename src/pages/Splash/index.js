@@ -14,6 +14,7 @@ import {fonts} from '../../utils/fonts';
 import {color} from 'react-native-reanimated';
 import {getData} from '../../utils/localStorage';
 import {PermissionsAndroid} from 'react-native';
+import LottieView from 'lottie-react-native';
 
 export default function Splash({navigation}) {
   const windowWidth = Dimensions.get('window').width;
@@ -79,10 +80,10 @@ export default function Splash({navigation}) {
             marginTop: 20,
             fontFamily: fonts.secondary[400],
             fontSize: windowWidth / 20,
-            color: colors.primary,
+            color: colors.black,
             bottom: bottom,
           }}>
-          Aplikasi untuk memudahkan Anda dalam Stock Opname
+          Aplikasi untuk memudahkan Anda dalam cek resi
         </Animated.Text>
 
         <Animated.View
@@ -93,10 +94,11 @@ export default function Splash({navigation}) {
             // bottom: bottomImage,
             // margin: 10,
             height: 10,
-            backgroundColor: colors.primary,
+            backgroundColor: colors.tertiary,
           }}
         />
       </View>
+      <LottieView source={require('../../assets/scan.json')} autoPlay loop />
 
       <View
         style={{
@@ -106,35 +108,21 @@ export default function Splash({navigation}) {
         }}>
         <Text
           style={{
-            fontSize: windowWidth / 5,
+            fontSize: windowWidth / 6,
             fontFamily: fonts.secondary[900],
             color: colors.secondary,
-            bottom: -40,
+            bottom: -30,
           }}>
           ZAVA
         </Text>
         <Text
           style={{
-            fontSize: windowWidth / 5,
+            fontSize: windowWidth / 6,
             fontFamily: fonts.secondary[900],
             color: colors.primary,
           }}>
-          STOCK
+          SCAN
         </Text>
-      </View>
-
-      <View
-        style={{
-          paddingHorizontal: 20,
-        }}>
-        <Animated.Image
-          resizeMode="contain"
-          source={require('../../assets/building.png')}
-          style={{
-            marginBottom: bottomImage,
-            aspectRatio: 2,
-          }}
-        />
       </View>
     </SafeAreaView>
   );

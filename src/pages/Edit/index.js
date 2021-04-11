@@ -40,7 +40,6 @@ export default function Edit({navigation, route}) {
   };
   return (
     <ImageBackground
-      source={require('../../assets/back-beton.png')}
       style={{
         flex: 1,
         padding: 10,

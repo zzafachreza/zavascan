@@ -12,15 +12,14 @@ import LottieView from 'lottie-react-native';
 import {MyButton} from '../../components';
 import {colors} from '../../utils/colors';
 
-export default function Success2({navigation, route}) {
+export default function Error({navigation, route}) {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const txt = new Animated.Value(-windowWidth);
 
   Animated.timing(txt, {
     toValue: 10,
-    duration: 800,
-    useNativeDriver: false,
+    duration: 100,
   }).start();
 
   const messege = route.params.messege;
@@ -37,7 +36,7 @@ export default function Success2({navigation, route}) {
           paddingBottom: 100,
         }}>
         <LottieView
-          source={require('../../assets/success.json')}
+          source={require('../../assets/error.json')}
           autoPlay
           loop={false}
         />

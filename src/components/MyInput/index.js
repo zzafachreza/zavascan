@@ -9,9 +9,11 @@ export default function MyInput({
   label,
   iconname,
   onChangeText,
+  autoFocus,
   value,
   keyboardType,
   secureTextEntry,
+  onSubmitEditing,
   styleInput,
   placeholder,
   styleLabel,
@@ -38,6 +40,8 @@ export default function MyInput({
         </Text>
       </View>
       <TextInput
+        autoFocus={autoFocus}
+        onSubmitEditing={onSubmitEditing}
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
@@ -45,7 +49,7 @@ export default function MyInput({
         onChangeText={onChangeText}
         autoCapitalize="none"
         style={{
-          borderColor: colors.border,
+          borderColor: colors.primary,
           borderRadius: 10,
           borderWidth: 1,
           paddingLeft: 10,

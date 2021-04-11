@@ -36,10 +36,16 @@ import {
   Success2,
   ListDetail,
   Edit,
+  Hasil,
+  Manual,
+  Kamera,
+  KameraHasil,
+  Error,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
 import {colors} from '../utils/colors';
+import {Icon} from 'react-native-elements';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -84,6 +90,15 @@ export default function Router() {
           headerShown: false,
         }}
       />
+
+      <Stack.Screen
+        name="Error"
+        component={Error}
+        options={{
+          headerShown: false,
+        }}
+      />
+
       <Stack.Screen
         name="Login"
         component={Login}
@@ -169,15 +184,129 @@ export default function Router() {
       />
 
       <Stack.Screen
-        name="Tambah"
-        component={Tambah}
+        name="Hasil"
+        component={Hasil}
         options={({route, navigation}) => ({
-          title: 'TAMBAH',
+          title: 'HASIL DATA SCAN',
           headerTintColor: 'white',
           headerStyle: {
             backgroundColor: colors.primary,
             elevation: 0, // remove shadow on Android
           },
+          cardStyleInterpolator: ({current, layouts}) => {
+            return {
+              cardStyle: {
+                transform: [
+                  {
+                    translateX: current.progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layouts.screen.width, 0],
+                    }),
+                  },
+                ],
+              },
+            };
+          },
+        })}
+      />
+
+      <Stack.Screen
+        name="Manual"
+        component={Manual}
+        options={({route, navigation}) => ({
+          title: 'INPUT MANUAL',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+          headerRight: () => (
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                padding: 10,
+              }}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Hasil')}
+                style={{
+                  position: 'relative',
+                  padding: 5,
+                  marginHorizontal: 5,
+                }}>
+                <Icon name="list" type="ionicon" color="white" size={20} />
+              </TouchableOpacity>
+            </View>
+          ),
+          cardStyleInterpolator: ({current, layouts}) => {
+            return {
+              cardStyle: {
+                transform: [
+                  {
+                    translateX: current.progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layouts.screen.width, 0],
+                    }),
+                  },
+                ],
+              },
+            };
+          },
+        })}
+      />
+
+      <Stack.Screen
+        name="Kamera"
+        component={Kamera}
+        options={({route, navigation}) => ({
+          title: 'SCAN CAMERA',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+          headerRight: () => (
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                padding: 10,
+              }}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Hasil')}
+                style={{
+                  position: 'relative',
+                  padding: 5,
+                  marginHorizontal: 5,
+                }}>
+                <Icon name="list" type="ionicon" color="white" size={20} />
+              </TouchableOpacity>
+            </View>
+          ),
+          cardStyleInterpolator: ({current, layouts}) => {
+            return {
+              cardStyle: {
+                transform: [
+                  {
+                    translateX: current.progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layouts.screen.width, 0],
+                    }),
+                  },
+                ],
+              },
+            };
+          },
+        })}
+      />
+
+      <Stack.Screen
+        name="KameraHasil"
+        component={KameraHasil}
+        options={({route, navigation}) => ({
+          headerShown: false,
           cardStyleInterpolator: ({current, layouts}) => {
             return {
               cardStyle: {

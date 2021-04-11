@@ -11,6 +11,11 @@ import Tambah from './Tambah';
 import List from './List';
 import ListDetail from './ListDetail';
 import Edit from './Edit';
+import Hasil from './Hasil';
+import Manual from './Manual';
+import Kamera from './Kamera';
+import KameraHasil from './KameraHasil';
+import Error from './Error';
 
 export {
   Splash,
@@ -26,4 +31,9 @@ export {
   List,
   Edit,
   ListDetail,
+  Hasil,
+  Manual,
+  Kamera,
+  Error,
+  KameraHasil,
 };

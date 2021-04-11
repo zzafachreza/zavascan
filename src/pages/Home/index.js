@@ -33,25 +33,24 @@ export default function Home({navigation}) {
     },
   ];
 
-  const [data, setData] = useState([
-    {
-      id: 0,
-      image:
-        'https://sikomarjabar.com/admin/upload/210304055804suaka-elang-loji-bogor-jawa-barat.jpg',
-    },
-    // {
-    //   id: 1,
-    //   image:
-    //     'https://sikomarjabar.com/admin/upload/210304055856geopark-Ciletuh.jpg',
-    // },
-  ]);
   const [user, setUser] = useState([]);
+  const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
     getData('user').then(res => {
       console.log(res);
       setUser(res);
     });
+
+    var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear(); //Current Year
+    var hours = new Date().getHours(); //Current Hours
+    var min = new Date().getMinutes(); //Current Minutes
+    var sec = new Date().getSeconds(); //Current Seconds
+    setCurrentDate(
+      date + '/' + month + '/' + year + ' ' + hours + ':' + min + ':' + sec,
+    );
   }, []);
 
   const windowWidth = Dimensions.get('window').width;
@@ -70,146 +69,113 @@ export default function Home({navigation}) {
     );
   };
   return (
-    <ImageBackground
-      source={require('../../assets/back-beton.png')}
+    <SafeAreaView
       style={{
         flex: 1,
       }}>
-      <ScrollView>
-        <FlatListSlider
-          data={images}
-          width={windowWidth}
-          timer={5000}
-          contentContainerStyle={{
-            borderRadius: 20,
-          }}
-          indicatorInActiveColor={colors.secondary}
-          // component={<Preview />}
-          // onPress={item => alert(JSON.stringify(item))}
-          indicatorActiveWidth={20}
-          indicatorActiveColor={colors.primary}
-        />
-        <View
+      <View
+        style={{
+          backgroundColor: colors.primary,
+          padding: 10,
+          height: windowHeight / 6,
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+        }}>
+        <Text
           style={{
-            marginTop: 10,
-            // backgroundColor: colors.primary,
-            // borderWidth: 1,
-            padding: 10,
+            fontFamily: fonts.secondary[400],
+            fontSize: windowWidth / 25,
+            maxWidth: '80%',
+            color: colors.white,
           }}>
+          Selamat datang,
+        </Text>
+        <Text
+          style={{
+            marginTop: 2,
+            fontFamily: fonts.secondary[600],
+            fontSize: windowWidth / 25,
+            maxWidth: '80%',
+            color: colors.white,
+          }}>
+          {user.nama_lengkap}
+        </Text>
+      </View>
+      <View
+        style={{
+          flex: 1,
+          // backgroundColor: 'red',
+          justifyContent: 'center',
+        }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Hasil')}
+          style={{
+            paddingVertical: 20,
+            paddingLeft: 10,
+            alignItems: 'center',
+            backgroundColor: colors.tertiary,
+            margin: 10,
+            borderRadius: 10,
+            flexDirection: 'row',
+          }}>
+          <Icon name="list" type="ionicon" color={colors.white} />
           <Text
             style={{
-              fontFamily: fonts.secondary[400],
-              fontSize: windowWidth / 25,
-              maxWidth: '80%',
-              color: colors.primary,
-            }}>
-            Selamat datang,
-          </Text>
-          <Text
-            style={{
-              marginTop: 2,
+              left: 10,
               fontFamily: fonts.secondary[600],
-              fontSize: windowWidth / 25,
-              maxWidth: '80%',
-              color: colors.primary,
+              color: colors.white,
+              textAlign: 'center',
             }}>
-            {user.nama_lengkap}
+            HASIL DATA SCAN
           </Text>
+        </TouchableOpacity>
 
-          <View
-            style={{
-              // backgroundColor: 'red',
-              // padding: 10,
-              marginVertical: 10,
-              flexDirection: 'row',
-            }}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('List')}
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: windowHeight / 10,
-                backgroundColor: colors.primary,
-                borderRadius: 10,
-                marginRight: 5,
-                flexDirection: 'row',
-              }}>
-              <Icon
-                type="ionicon"
-                name="folder"
-                color={colors.white}
-                size={windowWidth / 20}
-              />
-
-              <Text
-                style={{
-                  fontFamily: 'Montserrat-SemiBold',
-                  color: colors.white,
-                  fontSize: windowWidth / 28,
-                  left: 10,
-                }}>
-                LIHAT DATA
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Tambah')}
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: windowHeight / 10,
-                backgroundColor: colors.secondary,
-                marginLeft: 5,
-                borderRadius: 10,
-                flexDirection: 'row',
-              }}>
-              <Icon
-                type="ionicon"
-                name="file-tray-full"
-                color={colors.white}
-                size={windowWidth / 20}
-              />
-
-              <Text
-                style={{
-                  fontFamily: 'Montserrat-SemiBold',
-                  color: colors.white,
-                  left: 10,
-                  fontSize: windowWidth / 28,
-                }}>
-                TAMBAH
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Kamera')}
           style={{
-            // backgroundColor: colors.primary,
-            // padding: 20,
-            padding: 10,
+            paddingVertical: 20,
+            paddingLeft: 10,
+            alignItems: 'center',
+            backgroundColor: colors.secondary,
+            margin: 10,
+            borderRadius: 10,
+            flexDirection: 'row',
           }}>
-          <View
+          <Icon name="barcode-outline" type="ionicon" color={colors.white} />
+          <Text
             style={{
-              flexDirection: 'row',
-              // justifyContent: 'center',
-              alignItems: 'center',
-              // paddingVertical: 5,
+              left: 10,
+              fontFamily: fonts.secondary[600],
+              color: colors.white,
+              textAlign: 'center',
             }}>
-            <Icon type="ionicon" name="map" color={colors.primary} size={16} />
-            <Text
-              style={{
-                fontFamily: 'Montserrat-SemiBold',
-                color: colors.primary,
-                left: 10,
-                fontSize: 16,
-              }}>
-              KUMPULAN BERITA
-            </Text>
-          </View>
-          <MyNews />
-        </View>
-      </ScrollView>
-    </ImageBackground>
+            MULAI SCAN KAMERA
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Manual')}
+          style={{
+            paddingVertical: 20,
+            paddingLeft: 10,
+            alignItems: 'center',
+            backgroundColor: colors.primary,
+            margin: 10,
+            borderRadius: 10,
+            flexDirection: 'row',
+          }}>
+          <Icon name="keypad-outline" type="ionicon" color={colors.white} />
+          <Text
+            style={{
+              left: 10,
+              fontFamily: fonts.secondary[600],
+              color: colors.white,
+              textAlign: 'center',
+            }}>
+            MULAI INPUT MANUAL
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 }

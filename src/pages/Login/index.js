@@ -57,48 +57,26 @@ export default function Login({navigation}) {
             style={{
               justifyContent: 'center',
               alignItems: 'center',
-              // backgroundColor: 'red',
-              paddingTop: 50,
-              height: 350,
             }}>
-            <Text
-              style={{
-                fontSize: windowWidth / 5,
-                fontFamily: fonts.secondary[900],
-                color: colors.secondary,
-                bottom: -40,
-              }}>
-              SOBAT
-            </Text>
-            <Text
-              style={{
-                fontSize: windowWidth / 5,
-                fontFamily: fonts.secondary[900],
-                color: colors.primary,
-              }}>
-              BETON
-            </Text>
             <Image
               source={require('../../assets/logo.png')}
               style={{
-                top: '-15%',
-                aspectRatio: 1.4,
-                resizeMode: 'center',
+                aspectRatio: 1,
+                // resizeMode: 'center',
               }}
             />
           </View>
 
           <Text
             style={{
-              marginTop: 20,
               fontFamily: fonts.secondary[400],
               fontSize: windowWidth / 20,
               color: colors.black,
               // maxWidth: 230,
             }}>
-            Silahkan login untuk masuk ke aplikasi Sobat Beton
+            Silahkan login untuk masuk ke aplikasi ZAVASCAN
           </Text>
-          <MyGap jarak={20} />
+          <MyGap jarak={10} />
           <MyInput
             label="Email"
             iconname="mail"
@@ -110,7 +88,7 @@ export default function Login({navigation}) {
               })
             }
           />
-          <MyGap jarak={20} />
+          <MyGap jarak={10} />
           <MyInput
             label="Password"
             iconname="key"
@@ -122,7 +100,7 @@ export default function Login({navigation}) {
               })
             }
           />
-          <MyGap jarak={40} />
+          <MyGap jarak={20} />
           <MyButton
             warna={colors.primary}
             title="LOGIN"
