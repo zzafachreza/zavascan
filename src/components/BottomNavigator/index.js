@@ -48,6 +48,8 @@ export default function BottomNavigator({state, descriptors, navigation}) {
           iconName = 'home';
         } else if (label === 'Account') {
           iconName = 'user';
+        } else if (label === 'Laporan') {
+          iconName = 'list';
         }
 
         return (
@@ -126,7 +128,7 @@ export default function BottomNavigator({state, descriptors, navigation}) {
 }
 
 const styles = StyleSheet.create({
-  tab: (iconName) => ({
+  tab: iconName => ({
     // paddingTop: 5,
     // paddingBottom: 5,
     // fontSize: 12,
@@ -134,5 +136,5 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // textAlign: 'center',
   }),
-  box: (iconName) => ({}),
+  box: iconName => ({}),
 });

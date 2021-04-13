@@ -113,7 +113,7 @@ export default function Splash({navigation}) {
             color: colors.secondary,
             bottom: -30,
           }}>
-          CINDY
+          LAPULA
         </Text>
         <Text
           style={{
@@ -121,7 +121,7 @@ export default function Splash({navigation}) {
             fontFamily: fonts.secondary[900],
             color: colors.primary,
           }}>
-          SCAN
+          BEAUTY
         </Text>
       </View>
     </SafeAreaView>

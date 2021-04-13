@@ -17,6 +17,10 @@ import Kamera from './Kamera';
 import KameraHasil from './KameraHasil';
 import Error from './Error';
 
+import Laporan from './Laporan';
+import LaporanHarian from './LaporanHarian';
+import LaporanBulanan from './LaporanBulanan';
+
 export {
   Splash,
   GetStarted,
@@ -36,4 +40,7 @@ export {
   Kamera,
   Error,
   KameraHasil,
+  Laporan,
+  LaporanBulanan,
+  LaporanHarian,
 };

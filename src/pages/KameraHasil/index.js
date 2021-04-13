@@ -10,7 +10,7 @@ export default function KamerHasil({navigation, route}) {
   const [pesan, setPesan] = useState('');
   useEffect(() => {
     axios
-      .post('https://zavalabs.com/api/zavascan_manual_add.php', kirim)
+      .post('https://zavalabs.com/api/zavascan_kamera_add.php', kirim)
       .then(res => {
         console.log(res);
         if (res.data == 404) {

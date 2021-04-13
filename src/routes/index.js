@@ -16,22 +16,7 @@ import {
   Home,
   Account,
   Success,
-  Menu1,
-  Menu2,
-  Menu3,
-  Content,
-  Ekraf,
-  Perjanjian,
-  PerjanjianDetail,
-  Kawasan,
   Berita,
-  Usaha,
-  Dokumentasi,
-  Chse,
-  Jenis,
-  Resume,
-  Kegiatan,
-  Tambah,
   List,
   Success2,
   ListDetail,
@@ -41,6 +26,9 @@ import {
   Kamera,
   KameraHasil,
   Error,
+  Laporan,
+  LaporanHarian,
+  LaporanBulanan,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
@@ -54,6 +42,7 @@ const MainApp = () => {
   return (
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Laporan" component={Laporan} />
       <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
@@ -383,6 +372,60 @@ export default function Router() {
         component={Edit}
         options={({route, navigation}) => ({
           title: 'EDIT DATA',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+          cardStyleInterpolator: ({current, layouts}) => {
+            return {
+              cardStyle: {
+                transform: [
+                  {
+                    translateX: current.progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layouts.screen.width, 0],
+                    }),
+                  },
+                ],
+              },
+            };
+          },
+        })}
+      />
+
+      <Stack.Screen
+        name="LaporanHarian"
+        component={LaporanHarian}
+        options={({route, navigation}) => ({
+          title: 'LAPORAN HARIAN',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+          cardStyleInterpolator: ({current, layouts}) => {
+            return {
+              cardStyle: {
+                transform: [
+                  {
+                    translateX: current.progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layouts.screen.width, 0],
+                    }),
+                  },
+                ],
+              },
+            };
+          },
+        })}
+      />
+
+      <Stack.Screen
+        name="LaporanBulanan"
+        component={LaporanBulanan}
+        options={({route, navigation}) => ({
+          title: 'LAPORAN BULANAN',
           headerTintColor: 'white',
           headerStyle: {
             backgroundColor: colors.primary,

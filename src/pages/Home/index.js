@@ -108,29 +108,6 @@ export default function Home({navigation}) {
           justifyContent: 'center',
         }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Hasil')}
-          style={{
-            paddingVertical: 20,
-            paddingLeft: 10,
-            alignItems: 'center',
-            backgroundColor: colors.tertiary,
-            margin: 10,
-            borderRadius: 10,
-            flexDirection: 'row',
-          }}>
-          <Icon name="list" type="ionicon" color={colors.white} />
-          <Text
-            style={{
-              left: 10,
-              fontFamily: fonts.secondary[600],
-              color: colors.white,
-              textAlign: 'center',
-            }}>
-            HASIL DATA SCAN
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
           onPress={() => navigation.navigate('Kamera')}
           style={{
             paddingVertical: 20,
@@ -173,6 +150,28 @@ export default function Home({navigation}) {
               textAlign: 'center',
             }}>
             MULAI INPUT MANUAL
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Hasil')}
+          style={{
+            paddingVertical: 20,
+            paddingLeft: 10,
+            alignItems: 'center',
+            backgroundColor: colors.tertiary,
+            margin: 10,
+            borderRadius: 10,
+            flexDirection: 'row',
+          }}>
+          <Icon name="list" type="ionicon" color={colors.white} />
+          <Text
+            style={{
+              left: 10,
+              fontFamily: fonts.secondary[600],
+              color: colors.white,
+              textAlign: 'center',
+            }}>
+            HASIL DATA SCAN
           </Text>
         </TouchableOpacity>
       </View>

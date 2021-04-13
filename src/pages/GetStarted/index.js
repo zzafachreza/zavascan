@@ -51,7 +51,7 @@ export default function GetStarted({navigation}) {
           color: colors.secondary,
           bottom: -30,
         }}>
-        CINDY
+        LAPULA
       </Text>
       <Text
         style={{
@@ -59,7 +59,7 @@ export default function GetStarted({navigation}) {
           fontFamily: fonts.secondary[900],
           color: colors.primary,
         }}>
-        SCAN
+        BEAUTY
       </Text>
 
       <View
