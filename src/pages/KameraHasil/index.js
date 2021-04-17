@@ -48,6 +48,15 @@ export default function KamerHasil({navigation, route}) {
         style={{
           textAlign: 'center',
           margin: 10,
+          fontFamily: fonts.secondary[600],
+          fontSize: 18,
+        }}>
+        {kirim.key}
+      </Text>
+      <Text
+        style={{
+          textAlign: 'center',
+          margin: 10,
           fontFamily: fonts.secondary[400],
           fontSize: 18,
         }}>

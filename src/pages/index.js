@@ -20,6 +20,7 @@ import Error from './Error';
 import Laporan from './Laporan';
 import LaporanHarian from './LaporanHarian';
 import LaporanBulanan from './LaporanBulanan';
+import Scanner from './Scanner';
 
 export {
   Splash,
@@ -38,6 +39,7 @@ export {
   Hasil,
   Manual,
   Kamera,
+  Scanner,
   Error,
   KameraHasil,
   Laporan,

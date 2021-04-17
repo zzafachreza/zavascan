@@ -131,6 +131,29 @@ export default function Home({navigation}) {
         </TouchableOpacity>
 
         <TouchableOpacity
+          onPress={() => navigation.navigate('Scanner')}
+          style={{
+            paddingVertical: 20,
+            paddingLeft: 10,
+            alignItems: 'center',
+            backgroundColor: colors.border,
+            margin: 10,
+            borderRadius: 10,
+            flexDirection: 'row',
+          }}>
+          <Icon name="megaphone-outline" type="ionicon" color={colors.white} />
+          <Text
+            style={{
+              left: 10,
+              fontFamily: fonts.secondary[600],
+              color: colors.white,
+              textAlign: 'center',
+            }}>
+            MULAI SCAN DENGAN ALAT
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
           onPress={() => navigation.navigate('Manual')}
           style={{
             paddingVertical: 20,

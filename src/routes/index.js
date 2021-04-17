@@ -29,6 +29,7 @@ import {
   Laporan,
   LaporanHarian,
   LaporanBulanan,
+  Scanner,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
@@ -250,6 +251,52 @@ export default function Router() {
         component={Kamera}
         options={({route, navigation}) => ({
           title: 'SCAN CAMERA',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+          headerRight: () => (
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                padding: 10,
+              }}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Hasil')}
+                style={{
+                  position: 'relative',
+                  padding: 5,
+                  marginHorizontal: 5,
+                }}>
+                <Icon name="list" type="ionicon" color="white" size={20} />
+              </TouchableOpacity>
+            </View>
+          ),
+          cardStyleInterpolator: ({current, layouts}) => {
+            return {
+              cardStyle: {
+                transform: [
+                  {
+                    translateX: current.progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layouts.screen.width, 0],
+                    }),
+                  },
+                ],
+              },
+            };
+          },
+        })}
+      />
+
+      <Stack.Screen
+        name="Scanner"
+        component={Scanner}
+        options={({route, navigation}) => ({
+          title: 'SCAN MANUAL',
           headerTintColor: 'white',
           headerStyle: {
             backgroundColor: colors.primary,
