@@ -21,6 +21,7 @@ import Laporan from './Laporan';
 import LaporanHarian from './LaporanHarian';
 import LaporanBulanan from './LaporanBulanan';
 import Scanner from './Scanner';
+import BarcodeHasil from './BarcodeHasil';
 
 export {
   Splash,
@@ -45,4 +46,5 @@ export {
   Laporan,
   LaporanBulanan,
   LaporanHarian,
+  BarcodeHasil,
 };

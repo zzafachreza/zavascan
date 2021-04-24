@@ -30,6 +30,7 @@ import {
   LaporanHarian,
   LaporanBulanan,
   Scanner,
+  BarcodeHasil,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
@@ -341,6 +342,28 @@ export default function Router() {
       <Stack.Screen
         name="KameraHasil"
         component={KameraHasil}
+        options={({route, navigation}) => ({
+          headerShown: false,
+          cardStyleInterpolator: ({current, layouts}) => {
+            return {
+              cardStyle: {
+                transform: [
+                  {
+                    translateX: current.progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layouts.screen.width, 0],
+                    }),
+                  },
+                ],
+              },
+            };
+          },
+        })}
+      />
+
+      <Stack.Screen
+        name="BarcodeHasil"
+        component={BarcodeHasil}
         options={({route, navigation}) => ({
           headerShown: false,
           cardStyleInterpolator: ({current, layouts}) => {

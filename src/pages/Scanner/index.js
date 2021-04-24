@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,6 +7,7 @@ import {
   ScrollView,
   ActivityIndicator,
   Picker,
+  TextInput,
 } from 'react-native';
 import {MyInput, MyGap, MyButton} from '../../components';
 import {getData} from '../../utils/localStorage';
@@ -16,6 +17,7 @@ import {showMessage} from 'react-native-flash-message';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {Icon} from 'react-native-elements';
 import {fonts} from '../../utils/fonts';
+import {Button} from 'react-native-elements/dist/buttons/Button';
 
 export default function Scanner({navigation}) {
   useEffect(() => {
@@ -25,10 +27,11 @@ export default function Scanner({navigation}) {
     });
   }, []);
 
+  let _myInput = null;
+
   const [key, setKey] = useState('');
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
-
   const _kirimData = () => {
     if (key == '') {
       showMessage({
@@ -41,14 +44,19 @@ export default function Scanner({navigation}) {
         key: key,
       };
 
-      navigation.navigate('KameraHasil', kirim);
+      navigation.navigate('BarcodeHasil', kirim);
 
       //   console.log(kirim);
-      //   setTimeout(() => {
-      //     setLoading(false);
-      //   }, 2000);
+      setTimeout(() => {
+        setKey('');
+      }, 1000);
     }
   };
+
+  // useEffect(() => {
+  //   _myInput.focus();
+  //   console.log(_myInput);
+  // });
 
   return (
     <SafeAreaView

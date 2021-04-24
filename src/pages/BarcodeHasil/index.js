@@ -18,14 +18,14 @@ export default function KamerHasil({navigation, route}) {
           setCek(true);
           setPesan('Sudah pernah discan');
           setTimeout(() => {
-            navigation.replace('Kamera');
+            navigation.replace('Scanner');
           }, 500);
         } else {
           // alert(cek);
           setCek(false);
           setPesan('Berhasil disimpan !');
           setTimeout(() => {
-            navigation.replace('Kamera');
+            navigation.replace('Scanner');
           }, 500);
         }
       });
