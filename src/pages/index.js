@@ -22,7 +22,7 @@ import LaporanHarian from './LaporanHarian';
 import LaporanBulanan from './LaporanBulanan';
 import Scanner from './Scanner';
 import BarcodeHasil from './BarcodeHasil';
-
+import Utama from './Utama';
 export {
   Splash,
   GetStarted,
@@ -47,4 +47,5 @@ export {
   LaporanBulanan,
   LaporanHarian,
   BarcodeHasil,
+  Utama,
 };

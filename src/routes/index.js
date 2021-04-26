@@ -31,6 +31,7 @@ import {
   LaporanBulanan,
   Scanner,
   BarcodeHasil,
+  Utama,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
@@ -52,7 +53,14 @@ const MainApp = () => {
 
 export default function Router() {
   return (
-    <Stack.Navigator initialRouteName={'Splash'}>
+    <Stack.Navigator initialRouteName={'Utama'}>
+      <Stack.Screen
+        name="Utama"
+        component={Utama}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen
         name="Splash"
         component={Splash}

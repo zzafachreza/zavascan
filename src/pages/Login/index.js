@@ -59,9 +59,11 @@ export default function Login({navigation}) {
               alignItems: 'center',
             }}>
             <Image
-              source={require('../../assets/logo.png')}
+              resizeMode="center"
+              source={require('../../assets/logo2.png')}
               style={{
-                aspectRatio: 1,
+                width: 250,
+                height: 250,
                 // resizeMode: 'center',
               }}
             />
@@ -73,8 +75,9 @@ export default function Login({navigation}) {
               fontSize: windowWidth / 20,
               color: colors.black,
               // maxWidth: 230,
+              marginTop: 10,
             }}>
-            Silahkan login untuk masuk ke aplikasi LAPULA
+            Silahkan login untuk masuk ke aplikasi ZAVASCAN
           </Text>
           <MyGap jarak={10} />
           <MyInput

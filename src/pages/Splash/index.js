@@ -56,7 +56,7 @@ export default function Splash({navigation}) {
         // console.log('beum login');
 
         setTimeout(() => {
-          navigation.replace('GetStarted');
+          navigation.replace('Login');
         }, 2000);
       } else {
         console.log('sudah login logon');
@@ -106,23 +106,11 @@ export default function Splash({navigation}) {
           alignItems: 'center',
           // backgroundColor: 'red',
         }}>
-        <Text
-          style={{
-            fontSize: windowWidth / 6,
-            fontFamily: fonts.secondary[900],
-            color: colors.secondary,
-            bottom: -30,
-          }}>
-          LAPULA
-        </Text>
-        <Text
-          style={{
-            fontSize: windowWidth / 6,
-            fontFamily: fonts.secondary[900],
-            color: colors.primary,
-          }}>
-          BEAUTY
-        </Text>
+        <Image
+          resizeMode="contain"
+          style={{width: 200, height: 200, alignSelf: 'center'}}
+          source={require('../../assets/logo5.png')}
+        />
       </View>
     </SafeAreaView>
   );

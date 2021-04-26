@@ -77,7 +77,7 @@ export default function Home({navigation}) {
         style={{
           backgroundColor: colors.primary,
           padding: 10,
-          height: windowHeight / 6,
+          height: windowHeight / 8,
           borderBottomLeftRadius: 20,
           borderBottomRightRadius: 20,
         }}>
@@ -107,6 +107,11 @@ export default function Home({navigation}) {
           // backgroundColor: 'red',
           justifyContent: 'center',
         }}>
+        <Image
+          resizeMode="contain"
+          style={{width: 200, height: 200, alignSelf: 'center'}}
+          source={require('../../assets/logo3.png')}
+        />
         <TouchableOpacity
           onPress={() => navigation.navigate('Kamera')}
           style={{

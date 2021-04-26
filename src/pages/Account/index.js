@@ -27,7 +27,7 @@ export default function Account({navigation}) {
   const handleSave = () => {
     storeData('user', null);
 
-    navigation.replace('GetStarted');
+    navigation.replace('Login');
   };
 
   return (
