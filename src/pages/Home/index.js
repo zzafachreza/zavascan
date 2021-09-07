@@ -16,7 +16,7 @@ import {fonts} from '../../utils/fonts';
 import LottieView from 'lottie-react-native';
 import {getData} from '../../utils/localStorage';
 import {FlatListSlider} from 'react-native-flatlist-slider';
-import {Preview} from '../../components';
+import {Preview, MyDashboard} from '../../components';
 import {Icon} from 'react-native-elements';
 import MyNews from '../../components/MyNews';
 
@@ -72,137 +72,70 @@ export default function Home({navigation}) {
     <SafeAreaView
       style={{
         flex: 1,
+        backgroundColor: colors.primary,
       }}>
       <View
         style={{
-          backgroundColor: colors.primary,
           padding: 10,
           height: windowHeight / 8,
-          borderBottomLeftRadius: 20,
-          borderBottomRightRadius: 20,
+          flexDirection: 'row',
         }}>
-        <Text
+        <View style={{flex: 1}}>
+          <Text
+            style={{
+              fontFamily: fonts.secondary[400],
+              fontSize: windowWidth / 25,
+              maxWidth: '80%',
+              color: colors.white,
+            }}>
+            Selamat datang,
+          </Text>
+          <Text
+            style={{
+              marginTop: 2,
+              fontFamily: fonts.secondary[600],
+              fontSize: windowWidth / 22,
+              maxWidth: '80%',
+              color: colors.white,
+            }}>
+            {user.nama_lengkap}
+          </Text>
+          <Text
+            style={{
+              marginTop: 2,
+              fontFamily: fonts.secondary[600],
+              fontSize: windowWidth / 22,
+              maxWidth: '80%',
+              color: colors.white,
+            }}>
+            {user.email}
+          </Text>
+        </View>
+        <View
           style={{
-            fontFamily: fonts.secondary[400],
-            fontSize: windowWidth / 25,
-            maxWidth: '80%',
-            color: colors.white,
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: 10,
           }}>
-          Selamat datang,
-        </Text>
-        <Text
-          style={{
-            marginTop: 2,
-            fontFamily: fonts.secondary[600],
-            fontSize: windowWidth / 25,
-            maxWidth: '80%',
-            color: colors.white,
-          }}>
-          {user.nama_lengkap}
-        </Text>
+          <Icon
+            type="ionicon"
+            name="notifications"
+            color={colors.white}
+            size={windowWidth / 15}
+          />
+        </View>
       </View>
-      <View
+      <ImageBackground
+        source={require('../../assets/back.jpeg')}
         style={{
           flex: 1,
-          // backgroundColor: 'red',
+          backgroundColor: colors.white,
           justifyContent: 'center',
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
         }}>
-        <Image
-          resizeMode="contain"
-          style={{width: 200, height: 200, alignSelf: 'center'}}
-          source={require('../../assets/logo3.png')}
-        />
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Kamera')}
-          style={{
-            paddingVertical: 20,
-            paddingLeft: 10,
-            alignItems: 'center',
-            backgroundColor: colors.secondary,
-            margin: 10,
-            borderRadius: 10,
-            flexDirection: 'row',
-          }}>
-          <Icon name="barcode-outline" type="ionicon" color={colors.white} />
-          <Text
-            style={{
-              left: 10,
-              fontFamily: fonts.secondary[600],
-              color: colors.white,
-              textAlign: 'center',
-            }}>
-            MULAI SCAN KAMERA
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Scanner')}
-          style={{
-            paddingVertical: 20,
-            paddingLeft: 10,
-            alignItems: 'center',
-            backgroundColor: colors.border,
-            margin: 10,
-            borderRadius: 10,
-            flexDirection: 'row',
-          }}>
-          <Icon name="megaphone-outline" type="ionicon" color={colors.white} />
-          <Text
-            style={{
-              left: 10,
-              fontFamily: fonts.secondary[600],
-              color: colors.white,
-              textAlign: 'center',
-            }}>
-            MULAI SCAN DENGAN ALAT
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Manual')}
-          style={{
-            paddingVertical: 20,
-            paddingLeft: 10,
-            alignItems: 'center',
-            backgroundColor: colors.primary,
-            margin: 10,
-            borderRadius: 10,
-            flexDirection: 'row',
-          }}>
-          <Icon name="keypad-outline" type="ionicon" color={colors.white} />
-          <Text
-            style={{
-              left: 10,
-              fontFamily: fonts.secondary[600],
-              color: colors.white,
-              textAlign: 'center',
-            }}>
-            MULAI INPUT MANUAL
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Hasil')}
-          style={{
-            paddingVertical: 20,
-            paddingLeft: 10,
-            alignItems: 'center',
-            backgroundColor: colors.tertiary,
-            margin: 10,
-            borderRadius: 10,
-            flexDirection: 'row',
-          }}>
-          <Icon name="list" type="ionicon" color={colors.white} />
-          <Text
-            style={{
-              left: 10,
-              fontFamily: fonts.secondary[600],
-              color: colors.white,
-              textAlign: 'center',
-            }}>
-            HASIL DATA SCAN
-          </Text>
-        </TouchableOpacity>
-      </View>
+        <MyDashboard />
+      </ImageBackground>
     </SafeAreaView>
   );
 }

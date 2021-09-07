@@ -61,12 +61,14 @@ export default function Kamera({navigation, route}) {
   isFocused ? animasi() : null;
 
   const barcodeReceived = result => {
-    setLoading(true);
-    const kirim = {
-      id_member: user.id,
-      key: result.data,
-    };
-    navigation.navigate('KameraHasil', kirim);
+    alert(result.data);
+
+    // setLoading(true);
+    // const kirim = {
+    //   id_member: user.id,
+    //   key: result.data,
+    // };
+    // navigation.navigate('KameraHasil', kirim);
     // axios
     //   .post('https://zavalabs.com/api/zavascan_manual_add.php', kirim)
     //   .then(res => {
@@ -89,6 +91,8 @@ export default function Kamera({navigation, route}) {
   return (
     <View style={styles().container}>
       <RNCamera
+        focusDepth={1}
+        exposure={1}
         style={styles().preview}
         type={RNCamera.Constants.Type.back}
         autoFocus={RNCamera.Constants.AutoFocus.on}

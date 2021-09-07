@@ -17,6 +17,7 @@ import {showMessage} from 'react-native-flash-message';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {Icon} from 'react-native-elements';
 import {fonts} from '../../utils/fonts';
+import LottieView from 'lottie-react-native';
 import {Button} from 'react-native-elements/dist/buttons/Button';
 
 export default function Scanner({navigation}) {
@@ -27,13 +28,12 @@ export default function Scanner({navigation}) {
     });
   }, []);
 
-  let _myInput = null;
-
   const [key, setKey] = useState('');
   const [user, setUser] = useState({});
+
   const [loading, setLoading] = useState(false);
   const _kirimData = () => {
-    if (key == '') {
+    if (key.length == 0) {
       showMessage({
         message: 'Form masih kosong !',
         type: 'danger',
@@ -44,12 +44,35 @@ export default function Scanner({navigation}) {
         key: key,
       };
 
-      navigation.navigate('BarcodeHasil', kirim);
+      axios
+        .post('https://zavalabs.com/api/zavascan_kamera_add.php', kirim)
+        .then(res => {
+          setKey('');
+          ref_input.current.focus();
+          if (res.data == 404) {
+            // alert(cek);
+
+            setCek(true);
+
+            setCek2(false);
+            showMessage({
+              type: 'danger',
+              message: key + ' Sudah Pernah Di Scan !',
+            });
+          } else {
+            // alert(cek);
+            setCek2(true);
+            setCek(false);
+            showMessage({
+              type: 'success',
+              message: key + ' Berhasil Simpan Data',
+            });
+          }
+        });
+
+      // navigation.navigate('BarcodeHasil', kirim);
 
       //   console.log(kirim);
-      setTimeout(() => {
-        setKey('');
-      }, 1000);
     }
   };
 
@@ -57,6 +80,9 @@ export default function Scanner({navigation}) {
   //   _myInput.focus();
   //   console.log(_myInput);
   // });
+  const ref_input = useRef();
+  const [cek, setCek] = useState();
+  const [cek2, setCek2] = useState();
 
   return (
     <SafeAreaView
@@ -68,15 +94,57 @@ export default function Scanner({navigation}) {
           style={{
             padding: 10,
           }}>
-          <MyInput
+          {/* <MyInput
+            ref={x => (ref_input = x)}
             value={key}
             onChangeText={value => setKey(value)}
             onSubmitEditing={_kirimData}
-            autoFocus
+            // autoFocus
             label="Masukan barcode"
             iconname="barcode-outline"
-          />
+          /> */}
+
+          <View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                paddingVertical: 5,
+              }}>
+              <Icon
+                type="ionicon"
+                name="barcode"
+                color={colors.primary}
+                size={16}
+              />
+              <Text
+                style={{
+                  fontFamily: fonts.secondary[600],
+                  color: colors.primary,
+                  left: 10,
+                  fontSize: 16,
+                }}>
+                Masukan Barcode / Resi
+              </Text>
+            </View>
+            <TextInput
+              autoFocus
+              value={key}
+              onChangeText={val => setKey(val)}
+              onSubmitEditing={_kirimData}
+              style={{
+                borderColor: colors.primary,
+                borderRadius: 10,
+                borderWidth: 1,
+                paddingLeft: 10,
+                fontSize: 18,
+                fontFamily: fonts.primary[400],
+              }}
+              ref={ref_input}
+            />
+          </View>
         </View>
+
         {loading && (
           <View
             style={{
@@ -86,6 +154,21 @@ export default function Scanner({navigation}) {
           </View>
         )}
       </ScrollView>
+      {cek && (
+        <LottieView
+          source={require('../../assets/error.json')}
+          autoPlay
+          loop={false}
+        />
+      )}
+      {cek2 && (
+        <LottieView
+          style={{margin: 40}}
+          source={require('../../assets/success.json')}
+          autoPlay
+          loop={false}
+        />
+      )}
     </SafeAreaView>
   );
 }

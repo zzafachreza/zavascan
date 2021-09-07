@@ -94,7 +94,7 @@ export default function Splash({navigation}) {
             // bottom: bottomImage,
             // margin: 10,
             height: 10,
-            backgroundColor: colors.tertiary,
+            backgroundColor: colors.primary,
           }}
         />
       </View>

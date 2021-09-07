@@ -17,7 +17,7 @@ export default function Utama({navigation}) {
   return (
     <SafeAreaView
       style={{
-        backgroundColor: '#044cc2',
+        backgroundColor: colors.primary,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',

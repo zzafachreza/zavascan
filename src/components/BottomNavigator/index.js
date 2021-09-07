@@ -1,17 +1,25 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Linking,
+  Dimensions,
+} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {colors} from '../../utils/colors';
 
 export default function BottomNavigator({state, descriptors, navigation}) {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
-
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
   if (focusedOptions.tabBarVisible === false) {
     return null;
   }
 
   return (
-    <View style={{flexDirection: 'row', backgroundColor: 'white'}}>
+    <View style={{backgroundColor: colors.primary, flexDirection: 'row'}}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
         const label =
@@ -45,11 +53,17 @@ export default function BottomNavigator({state, descriptors, navigation}) {
         let iconName = 'home';
 
         if (label === 'Home') {
-          iconName = 'home';
+          iconName = 'home-outline';
         } else if (label === 'Account') {
-          iconName = 'user';
+          iconName = 'person-outline';
         } else if (label === 'Laporan') {
-          iconName = 'list';
+          iconName = 'grid-outline';
+        } else if (label === 'ChatWa') {
+          iconName = 'chatbubbles-outline';
+        } else if (label === 'Cart') {
+          iconName = 'cart';
+        } else if (label === 'Pesanan') {
+          iconName = 'cube-outline';
         }
 
         return (
@@ -59,13 +73,19 @@ export default function BottomNavigator({state, descriptors, navigation}) {
             accessibilityStates={isFocused ? ['selected'] : []}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
-            onPress={onPress}
+            onPress={
+              label === 'Chat'
+                ? () =>
+                    Linking.openURL(
+                      'https://api.whatsapp.com/send?phone=6289653763986',
+                    )
+                : onPress
+            }
             onLongPress={onLongPress}
             style={{flex: 1}}>
             <View
               style={{
-                color: isFocused ? colors.primary : '#919095',
-                backgroundColor: isFocused ? 'white' : '#FFFFFF',
+                color: isFocused ? colors.white : '#919095',
                 paddingTop: 5,
                 paddingBottom: 0,
                 fontSize: 12,
@@ -75,48 +95,25 @@ export default function BottomNavigator({state, descriptors, navigation}) {
               }}>
               <View
                 style={{
-                  position: iconName === 'barcode' ? 'absolute' : 'relative',
-                  backgroundColor: iconName === 'barcode' ? 'red' : 'white',
-                  // borderTopWidth: iconName === 'barcode' && isFocused ? 5 : 0,
-                  borderWidth: 3,
-                  // borderColor: 'red',
-                  // padding: 10,
-                  // position: 'absolute',
-                  position: iconName === 'barcode' ? 'absolute' : 'relative',
-                  borderColor: iconName === 'barcode' ? 'white' : 'white',
-                  borderRadius: iconName === 'barcode' ? 50 : 0,
-                  width: iconName === 'barcode' ? 90 : 80,
-                  marginBottom: iconName === 'barcode' ? 0 : 0,
-                  bottom: iconName === 'barcode' ? -45 : 0,
-                  height: iconName === 'barcode' ? 90 : 50,
+                  width: 80,
+                  bottom: 0,
+                  height: 50,
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                {iconName === 'barcode' ? (
-                  <Icon
-                    name={iconName}
-                    type="font-awesome"
-                    color={isFocused ? 'white' : 'white'}
-                  />
-                ) : (
-                  <Icon
-                    name={iconName}
-                    type="font-awesome"
-                    color={isFocused ? colors.primary : '#919095'}
-                  />
-                )}
+                <Icon
+                  name={isFocused ? iconName.replace('-outline', '') : iconName}
+                  type="ionicon"
+                  size={windowWidth / 20}
+                  color={isFocused ? colors.white : colors.white}
+                />
+
                 <Text
                   style={{
-                    color:
-                      isFocused && iconName == 'barcode'
-                        ? 'white'
-                        : !isFocused && iconName == 'barcode'
-                        ? 'white'
-                        : isFocused
-                        ? colors.primary
-                        : '#919095',
+                    fontSize: windowWidth / 45,
+                    color: isFocused ? colors.white : colors.white,
                   }}>
-                  {label}
+                  {label == 'ChatWa' ? 'Chat' : label}
                 </Text>
               </View>
             </View>

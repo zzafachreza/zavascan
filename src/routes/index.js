@@ -259,7 +259,7 @@ export default function Router() {
         name="Kamera"
         component={Kamera}
         options={({route, navigation}) => ({
-          title: 'SCAN CAMERA',
+          title: 'SCAN KAMERA',
           headerTintColor: 'white',
           headerStyle: {
             backgroundColor: colors.primary,
@@ -278,9 +278,19 @@ export default function Router() {
                 style={{
                   position: 'relative',
                   padding: 5,
-                  marginHorizontal: 5,
+                  marginHorizontal: 10,
                 }}>
-                <Icon name="list" type="ionicon" color="white" size={20} />
+                <Icon name="list" type="ionicon" color="white" size={25} />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => navigation.replace('MainApp')}
+                style={{
+                  position: 'relative',
+                  padding: 5,
+                  marginHorizontal: 10,
+                }}>
+                <Icon name="home" type="ionicon" color="white" size={25} />
               </TouchableOpacity>
             </View>
           ),
@@ -305,7 +315,7 @@ export default function Router() {
         name="Scanner"
         component={Scanner}
         options={({route, navigation}) => ({
-          title: 'SCAN MANUAL',
+          title: 'SCAN ALAT',
           headerTintColor: 'white',
           headerStyle: {
             backgroundColor: colors.primary,
@@ -324,9 +334,19 @@ export default function Router() {
                 style={{
                   position: 'relative',
                   padding: 5,
-                  marginHorizontal: 5,
+                  marginHorizontal: 10,
                 }}>
-                <Icon name="list" type="ionicon" color="white" size={20} />
+                <Icon name="list" type="ionicon" color="white" size={25} />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => navigation.replace('MainApp')}
+                style={{
+                  position: 'relative',
+                  padding: 5,
+                  marginHorizontal: 10,
+                }}>
+                <Icon name="home" type="ionicon" color="white" size={25} />
               </TouchableOpacity>
             </View>
           ),
