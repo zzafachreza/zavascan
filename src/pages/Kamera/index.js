@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   Dimensions,
   Alert,
+  ActivityIndicator,
+  ImageBackground,
 } from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import {Icon, ListItem} from 'react-native-elements';
@@ -15,6 +17,7 @@ import LottieView from 'lottie-react-native';
 import {colors} from '../../utils/colors';
 import {getData} from '../../utils/localStorage';
 import axios from 'axios';
+import BarcodeMask from 'react-native-barcode-mask';
 import {showMessage} from 'react-native-flash-message';
 export default function Kamera({navigation, route}) {
   useEffect(() => {
@@ -27,7 +30,7 @@ export default function Kamera({navigation, route}) {
   const isFocused = useIsFocused();
 
   //   alert(data.id);
-
+  const [openCamera, setOpenCamera] = useState(true);
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
 
@@ -61,78 +64,94 @@ export default function Kamera({navigation, route}) {
   isFocused ? animasi() : null;
 
   const barcodeReceived = result => {
-    alert(result.data);
+    // alert(result.data);
+    setOpenCamera(false);
+    setLoading(true);
+    const kirim = {
+      id_member: user.id,
+      key: result.data,
+    };
 
-    // setLoading(true);
-    // const kirim = {
-    //   id_member: user.id,
-    //   key: result.data,
-    // };
-    // navigation.navigate('KameraHasil', kirim);
-    // axios
-    //   .post('https://zavalabs.com/api/zavascan_manual_add.php', kirim)
-    //   .then(res => {
-    //     console.log(res);
-    //     if (res.data == 404) {
-    //       setLoading(false);
-    //       navigation.navigate('Error', {
-    //         messege: 'Data sudah pernah discan !',
-    //       });
-    //     } else {
-    //       setLoading(false);
-    //       navigation.navigate('Success2', {
-    //         messege: 'Data berhasil discan !',
-    //       });
-    //     }
-    //   });
+    axios
+      .post('https://zavalabs.com/api/zavascan_kamera_add.php', kirim)
+      .then(res => {
+        console.log(res);
+        if (res.data == 404) {
+          showMessage({
+            message: 'Sudah pernah discan',
+            type: 'danger',
+          });
+        } else {
+          showMessage({
+            message: 'Berhasil disimpan !',
+            type: 'success',
+          });
+        }
+        setTimeout(() => {
+          setOpenCamera(true);
+        }, 1200);
+      });
+
     setlampu(false);
   };
 
   return (
     <View style={styles().container}>
-      <RNCamera
-        focusDepth={1}
-        exposure={1}
-        style={styles().preview}
-        type={RNCamera.Constants.Type.back}
-        autoFocus={RNCamera.Constants.AutoFocus.on}
-        flashMode={
-          lampu
-            ? RNCamera.Constants.FlashMode.torch
-            : RNCamera.Constants.FlashMode.off
-        }
-        type={RNCamera.Constants.Type.back}
-        androidCameraPermissionOptions={{
-          title: 'Permission to use camera',
-          message: 'We need your permission to use your camera',
-          buttonPositive: 'Ok',
-          buttonNegative: 'Cancel',
-        }}
-        onBarCodeRead={barcodeReceived}>
-        <LottieView source={require('../../assets/2.json')} autoPlay loop />
-      </RNCamera>
-
-      {!lampu ? (
-        <TouchableOpacity
-          onPress={() => setlampu(true)}
-          style={{
-            width: '100%',
-            backgroundColor: colors.tertiary,
-            padding: 10,
-          }}>
-          <Icon name="flash" type="font-awesome" color="white" size={35} />
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          onPress={() => setlampu(false)}
-          style={{
-            width: '100%',
-            backgroundColor: 'grey',
-            padding: 10,
-          }}>
-          <Icon name="times" type="font-awesome" color="white" size={35} />
-        </TouchableOpacity>
+      {openCamera && (
+        <RNCamera
+          style={styles().preview}
+          type={RNCamera.Constants.Type.back}
+          autoFocus={RNCamera.Constants.AutoFocus.on}
+          flashMode={
+            lampu
+              ? RNCamera.Constants.FlashMode.torch
+              : RNCamera.Constants.FlashMode.off
+          }
+          type={RNCamera.Constants.Type.back}
+          androidCameraPermissionOptions={{
+            title: 'Permission to use camera',
+            message: 'We need your permission to use your camera',
+            buttonPositive: 'Ok',
+            buttonNegative: 'Cancel',
+          }}
+          onBarCodeRead={barcodeReceived}>
+          <BarcodeMask edgeColor={colors.primary} />
+        </RNCamera>
       )}
+      {!openCamera && (
+        <ImageBackground
+          source={require('../../assets/back.jpeg')}
+          style={{
+            flex: 1,
+            backgroundColor: colors.white,
+            justifyContent: 'center',
+          }}>
+          <ActivityIndicator color={colors.primary} size="large" />
+        </ImageBackground>
+      )}
+      <View>
+        {!lampu ? (
+          <TouchableOpacity
+            onPress={() => setlampu(true)}
+            style={{
+              width: '100%',
+              backgroundColor: colors.primary,
+              padding: 10,
+            }}>
+            <Icon name="flash" type="font-awesome" color="white" size={35} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={() => setlampu(false)}
+            style={{
+              width: '100%',
+              backgroundColor: 'grey',
+              padding: 10,
+            }}>
+            <Icon name="times" type="font-awesome" color="white" size={35} />
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 }

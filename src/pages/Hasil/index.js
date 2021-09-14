@@ -16,6 +16,7 @@ import {FlatList} from 'react-native-gesture-handler';
 import {fonts} from '../../utils/fonts';
 import {colors} from '../../utils/colors';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Icon} from 'react-native-elements';
 
 const wait = timeout => {
   return new Promise(resolve => {
@@ -88,22 +89,7 @@ export default function Hasil() {
 
   const _renderItem = ({item, index}) => {
     return (
-      <TouchableOpacity
-        onPress={() =>
-          Alert.alert('', 'Apakah Anda yakin akan hapus ini ?', [
-            {
-              text: 'Cancel',
-              onPress: () => console.log('Cancel Pressed'),
-              style: 'cancel',
-            },
-            {
-              text: 'OK',
-              onPress: () => {
-                _hapusData(user.id, item.id);
-              },
-            },
-          ])
-        }
+      <View
         style={{
           marginVertical: 10,
           borderRadius: 10,
@@ -116,14 +102,14 @@ export default function Hasil() {
           style={{
             backgroundColor: colors.white,
             justifyContent: 'center',
-            alignItems: 'center',
+
             padding: 10,
           }}>
           <Text
             style={{
               fontFamily: fonts.secondary[600],
               fontSize: 14,
-              color: colors.primary,
+              color: colors.background,
             }}>
             {item.nama}
           </Text>
@@ -149,20 +135,47 @@ export default function Hasil() {
         <View
           style={{
             backgroundColor: colors.primary,
-            justifyContent: 'flex-end',
-            alignItems: 'flex-end',
-            padding: 10,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            paddingLeft: 10,
+            alignItems: 'center',
           }}>
           <Text
             style={{
               fontFamily: fonts.secondary[400],
               fontSize: 12,
+              flex: 1,
               color: colors.white,
             }}>
             {item.tanggal} {item.jam}
           </Text>
+
+          <TouchableOpacity
+            style={{
+              backgroundColor: colors.danger,
+              padding: 10,
+              flexDirection: 'row',
+            }}
+            onPress={() =>
+              Alert.alert('', 'Apakah Anda yakin akan hapus ini ?', [
+                {
+                  text: 'Cancel',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel',
+                },
+                {
+                  text: 'OK',
+                  onPress: () => {
+                    _hapusData(user.id, item.id);
+                  },
+                },
+              ])
+            }>
+            <Icon type="ionicon" name="trash" size={13} color={colors.white} />
+            <Text style={{color: colors.white}}>Hapus</Text>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
+      </View>
     );
   };
   return (

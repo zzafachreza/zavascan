@@ -103,8 +103,8 @@ export default function Home({navigation}) {
           <Text
             style={{
               marginTop: 2,
-              fontFamily: fonts.secondary[600],
-              fontSize: windowWidth / 22,
+              fontFamily: fonts.secondary[400],
+              fontSize: windowWidth / 27,
               maxWidth: '80%',
               color: colors.white,
             }}>

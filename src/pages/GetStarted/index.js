@@ -42,7 +42,7 @@ export default function GetStarted({navigation}) {
 
   return (
     <ImageBackground
-      source={require('../../assets/back.jpg')}
+      source={require('../../assets/back.jpeg')}
       style={styles.page}>
       <Text
         style={{
