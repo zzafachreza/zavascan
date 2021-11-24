@@ -19,6 +19,7 @@ import {Icon} from 'react-native-elements';
 import {fonts} from '../../utils/fonts';
 import LottieView from 'lottie-react-native';
 import {Button} from 'react-native-elements/dist/buttons/Button';
+import Sound from 'react-native-sound';
 
 export default function Scanner({navigation}) {
   useEffect(() => {
@@ -27,6 +28,8 @@ export default function Scanner({navigation}) {
       //   console.log(res);
     });
   }, []);
+
+  var whoosh = new Sound(require('../../assets/salah.mp3'), Sound.MAIN_BUNDLE);
 
   const [key, setKey] = useState('');
   const [user, setUser] = useState({});
@@ -49,16 +52,24 @@ export default function Scanner({navigation}) {
         .then(res => {
           setKey('');
           ref_input.current.focus();
+          console.log(res.data);
           if (res.data == 404) {
-            // alert(cek);
+            whoosh.play(success => {
+              if (success) {
+                setCek(true);
 
-            setCek(true);
+                setCek2(false);
 
-            setCek2(false);
-            showMessage({
-              type: 'danger',
-              message: key + ' Sudah Pernah Di Scan !',
+                showMessage({
+                  type: 'danger',
+                  message: key + ' Sudah Pernah Di Scan !',
+                });
+                console.log('successfully finished playing');
+              } else {
+                console.log('playback failed due to audio decoding errors');
+              }
             });
+            // alert(cek);
           } else {
             // alert(cek);
             setCek2(true);

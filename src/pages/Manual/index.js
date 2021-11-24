@@ -17,14 +17,24 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import {Icon} from 'react-native-elements';
 import {fonts} from '../../utils/fonts';
 
+import Sound from 'react-native-sound';
+
 export default function Manual() {
   useEffect(() => {
     getData('user').then(res => {
       setUser(res);
       //   console.log(res);
     });
+
+    axios.get('https://zavalabs.com/api/zavascan_kurir.php').then(res => {
+      console.log('kuri', res);
+      setKurir(res.data);
+    });
   }, []);
 
+  var whoosh = new Sound(require('../../assets/salah.mp3'), Sound.MAIN_BUNDLE);
+
+  const [kurir, setKurir] = useState([]);
   const [key, setKey] = useState('');
   const [eks, setEks] = useState('');
   const [user, setUser] = useState({});
@@ -48,11 +58,18 @@ export default function Manual() {
         .then(res => {
           console.log(res);
           if (res.data == 404) {
-            setLoading(false);
-            showMessage({
-              message: 'Nomor barcode sudah pernah diinput !',
-              type: 'info',
+            whoosh.play(success => {
+              if (success) {
+                showMessage({
+                  message: 'Nomor barcode sudah pernah diinput !',
+                  type: 'danger',
+                });
+                console.log('successfully finished playing');
+              } else {
+                console.log('playback failed due to audio decoding errors');
+              }
             });
+            setLoading(false);
           } else {
             setTimeout(() => {
               setLoading(false);
@@ -110,12 +127,11 @@ export default function Manual() {
           <Picker
             selectedValue={eks}
             onValueChange={itemValue => setEks(itemValue)}>
-            <Picker.Item label="JNE" value="JNE" />
-            <Picker.Item label="SICEPAT" value="SICEPAT" />
-            <Picker.Item label="NINJA" value="NINJA" />
-            <Picker.Item label="J&T" value="J&T" />
-            <Picker.Item label="WAHANA" value="WAHANA" />
-            <Picker.Item label="ID EXPRESS" value="ID EXPRESS" />
+            {kurir.map(item => {
+              return (
+                <Picker.Item label={item.nama_kurir} value={item.nama_kurir} />
+              );
+            })}
           </Picker>
 
           <MyGap jarak={10} />

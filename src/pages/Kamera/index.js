@@ -19,7 +19,11 @@ import {getData} from '../../utils/localStorage';
 import axios from 'axios';
 import BarcodeMask from 'react-native-barcode-mask';
 import {showMessage} from 'react-native-flash-message';
+import Sound from 'react-native-sound';
+
 export default function Kamera({navigation, route}) {
+  var whoosh = new Sound(require('../../assets/salah.mp3'), Sound.MAIN_BUNDLE);
+
   useEffect(() => {
     getData('user').then(res => {
       setUser(res);
@@ -77,9 +81,16 @@ export default function Kamera({navigation, route}) {
       .then(res => {
         console.log(res);
         if (res.data == 404) {
-          showMessage({
-            message: 'Sudah pernah discan',
-            type: 'danger',
+          whoosh.play(success => {
+            if (success) {
+              showMessage({
+                message: 'Sudah pernah discan',
+                type: 'danger',
+              });
+              console.log('successfully finished playing');
+            } else {
+              console.log('playback failed due to audio decoding errors');
+            }
           });
         } else {
           showMessage({
