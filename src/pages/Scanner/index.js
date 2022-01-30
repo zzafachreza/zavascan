@@ -21,6 +21,11 @@ import LottieView from 'lottie-react-native';
 import {Button} from 'react-native-elements/dist/buttons/Button';
 import Sound from 'react-native-sound';
 
+var whoosh = new Sound(
+  require('../../assets/salah.mp3'),
+  Sound.MAIN_BUNDLE,
+).release();
+
 export default function Scanner({navigation}) {
   useEffect(() => {
     getData('user').then(res => {
@@ -28,8 +33,6 @@ export default function Scanner({navigation}) {
       //   console.log(res);
     });
   }, []);
-
-  var whoosh = new Sound(require('../../assets/salah.mp3'), Sound.MAIN_BUNDLE);
 
   const [key, setKey] = useState('');
   const [user, setUser] = useState({});
@@ -54,26 +57,13 @@ export default function Scanner({navigation}) {
           ref_input.current.focus();
           console.log(res.data);
           if (res.data == 404) {
-            whoosh.play(success => {
-              if (success) {
-                setCek(true);
-
-                setCek2(false);
-
-                showMessage({
-                  type: 'danger',
-                  message: key + ' Sudah Pernah Di Scan !',
-                });
-                console.log('successfully finished playing');
-              } else {
-                console.log('playback failed due to audio decoding errors');
-              }
+            showMessage({
+              type: 'danger',
+              message: key + ' Sudah Pernah Di Scan !',
             });
+            whoosh.play();
             // alert(cek);
           } else {
-            // alert(cek);
-            setCek2(true);
-            setCek(false);
             showMessage({
               type: 'success',
               message: key + ' Berhasil Simpan Data',
@@ -165,7 +155,7 @@ export default function Scanner({navigation}) {
           </View>
         )}
       </ScrollView>
-      {cek && (
+      {/* {cek && (
         <LottieView
           source={require('../../assets/error.json')}
           autoPlay
@@ -179,7 +169,7 @@ export default function Scanner({navigation}) {
           autoPlay
           loop={false}
         />
-      )}
+      )} */}
     </SafeAreaView>
   );
 }
