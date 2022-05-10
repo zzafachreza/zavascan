@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,14 +9,14 @@ import {
   Image,
   Animated,
 } from 'react-native';
-import {colors} from '../../utils/colors';
-import {fonts} from '../../utils/fonts';
-import {color} from 'react-native-reanimated';
-import {getData} from '../../utils/localStorage';
-import {PermissionsAndroid} from 'react-native';
+import { colors } from '../../utils/colors';
+import { fonts } from '../../utils/fonts';
+import { color } from 'react-native-reanimated';
+import { getData } from '../../utils/localStorage';
+import { PermissionsAndroid } from 'react-native';
 import LottieView from 'lottie-react-native';
 
-export default function Splash({navigation}) {
+export default function Splash({ navigation }) {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
 
@@ -51,16 +51,11 @@ export default function Splash({navigation}) {
 
   useEffect(() => {
     const unsubscribe = getData('user').then(res => {
-      console.log(res);
       if (!res) {
-        // console.log('beum login');
-
         setTimeout(() => {
           navigation.replace('Login');
         }, 2000);
       } else {
-        console.log('sudah login logon');
-
         setTimeout(() => {
           navigation.replace('MainApp');
         }, 2000);
@@ -108,7 +103,7 @@ export default function Splash({navigation}) {
         }}>
         <Image
           resizeMode="contain"
-          style={{width: 200, height: 200, alignSelf: 'center'}}
+          style={{ width: 200, height: 200, alignSelf: 'center' }}
           source={require('../../assets/logo5.png')}
         />
       </View>

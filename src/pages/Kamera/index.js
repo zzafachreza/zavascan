@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,32 +10,36 @@ import {
   ActivityIndicator,
   ImageBackground,
 } from 'react-native';
-import {RNCamera} from 'react-native-camera';
-import {Icon, ListItem} from 'react-native-elements';
-import {useIsFocused} from '@react-navigation/native';
+import { RNCamera } from 'react-native-camera';
+import { Icon, ListItem } from 'react-native-elements';
+import { useIsFocused } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
-import {colors} from '../../utils/colors';
-import {getData} from '../../utils/localStorage';
+import { colors } from '../../utils/colors';
+import { getData } from '../../utils/localStorage';
 import axios from 'axios';
 import BarcodeMask from 'react-native-barcode-mask';
-import {showMessage} from 'react-native-flash-message';
+import { showMessage } from 'react-native-flash-message';
 import Sound from 'react-native-sound';
+import { fonts } from '../../utils/fonts';
 
 var whoosh = new Sound(
   require('../../assets/salah.mp3'),
   Sound.MAIN_BUNDLE,
 ).release();
 
-export default function Kamera({navigation, route}) {
+export default function Kamera({ navigation, route }) {
   useEffect(() => {
     getData('user').then(res => {
       setUser(res);
       console.log(res);
     });
+    getData('customer').then(res => {
+      setCustomer(res);
+    })
   }, []);
 
   const isFocused = useIsFocused();
-
+  const [customer, setCustomer] = useState('');
   //   alert(data.id);
   const [openCamera, setOpenCamera] = useState(true);
   const windowWidth = Dimensions.get('window').width;
@@ -77,6 +81,7 @@ export default function Kamera({navigation, route}) {
     const kirim = {
       id_member: user.id,
       key: result.data,
+      customer: customer
     };
 
     axios
@@ -116,7 +121,7 @@ export default function Kamera({navigation, route}) {
               ? RNCamera.Constants.FlashMode.torch
               : RNCamera.Constants.FlashMode.off
           }
-          type={RNCamera.Constants.Type.back}
+
           androidCameraPermissionOptions={{
             title: 'Permission to use camera',
             message: 'We need your permission to use your camera',
@@ -147,7 +152,13 @@ export default function Kamera({navigation, route}) {
               backgroundColor: colors.primary,
               padding: 10,
             }}>
+            <Text style={{
+              color: colors.white,
+              fontFamily: fonts.secondary[400],
+              fontSize: 14,
+            }}>{customer}</Text>
             <Icon name="flash" type="font-awesome" color="white" size={35} />
+
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
@@ -158,6 +169,7 @@ export default function Kamera({navigation, route}) {
               padding: 10,
             }}>
             <Icon name="times" type="font-awesome" color="white" size={35} />
+            <Text>{customer}</Text>
           </TouchableOpacity>
         )}
       </View>

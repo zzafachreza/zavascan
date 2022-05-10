@@ -7,13 +7,13 @@ import {
   ScrollView,
   Dimensions,
 } from 'react-native';
-import {Icon} from 'react-native-elements';
-import {useNavigation} from '@react-navigation/native';
-import {colors} from '../../utils/colors';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
-import {fonts} from '../../utils/fonts';
+import { Icon } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
+import { colors } from '../../utils/colors';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { fonts } from '../../utils/fonts';
 
-const IconCategory = ({img, title, onPress, iconname}) => {
+const IconCategory = ({ img, title, onPress, iconname }) => {
   return (
     <View>
       <TouchableOpacity
@@ -76,7 +76,7 @@ export default function MyDashboard() {
     <View
       style={{
         justifyContent: 'center',
-        padding: 20,
+        padding: 10,
         flex: 1,
       }}>
       <View
@@ -114,10 +114,10 @@ export default function MyDashboard() {
               alignItems: 'center',
               marginBottom: 10,
             }}>
-            <Text style={{fontFamily: fonts.secondary[600], fontSize: 16}}>
+            <Text style={{ fontFamily: fonts.secondary[600], fontSize: 16 }}>
               SCAN ALAT
             </Text>
-            <Text style={{fontFamily: fonts.secondary[400], fontSize: 12}}>
+            <Text style={{ fontFamily: fonts.secondary[400], fontSize: 12 }}>
               Menggunakan Alat Scanner
             </Text>
           </View>
@@ -146,10 +146,10 @@ export default function MyDashboard() {
               alignItems: 'center',
               marginBottom: 70,
             }}>
-            <Text style={{fontFamily: fonts.secondary[600], fontSize: 16}}>
+            <Text style={{ fontFamily: fonts.secondary[600], fontSize: 16 }}>
               SCAN MANUAL
             </Text>
-            <Text style={{fontFamily: fonts.secondary[400], fontSize: 12}}>
+            <Text style={{ fontFamily: fonts.secondary[400], fontSize: 12 }}>
               Ketik Barcode Manual
             </Text>
           </View>
@@ -184,10 +184,10 @@ export default function MyDashboard() {
               alignItems: 'center',
               marginBottom: 10,
             }}>
-            <Text style={{fontFamily: fonts.secondary[600], fontSize: 16}}>
+            <Text style={{ fontFamily: fonts.secondary[600], fontSize: 16 }}>
               SCAN KAMERA
             </Text>
-            <Text style={{fontFamily: fonts.secondary[400], fontSize: 12}}>
+            <Text style={{ fontFamily: fonts.secondary[400], fontSize: 12 }}>
               Menggunakan Kamera HP
             </Text>
           </View>
@@ -215,10 +215,10 @@ export default function MyDashboard() {
               alignItems: 'center',
               marginBottom: 70,
             }}>
-            <Text style={{fontFamily: fonts.secondary[600], fontSize: 16}}>
+            <Text style={{ fontFamily: fonts.secondary[600], fontSize: 16 }}>
               HASIL SCAN
             </Text>
-            <Text style={{fontFamily: fonts.secondary[400], fontSize: 12}}>
+            <Text style={{ fontFamily: fonts.secondary[400], fontSize: 12 }}>
               Hasil Scan Hari ini
             </Text>
           </View>

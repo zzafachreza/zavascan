@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,15 +9,15 @@ import {
   Dimensions,
   ImageBackground,
 } from 'react-native';
-import {colors} from '../../utils/colors';
-import {fonts} from '../../utils/fonts';
-import {MyInput, MyGap, MyButton} from '../../components';
+import { colors } from '../../utils/colors';
+import { fonts } from '../../utils/fonts';
+import { MyInput, MyGap, MyButton } from '../../components';
 import LottieView from 'lottie-react-native';
 import axios from 'axios';
-import {storeData, getData} from '../../utils/localStorage';
-import {showMessage} from 'react-native-flash-message';
+import { storeData, getData } from '../../utils/localStorage';
+import { showMessage } from 'react-native-flash-message';
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const [loading, setLoading] = useState(false);
@@ -28,11 +28,11 @@ export default function Login({navigation}) {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (reg.test(text) === false) {
       // console.log('Email is Not Correct');
-      setData({...data, email: text});
+      setData({ ...data, email: text });
       setValid(false);
       return false;
     } else {
-      setData({...data, email: text});
+      setData({ ...data, email: text });
       setValid(true);
       // console.log('Email is Correct');
     }
@@ -43,12 +43,6 @@ export default function Login({navigation}) {
     password: '',
   });
 
-  useEffect(() => {
-    getData('token').then(res => {
-      console.log('data token,', res);
-      setToken(res.token);
-    });
-  }, []);
 
   // login ok
   const masuk = () => {
@@ -66,10 +60,8 @@ export default function Login({navigation}) {
       });
     } else {
       setLoading(true);
-      console.log(data);
       setTimeout(() => {
         axios.post('https://zavalabs.com/api/login.php', data).then(res => {
-          console.log(res.data);
           setLoading(false);
           if (res.data.kode == 50) {
             showMessage({
@@ -78,15 +70,6 @@ export default function Login({navigation}) {
             });
           } else {
             storeData('user', res.data);
-            axios
-              .post('https://zavalabs.com/api/update_token.php', {
-                id_member: res.data.id,
-                token: token,
-              })
-              .then(res => {
-                console.log('update token', res);
-              });
-
             navigation.replace('MainApp');
           }
         });
@@ -184,7 +167,7 @@ export default function Login({navigation}) {
           source={require('../../assets/animation.json')}
           autoPlay
           loop
-          style={{backgroundColor: colors.primary}}
+          style={{ backgroundColor: colors.primary }}
         />
       )}
     </ImageBackground>

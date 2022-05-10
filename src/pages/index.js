@@ -20,13 +20,26 @@ import Error from './Error';
 import Laporan from './Laporan';
 import LaporanHarian from './LaporanHarian';
 import LaporanBulanan from './LaporanBulanan';
+
 import Scanner from './Scanner';
 import BarcodeHasil from './BarcodeHasil';
 import Utama from './Utama';
+import SerahTerima from './SerahTerima';
+import HasilSerah from './HasilSerah';
+import Customer from './Customer';
+import LaporanTanggal from './LaporanTanggal';
+
+
+
+
 export {
   Splash,
   GetStarted,
+  LaporanTanggal,
   Register,
+  SerahTerima,
+  HasilSerah,
+  Customer,
   Login,
   Home,
   Account,

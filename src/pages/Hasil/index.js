@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,14 +9,14 @@ import {
   RefreshControl,
   ActivityIndicator,
 } from 'react-native';
-import {MyInput} from '../../components';
-import {getData} from '../../utils/localStorage';
+import { MyInput } from '../../components';
+import { getData } from '../../utils/localStorage';
 import axios from 'axios';
-import {FlatList} from 'react-native-gesture-handler';
-import {fonts} from '../../utils/fonts';
-import {colors} from '../../utils/colors';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Icon} from 'react-native-elements';
+import { FlatList } from 'react-native-gesture-handler';
+import { fonts } from '../../utils/fonts';
+import { colors } from '../../utils/colors';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Icon } from 'react-native-elements';
 
 const wait = timeout => {
   return new Promise(resolve => {
@@ -34,7 +34,6 @@ export default function Hasil() {
     getData('user').then(res => {
       setUser(res);
       _getData(res.id);
-      //   console.log(res);
     });
   }, []);
 
@@ -43,7 +42,6 @@ export default function Hasil() {
     getData('user').then(res => {
       setUser(res);
       _getData(res.id);
-      //   console.log(res);
     });
     wait(2000).then(() => setRefreshing(false));
   }, []);
@@ -54,7 +52,6 @@ export default function Hasil() {
         id_member: id_member,
       })
       .then(res => {
-        console.log(res.data);
         setData(res.data);
       });
   };
@@ -67,7 +64,6 @@ export default function Hasil() {
         key: kata_kunci,
       })
       .then(res => {
-        console.log(res.data);
         setTimeout(() => {
           setData(res.data);
           setLoading(false);
@@ -82,12 +78,11 @@ export default function Hasil() {
         id: id,
       })
       .then(res => {
-        console.log(res.data);
         _getData(id_member);
       });
   };
 
-  const _renderItem = ({item, index}) => {
+  const _renderItem = ({ item, index }) => {
     return (
       <View
         style={{
@@ -112,6 +107,14 @@ export default function Hasil() {
               color: colors.background,
             }}>
             {item.nama}
+          </Text>
+          <Text
+            style={{
+              fontFamily: fonts.secondary[600],
+              fontSize: 14,
+              color: colors.black,
+            }}>
+            {item.customer}
           </Text>
         </View>
 
@@ -172,7 +175,7 @@ export default function Hasil() {
               ])
             }>
             <Icon type="ionicon" name="trash" size={13} color={colors.white} />
-            <Text style={{color: colors.white}}>Hapus</Text>
+            <Text style={{ color: colors.white }}>Hapus</Text>
           </TouchableOpacity>
         </View>
       </View>

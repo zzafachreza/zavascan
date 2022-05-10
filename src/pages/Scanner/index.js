@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,16 +9,16 @@ import {
   Picker,
   TextInput,
 } from 'react-native';
-import {MyInput, MyGap, MyButton} from '../../components';
-import {getData} from '../../utils/localStorage';
+import { MyInput, MyGap, MyButton } from '../../components';
+import { getData } from '../../utils/localStorage';
 import axios from 'axios';
-import {colors} from '../../utils/colors';
-import {showMessage} from 'react-native-flash-message';
+import { colors } from '../../utils/colors';
+import { showMessage } from 'react-native-flash-message';
 import DropDownPicker from 'react-native-dropdown-picker';
-import {Icon} from 'react-native-elements';
-import {fonts} from '../../utils/fonts';
+import { Icon } from 'react-native-elements';
+import { fonts } from '../../utils/fonts';
 import LottieView from 'lottie-react-native';
-import {Button} from 'react-native-elements/dist/buttons/Button';
+import { Button } from 'react-native-elements/dist/buttons/Button';
 import Sound from 'react-native-sound';
 
 var whoosh = new Sound(
@@ -26,17 +26,20 @@ var whoosh = new Sound(
   Sound.MAIN_BUNDLE,
 ).release();
 
-export default function Scanner({navigation}) {
+export default function Scanner({ navigation }) {
   useEffect(() => {
     getData('user').then(res => {
       setUser(res);
       //   console.log(res);
     });
+    getData('customer').then(res => {
+      setCustomer(res);
+    })
   }, []);
 
   const [key, setKey] = useState('');
   const [user, setUser] = useState({});
-
+  const [customer, setCustomer] = useState('');
   const [loading, setLoading] = useState(false);
   const _kirimData = () => {
     if (key.length == 0) {
@@ -47,6 +50,7 @@ export default function Scanner({navigation}) {
     } else {
       const kirim = {
         id_member: user.id,
+        customer: customer,
         key: key,
       };
 
@@ -123,9 +127,9 @@ export default function Scanner({navigation}) {
                   fontFamily: fonts.secondary[600],
                   color: colors.primary,
                   left: 10,
-                  fontSize: 16,
+                  fontSize: 14,
                 }}>
-                Masukan Barcode / Resi
+                Masukan Barcode / Resi ( {customer} )
               </Text>
             </View>
             <TextInput

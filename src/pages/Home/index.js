@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,34 +11,22 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import {colors} from '../../utils/colors';
-import {fonts} from '../../utils/fonts';
+import { colors } from '../../utils/colors';
+import { fonts } from '../../utils/fonts';
 import LottieView from 'lottie-react-native';
-import {getData} from '../../utils/localStorage';
-import {FlatListSlider} from 'react-native-flatlist-slider';
-import {Preview, MyDashboard} from '../../components';
-import {Icon} from 'react-native-elements';
+import { getData } from '../../utils/localStorage';
+import { FlatListSlider } from 'react-native-flatlist-slider';
+import { Preview, MyDashboard } from '../../components';
+import { Icon } from 'react-native-elements';
 import MyNews from '../../components/MyNews';
 
-export default function Home({navigation}) {
-  const images = [
-    {
-      image: 'https://kipmi.or.id/wp-content/uploads/2016/11/beton1.jpg',
-    },
-    {
-      image: 'https://kipmi.or.id/wp-content/uploads/2017/01/molen-kecil.jpg',
-    },
-    {
-      image: 'https://kipmi.or.id/wp-content/uploads/2016/11/beton8.jpg',
-    },
-  ];
+export default function Home({ navigation }) {
 
   const [user, setUser] = useState([]);
   const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
     getData('user').then(res => {
-      console.log(res);
       setUser(res);
     });
 
@@ -56,11 +44,11 @@ export default function Home({navigation}) {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const ratio = 192 / 108;
-  const _renderItem = ({item, index}) => {
+  const _renderItem = ({ item, index }) => {
     return (
       <Image
         resizeMode="contain"
-        source={{uri: item.image}}
+        source={{ uri: item.image }}
         style={{
           width: windowWidth,
           height: Math.round((windowWidth * 9) / 16),
@@ -80,7 +68,7 @@ export default function Home({navigation}) {
           height: windowHeight / 8,
           flexDirection: 'row',
         }}>
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           <Text
             style={{
               fontFamily: fonts.secondary[400],
@@ -111,7 +99,8 @@ export default function Home({navigation}) {
             {user.email}
           </Text>
         </View>
-        <View
+        <TouchableOpacity
+          onPress={() => navigation.navigate('SerahTerima')}
           style={{
             justifyContent: 'center',
             alignItems: 'center',
@@ -119,11 +108,11 @@ export default function Home({navigation}) {
           }}>
           <Icon
             type="ionicon"
-            name="notifications"
+            name="open-outline"
             color={colors.white}
             size={windowWidth / 15}
           />
-        </View>
+        </TouchableOpacity>
       </View>
       <ImageBackground
         source={require('../../assets/back.jpeg')}
