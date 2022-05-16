@@ -7,17 +7,18 @@ import {
     Dimensions,
     SafeAreaView,
     PermissionsAndroid,
+    Linking,
 } from 'react-native';
-import { fonts } from '../../utils/fonts';
-import { WebView } from 'react-native-webview';
 import { getData } from '../../utils/localStorage';
-import { Icon } from 'react-native-elements';
+import DatePicker from 'react-native-datepicker'
+import { fonts } from '../../utils/fonts';
+import { MyInput, MyGap, MyButton } from '../../components';
 import { colors } from '../../utils/colors';
+export default function LaporanTanggal() {
 
-export default function LaporanTanggal({ navigation, route }) {
-    const windowWidth = Dimensions.get('window').width;
-    const windowHeight = Dimensions.get('window').height;
     const [user, setUser] = useState({});
+    const [awal, setAwal] = useState('');
+    const [akhir, setAkhir] = useState('');
     useEffect(() => {
         getData('user').then(res => {
             setUser(res);
@@ -25,85 +26,98 @@ export default function LaporanTanggal({ navigation, route }) {
         });
     }, []);
 
-    const webViewRef = useRef(null);
+    const download = () => {
 
-    const goback = () => {
-        webViewRef.current.goBack();
-    };
-
-    const requestCameraPermission = async () => {
-        try {
-            const granted = await PermissionsAndroid.request(
-                PermissionsAndroid.PERMISSIONS.CAMERA,
-                {
-                    title: "Write file Permission",
-                    message:
-                        "Izinkan Aplikasi untuk menyimpan data " +
-                        "Supaya bisa download laporan.",
-                    buttonNeutral: "Ask Me Later",
-                    buttonNegative: "Cancel",
-                    buttonPositive: "OK"
-                }
-            );
-            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                console.log("You can use the camera");
-            } else {
-                console.log("Camera permission denied");
-            }
-        } catch (err) {
-            console.warn(err);
+        if (awal.length > 1 && akhir.length > 1) {
+            console.log('siop');
+            Linking.openURL('https://zavalabs.com/api/zavascan_download.php?id_member=' +
+                user.id + '&awal=' + awal + '&akhir=' + akhir);
+        } else {
+            alert('Silahkan pilih tanggal terlebih dahulu')
         }
+
+
     }
 
-    useEffect(() => {
-        requestCameraPermission();
-    }, [])
+
     return (
-        <SafeAreaView
-            style={{
-                flex: 1,
-                // padding: 10,
-            }}>
-            <WebView
-                ref={webViewRef}
-                injectedJavaScript={`const meta = document.createElement('meta'); meta.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); `}
-                scalesPageToFit={false}
-                source={{
-                    uri:
-                        'https://zavalabs.com/api/zavascan_data_tanggal.php?id_member=' +
-                        user.id,
-                }}
-            />
-            <View style={styles.navbar}>
-                <View style={styles.back}>
-                    <Icon
-                        name="arrow-back-outline"
-                        size={30}
-                        color={colors.white}
-                        type="ionicon"
-                        onPress={goback}
-                    />
-                </View>
+        <SafeAreaView style={{
+            flex: 1,
+            padding: 10
+        }}>
+
+            <View>
+                <Text style={{
+                    fontFamily: fonts.secondary[600],
+                    fontSize: 14,
+                }}>Dari</Text>
+                <DatePicker
+                    style={{
+                        width: '100%',
+                    }}
+
+                    date={awal}
+                    mode="date"
+                    placeholder="silahkan pilih tanggal"
+                    format="YYYY-MM-DD"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    customStyles={{
+                        dateIcon: {
+                            position: 'absolute',
+                            left: 0,
+                            top: 4,
+                            marginLeft: 0
+                        },
+                        dateInput: {
+                            marginLeft: 36,
+                            borderRadius: 10,
+                        },
+
+                        // ... You can check the source to find the other keys.
+                    }}
+                    onDateChange={(date) => setAwal(date)}
+                />
             </View>
+
+            <MyGap jarak={20} />
+            <View>
+                <Text style={{
+                    fontFamily: fonts.secondary[600],
+                    fontSize: 14,
+                }}>Sampai</Text>
+                <DatePicker
+                    style={{
+                        width: '100%',
+                    }}
+
+                    date={akhir}
+                    mode="date"
+                    placeholder="ssilahkan pilih tanggal"
+                    format="YYYY-MM-DD"
+                    confirmBtnText="Confirm"
+                    cancelBtnText="Cancel"
+                    customStyles={{
+                        dateIcon: {
+                            position: 'absolute',
+                            left: 0,
+                            top: 4,
+                            marginLeft: 0
+                        },
+                        dateInput: {
+                            marginLeft: 36,
+                            borderRadius: 10,
+                        },
+
+                        // ... You can check the source to find the other keys.
+                    }}
+                    onDateChange={(date) => setAkhir(date)}
+                />
+            </View>
+            <MyGap jarak={20} />
+            <MyButton onPress={download} title="Download Sekarang" warna={colors.success} Icons="download-outline" />
         </SafeAreaView>
-    );
+    )
 }
 
-const styles = StyleSheet.create({
-    navbar: {
-        height: 50,
-        width: '100%',
-        padding: 10,
-        flexDirection: 'row-reverse',
-        backgroundColor: colors.primary,
-    },
-    back: {
-        width: 50,
-        height: 50,
-        marginRight: 10,
-    },
-    forward: {
-        width: 50,
-        height: 50,
-    },
-});
+const styles = StyleSheet.create({})
