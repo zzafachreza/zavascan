@@ -19,6 +19,7 @@ import { FlatListSlider } from 'react-native-flatlist-slider';
 import { Preview, MyDashboard } from '../../components';
 import { Icon } from 'react-native-elements';
 import MyNews from '../../components/MyNews';
+import MyCarouser from '../../components/MyCarouser';
 
 export default function Home({ navigation }) {
 
@@ -56,6 +57,60 @@ export default function Home({ navigation }) {
       />
     );
   };
+
+  const DataKategori = ({
+    icon,
+    nama,
+    nama2,
+    onPress,
+    warna = colors.primary,
+  }) => {
+    return (
+      <TouchableOpacity
+        onPress={onPress}
+        style={{
+          backgroundColor: warna,
+          padding: 5,
+          borderRadius: 10,
+          width: windowWidth / 2.5,
+          height: windowHeight / 5,
+          elevation: 5,
+          justifyContent: 'center',
+        }}>
+        <View>
+          <Icon
+            type="ionicon"
+            name={icon}
+            color={colors.white}
+            size={windowWidth / 5}
+          />
+        </View>
+        <View>
+          <Text
+            style={{
+              fontFamily: fonts.secondary[600],
+              color: colors.white,
+              fontSize: windowWidth / 30,
+              textAlign: 'center',
+              // marginHorizontal: 10,
+            }}>
+            {nama}
+          </Text>
+          <Text
+            style={{
+              fontFamily: fonts.secondary[600],
+              color: colors.white,
+              fontSize: windowWidth / 35,
+              textAlign: 'center',
+              // marginHorizontal: 10,
+            }}>
+            {nama2}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <SafeAreaView
       style={{
@@ -65,14 +120,15 @@ export default function Home({ navigation }) {
       <View
         style={{
           padding: 10,
-          height: windowHeight / 8,
+
+          height: windowHeight / 10,
           flexDirection: 'row',
         }}>
         <View style={{ flex: 1 }}>
           <Text
             style={{
               fontFamily: fonts.secondary[400],
-              fontSize: windowWidth / 25,
+              fontSize: 12,
               maxWidth: '80%',
               color: colors.white,
             }}>
@@ -82,7 +138,7 @@ export default function Home({ navigation }) {
             style={{
               marginTop: 2,
               fontFamily: fonts.secondary[600],
-              fontSize: windowWidth / 22,
+              fontSize: 14,
               maxWidth: '80%',
               color: colors.white,
             }}>
@@ -92,14 +148,26 @@ export default function Home({ navigation }) {
             style={{
               marginTop: 2,
               fontFamily: fonts.secondary[400],
-              fontSize: windowWidth / 27,
+              fontSize: 12,
               maxWidth: '80%',
               color: colors.white,
             }}>
             {user.email}
           </Text>
         </View>
-        <TouchableOpacity
+        <View style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          flex: 1,
+        }}>
+          <Text style={{
+            fontFamily: fonts.secondary[800],
+            color: colors.white,
+            fontSize: 30,
+          }}>ZAVASCAN</Text>
+        </View>
+
+        {/* <TouchableOpacity
           onPress={() => navigation.navigate('SerahTerima')}
           style={{
             justifyContent: 'center',
@@ -112,18 +180,61 @@ export default function Home({ navigation }) {
             color={colors.white}
             size={windowWidth / 15}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
+      <MyCarouser />
       <ImageBackground
         source={require('../../assets/back.jpeg')}
         style={{
           flex: 1,
           backgroundColor: colors.white,
           justifyContent: 'center',
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
         }}>
-        <MyDashboard />
+
+        {/* <MyDashboard /> */}
+
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }}>
+          <DataKategori
+            warna={colors.primary}
+            onPress={() => navigation.navigate('Scanner')}
+            icon="qr-code-outline"
+            nama="SCAN ALAT / MANUAL"
+            nama2="Menggunakan Alat Scanner"
+          />
+          <DataKategori
+            warna={colors.primary}
+            onPress={() => navigation.navigate('Kamera')}
+            icon="camera-outline"
+            nama="SCAN KAMERA"
+            nama2="Menggunakan Kamera HP"
+          />
+        </View>
+
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            marginTop: 20,
+          }}>
+          <DataKategori
+            warna={colors.primary}
+            onPress={() => navigation.navigate('LaporanTanggal')}
+            icon="calendar-outline"
+            nama="LAPORAN"
+            nama2="Laporan Berdasarkan Tanggal"
+          />
+          <DataKategori
+            warna={colors.primary}
+            onPress={() => navigation.navigate('Hasil')}
+            icon="file-tray-stacked-outline"
+            nama="HASIL SCAN"
+            nama2="Hasil Scan Hari ini"
+          />
+        </View>
       </ImageBackground>
     </SafeAreaView>
   );

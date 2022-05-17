@@ -36,6 +36,9 @@ import {
   HasilSerah,
   Customer,
   LaporanTanggal,
+  LaporanByEkspedisi,
+  LaporanByCustomer,
+  Kurir,
 } from '../pages';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigator } from '../components';
@@ -50,7 +53,7 @@ const MainApp = () => {
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Customer" component={Customer} />
-      <Tab.Screen name="Laporan" component={Laporan} />
+      <Tab.Screen name="Kurir" component={Kurir} />
       <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
@@ -631,6 +634,63 @@ export default function Router() {
           },
         })}
       />
+
+
+      <Stack.Screen
+        name="LaporanByEkspedisi"
+        component={LaporanByEkspedisi}
+        options={({ route, navigation }) => ({
+          title: 'LAPORAN EKSPEDISI',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+          cardStyleInterpolator: ({ current, layouts }) => {
+            return {
+              cardStyle: {
+                transform: [
+                  {
+                    translateX: current.progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layouts.screen.width, 0],
+                    }),
+                  },
+                ],
+              },
+            };
+          },
+        })}
+      />
+
+      <Stack.Screen
+        name="LaporanByCustomer"
+        component={LaporanByCustomer}
+        options={({ route, navigation }) => ({
+          title: 'LAPORAN CUSTOMER',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+          cardStyleInterpolator: ({ current, layouts }) => {
+            return {
+              cardStyle: {
+                transform: [
+                  {
+                    translateX: current.progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layouts.screen.width, 0],
+                    }),
+                  },
+                ],
+              },
+            };
+          },
+        })}
+      />
+
+
 
       <Stack.Screen
         name="SerahTerima"

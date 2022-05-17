@@ -60,8 +60,8 @@ export default function BottomNavigator({ state, descriptors, navigation }) {
           iconName = 'grid-outline';
         } else if (label === 'Customer') {
           iconName = 'people-outline';
-        } else if (label === 'Cart') {
-          iconName = 'cart';
+        } else if (label === 'Kurir') {
+          iconName = 'cube-outline';
         } else if (label === 'Pesanan') {
           iconName = 'cube-outline';
         }

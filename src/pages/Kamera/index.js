@@ -27,6 +27,11 @@ var whoosh = new Sound(
   Sound.MAIN_BUNDLE,
 ).release();
 
+var whoosh2 = new Sound(
+  require('../../assets/oke.mp3'),
+  Sound.MAIN_BUNDLE,
+).release();
+
 export default function Kamera({ navigation, route }) {
   useEffect(() => {
     getData('user').then(res => {
@@ -100,6 +105,7 @@ export default function Kamera({ navigation, route }) {
             message: 'Berhasil disimpan !',
             type: 'success',
           });
+          whoosh2.play();
         }
         setTimeout(() => {
           setOpenCamera(true);

@@ -13,59 +13,7 @@ import { colors } from '../../utils/colors';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { fonts } from '../../utils/fonts';
 
-const IconCategory = ({ img, title, onPress, iconname }) => {
-  return (
-    <View>
-      <TouchableOpacity
-        onPress={onPress}
-        style={{
-          // flex: 1,
-          width: 90,
-          height: 90,
-          // backgroundColor: '#F8781D',
-          // backgroundColor: '#FFF',
-          backgroundColor: colors.secondary,
-          borderRadius: 10,
-          padding: 5,
-          justifyContent: 'center',
-          alignItems: 'center',
-          margin: 5,
-          borderWidth: 4,
-          borderColor: colors.secondary,
 
-          elevation: 2,
-        }}>
-        <View
-          style={{
-            flex: 2,
-            justifyContent: 'center',
-          }}>
-          <Icon
-            type="ionicon"
-            name={iconname}
-            color={colors.primary}
-            size={40}
-          />
-        </View>
-        <View
-          style={{
-            flex: 1,
-          }}>
-          <Text
-            style={{
-              fontFamily: 'Montserrat-SemiBold',
-              // color: '#F8781D',
-              color: colors.white,
-              fontSize: 12,
-              textAlign: 'center',
-            }}>
-            {title}
-          </Text>
-        </View>
-      </TouchableOpacity>
-    </View>
-  );
-};
 
 export default function MyDashboard() {
   const windowWidth = Dimensions.get('window').width;
@@ -115,7 +63,7 @@ export default function MyDashboard() {
               marginBottom: 10,
             }}>
             <Text style={{ fontFamily: fonts.secondary[600], fontSize: 16 }}>
-              SCAN ALAT
+              SCAN ALAT / MANUAL
             </Text>
             <Text style={{ fontFamily: fonts.secondary[400], fontSize: 12 }}>
               Menggunakan Alat Scanner
@@ -123,7 +71,7 @@ export default function MyDashboard() {
           </View>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate('Manual')}
+            onPress={() => navigation.navigate('LaporanTanggal')}
             style={{
               flex: 1,
               borderRadius: 10,
@@ -135,7 +83,7 @@ export default function MyDashboard() {
             }}>
             <Icon
               type="ionicon"
-              name="keypad-outline"
+              name="calendar-outline"
               size={windowWidth / 5}
               color={colors.white}
             />
@@ -147,10 +95,10 @@ export default function MyDashboard() {
               marginBottom: 70,
             }}>
             <Text style={{ fontFamily: fonts.secondary[600], fontSize: 16 }}>
-              SCAN MANUAL
+              LAPORAN
             </Text>
             <Text style={{ fontFamily: fonts.secondary[400], fontSize: 12 }}>
-              Ketik Barcode Manual
+              Laporan Berdasarkan Tanggal
             </Text>
           </View>
         </View>

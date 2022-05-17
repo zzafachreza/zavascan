@@ -14,7 +14,7 @@ import DatePicker from 'react-native-datepicker'
 import { fonts } from '../../utils/fonts';
 import { MyInput, MyGap, MyButton } from '../../components';
 import { colors } from '../../utils/colors';
-export default function LaporanTanggal() {
+export default function LaporanTanggal({ navigation }) {
 
     const [user, setUser] = useState({});
     const [awal, setAwal] = useState('');
@@ -29,14 +29,41 @@ export default function LaporanTanggal() {
     const download = () => {
 
         if (awal.length > 1 && akhir.length > 1) {
-            console.log('siop');
+
             Linking.openURL('https://zavalabs.com/api/zavascan_download.php?id_member=' +
                 user.id + '&awal=' + awal + '&akhir=' + akhir);
         } else {
             alert('Silahkan pilih tanggal terlebih dahulu')
         }
+    }
 
+    const ViewByEkspedisi = () => {
 
+        if (awal.length > 1 && akhir.length > 1) {
+
+            navigation.navigate('LaporanByEkspedisi', {
+                id_member: user.id,
+                awal: awal,
+                akhir: akhir
+            })
+
+        } else {
+            alert('Silahkan pilih tanggal terlebih dahulu')
+        }
+    }
+
+    const ViewByCustomer = () => {
+        if (awal.length > 1 && akhir.length > 1) {
+
+            navigation.navigate('LaporanByCustomer', {
+                id_member: user.id,
+                awal: awal,
+                akhir: akhir
+            })
+
+        } else {
+            alert('Silahkan pilih tanggal terlebih dahulu')
+        }
     }
 
 
@@ -45,6 +72,14 @@ export default function LaporanTanggal() {
             flex: 1,
             padding: 10
         }}>
+
+            <Text style={{
+                marginVertical: 20,
+                fontFamily: fonts.secondary[600],
+                fontSize: 16,
+            }}>
+                Silahkan Pilih tanggal laporan yang Anda butuhkan
+            </Text>
 
             <View>
                 <Text style={{
@@ -114,8 +149,13 @@ export default function LaporanTanggal() {
                     onDateChange={(date) => setAkhir(date)}
                 />
             </View>
+
             <MyGap jarak={20} />
-            <MyButton onPress={download} title="Download Sekarang" warna={colors.success} Icons="download-outline" />
+            <MyButton onPress={ViewByEkspedisi} title="Lihat Berdasarkan Ekspedisi" warna={colors.primary} Icons="file-tray-stacked-outline" />
+            <MyGap jarak={20} />
+            <MyButton onPress={ViewByCustomer} title="Lihat Berdasarkan Customer" warna={colors.secondary} Icons="people-outline" />
+            <MyGap jarak={20} />
+            <MyButton onPress={download} title="Download" warna={colors.success} Icons="download-outline" />
         </SafeAreaView>
     )
 }

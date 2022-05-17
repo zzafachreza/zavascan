@@ -26,6 +26,11 @@ var whoosh = new Sound(
   Sound.MAIN_BUNDLE,
 ).release();
 
+var whoosh2 = new Sound(
+  require('../../assets/oke.mp3'),
+  Sound.MAIN_BUNDLE,
+).release();
+
 export default function Scanner({ navigation }) {
   useEffect(() => {
     getData('user').then(res => {
@@ -36,6 +41,11 @@ export default function Scanner({ navigation }) {
       setCustomer(res);
     })
   }, []);
+
+
+  const getDataResi = x => {
+
+  }
 
   const [key, setKey] = useState('');
   const [user, setUser] = useState({});
@@ -72,6 +82,7 @@ export default function Scanner({ navigation }) {
               type: 'success',
               message: key + ' Berhasil Simpan Data',
             });
+            whoosh2.play();
           }
         });
 
@@ -149,6 +160,9 @@ export default function Scanner({ navigation }) {
             />
           </View>
         </View>
+
+
+
 
         {loading && (
           <View

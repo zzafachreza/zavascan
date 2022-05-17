@@ -28,6 +28,9 @@ import SerahTerima from './SerahTerima';
 import HasilSerah from './HasilSerah';
 import Customer from './Customer';
 import LaporanTanggal from './LaporanTanggal';
+import LaporanByEkspedisi from './LaporanByEkspedisi';
+import LaporanByCustomer from './LaporanByCustomer';
+import Kurir from './Kurir';
 
 
 
@@ -36,6 +39,9 @@ export {
   Splash,
   GetStarted,
   LaporanTanggal,
+  LaporanByEkspedisi,
+  LaporanByCustomer,
+  Kurir,
   Register,
   SerahTerima,
   HasilSerah,
