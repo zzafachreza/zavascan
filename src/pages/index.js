@@ -31,6 +31,7 @@ import LaporanTanggal from './LaporanTanggal';
 import LaporanByEkspedisi from './LaporanByEkspedisi';
 import LaporanByCustomer from './LaporanByCustomer';
 import Kurir from './Kurir';
+import Hasil2 from './Hasil2';
 
 
 
@@ -41,6 +42,7 @@ export {
   LaporanTanggal,
   LaporanByEkspedisi,
   LaporanByCustomer,
+  Hasil2,
   Kurir,
   Register,
   SerahTerima,

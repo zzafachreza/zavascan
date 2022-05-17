@@ -39,6 +39,7 @@ import {
   LaporanByEkspedisi,
   LaporanByCustomer,
   Kurir,
+  Hasil2,
 } from '../pages';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigator } from '../components';
@@ -193,6 +194,34 @@ export default function Router() {
       <Stack.Screen
         name="Hasil"
         component={Hasil}
+        options={({ route, navigation }) => ({
+          title: 'HASIL DATA SCAN',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+          cardStyleInterpolator: ({ current, layouts }) => {
+            return {
+              cardStyle: {
+                transform: [
+                  {
+                    translateX: current.progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layouts.screen.width, 0],
+                    }),
+                  },
+                ],
+              },
+            };
+          },
+        })}
+      />
+
+
+      <Stack.Screen
+        name="Hasil2"
+        component={Hasil2}
         options={({ route, navigation }) => ({
           title: 'HASIL DATA SCAN',
           headerTintColor: 'white',

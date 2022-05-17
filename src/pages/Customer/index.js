@@ -146,6 +146,13 @@ export default function Customer({ navigation, route }) {
                                 }}>{item.telepon_customer}</Text>
                             </View>
 
+                            <TouchableOpacity onPress={() => navigation.navigate('Hasil2', {
+                                key: item.nama_customer
+                            })
+                            } >
+                                <Icon type='ionicon' name='search' color={colors.primary} />
+                            </TouchableOpacity>
+
                             {customer != item.nama_customer && <TouchableOpacity style={{
                                 marginHorizontal: 10,
                             }} onPress={() => {
@@ -192,6 +199,8 @@ export default function Customer({ navigation, route }) {
                             }}>
                                 <Icon type='ionicon' name='trash' color={colors.secondary} />
                             </TouchableOpacity>
+
+
 
                         </View>
 

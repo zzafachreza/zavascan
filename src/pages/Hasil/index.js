@@ -24,7 +24,8 @@ const wait = timeout => {
   });
 };
 
-export default function Hasil() {
+export default function Hasil({ route }) {
+  const cust = route.params;
   const [refreshing, setRefreshing] = React.useState(false);
   const [user, setUser] = useState({});
   const [data, setData] = useState([]);

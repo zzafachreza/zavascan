@@ -163,7 +163,7 @@ export default function Home({ navigation }) {
           <Text style={{
             fontFamily: fonts.secondary[800],
             color: colors.white,
-            fontSize: 30,
+            fontSize: 22,
           }}>ZAVASCAN</Text>
         </View>
 
