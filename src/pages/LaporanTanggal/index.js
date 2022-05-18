@@ -30,8 +30,16 @@ export default function LaporanTanggal({ navigation }) {
 
         if (awal.length > 1 && akhir.length > 1) {
 
-            Linking.openURL('https://zavalabs.com/api/zavascan_download.php?id_member=' +
-                user.id + '&awal=' + awal + '&akhir=' + akhir);
+            // Linking.openURL('https://zavalabs.com/api/zavascan_download.php?id_member=' +
+            //     user.id + '&awal=' + awal + '&akhir=' + akhir);
+
+            navigation.navigate('LaporanDownload', {
+                url: 'https://zavalabs.com/api/zavascan_download.php?id_member=' +
+                    user.id + '&awal=' + awal + '&akhir=' + akhir
+            })
+
+
+
         } else {
             alert('Silahkan pilih tanggal terlebih dahulu')
         }
@@ -128,7 +136,7 @@ export default function LaporanTanggal({ navigation }) {
 
                     date={akhir}
                     mode="date"
-                    placeholder="ssilahkan pilih tanggal"
+                    placeholder="silahkan pilih tanggal"
                     format="YYYY-MM-DD"
                     confirmBtnText="Confirm"
                     cancelBtnText="Cancel"

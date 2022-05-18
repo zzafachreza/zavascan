@@ -105,7 +105,7 @@ export default function Kamera({ navigation, route }) {
             message: 'Berhasil disimpan !',
             type: 'success',
           });
-          whoosh2.play();
+          // whoosh2.play();
         }
         setTimeout(() => {
           setOpenCamera(true);

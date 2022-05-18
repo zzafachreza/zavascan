@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Icon, ListItem, Button} from 'react-native-elements';
-import {colors} from '../../utils/colors';
-import {fonts} from '../../utils/fonts';
-import {TextInput} from 'react-native-gesture-handler';
+import { StyleSheet, Text, View } from 'react-native';
+import { Icon, ListItem, Button } from 'react-native-elements';
+import { colors } from '../../utils/colors';
+import { fonts } from '../../utils/fonts';
+import { TextInput } from 'react-native-gesture-handler';
 
 export default function MyInput({
   label,
@@ -15,6 +15,7 @@ export default function MyInput({
   secureTextEntry,
   onSubmitEditing,
   styleInput,
+  borderRadius = 10,
   ref,
   placeholder,
   styleLabel,
@@ -52,7 +53,7 @@ export default function MyInput({
         autoCapitalize="none"
         style={{
           borderColor: colors.primary,
-          borderRadius: 10,
+          borderRadius: borderRadius,
           borderWidth: 1,
           paddingLeft: 10,
           fontSize: 18,

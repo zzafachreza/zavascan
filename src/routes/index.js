@@ -40,6 +40,7 @@ import {
   LaporanByCustomer,
   Kurir,
   Hasil2,
+  LaporanDownload,
 } from '../pages';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigator } from '../components';
@@ -70,6 +71,16 @@ export default function Router() {
           headerShown: false,
         }}
       />
+
+      <Stack.Screen
+        name="LaporanDownload"
+        component={LaporanDownload}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+
       <Stack.Screen
         name="Splash"
         component={Splash}

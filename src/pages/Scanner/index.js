@@ -82,7 +82,7 @@ export default function Scanner({ navigation }) {
               type: 'success',
               message: key + ' Berhasil Simpan Data',
             });
-            whoosh2.play();
+            // whoosh2.play();
           }
         });
 
