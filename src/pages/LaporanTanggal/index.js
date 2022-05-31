@@ -14,6 +14,7 @@ import DatePicker from 'react-native-datepicker'
 import { fonts } from '../../utils/fonts';
 import { MyInput, MyGap, MyButton } from '../../components';
 import { colors } from '../../utils/colors';
+import axios from 'axios';
 export default function LaporanTanggal({ navigation }) {
 
     const [user, setUser] = useState({});
@@ -36,6 +37,28 @@ export default function LaporanTanggal({ navigation }) {
             navigation.navigate('LaporanDownload', {
                 url: 'https://zavalabs.com/api/zavascan_download.php?id_member=' +
                     user.id + '&awal=' + awal + '&akhir=' + akhir
+            })
+
+
+
+        } else {
+            alert('Silahkan pilih tanggal terlebih dahulu')
+        }
+    }
+
+
+    const clearResi = () => {
+
+        if (awal.length > 1 && akhir.length > 1) {
+
+            // Linking.openURL('https://zavalabs.com/api/zavascan_download.php?id_member=' +
+            //     user.id + '&awal=' + awal + '&akhir=' + akhir);
+
+            axios.get('https://zavalabs.com/api/zavascan_clear.php?id_member=' +
+                user.id + '&awal=' + awal + '&akhir=' + akhir
+            ).then(res => {
+                console.log(res);
+                alert('Data berhasil di clear')
             })
 
 
@@ -164,6 +187,8 @@ export default function LaporanTanggal({ navigation }) {
             <MyButton onPress={ViewByCustomer} title="Lihat Berdasarkan Customer" warna={colors.secondary} Icons="people-outline" />
             <MyGap jarak={20} />
             <MyButton onPress={download} title="Download" warna={colors.success} Icons="download-outline" />
+            <MyGap jarak={20} />
+            <MyButton onPress={clearResi} title="Hapus Resi" warna={colors.danger} Icons="trash-outline" />
         </SafeAreaView>
     )
 }

@@ -7,6 +7,9 @@ import {
   ScrollView,
   ActivityIndicator,
   Picker,
+  Alert,
+  FlatList,
+  TouchableOpacity,
   TextInput,
 } from 'react-native';
 import { MyInput, MyGap, MyButton } from '../../components';
@@ -35,17 +38,16 @@ export default function Scanner({ navigation }) {
   useEffect(() => {
     getData('user').then(res => {
       setUser(res);
-      //   console.log(res);
+
+      getData('customer').then(res2 => {
+        setCustomer(res2);
+        _getData(res.id, res2);
+      });
     });
-    getData('customer').then(res => {
-      setCustomer(res);
-    })
+
   }, []);
 
 
-  const getDataResi = x => {
-
-  }
 
   const [key, setKey] = useState('');
   const [user, setUser] = useState({});
@@ -82,23 +84,97 @@ export default function Scanner({ navigation }) {
               type: 'success',
               message: key + ' Berhasil Simpan Data',
             });
-            // whoosh2.play();
+            _getData(user.id, customer);
+
           }
         });
 
-      // navigation.navigate('BarcodeHasil', kirim);
 
-      //   console.log(kirim);
     }
   };
 
-  // useEffect(() => {
-  //   _myInput.focus();
-  //   console.log(_myInput);
-  // });
+
   const ref_input = useRef();
-  const [cek, setCek] = useState();
-  const [cek2, setCek2] = useState();
+  const [jml, setJML] = useState(0);
+  const [data, setData] = useState([]);
+
+  const _getData = (id_member, customer) => {
+    axios
+      .post('https://zavalabs.com/api/zavascan_data_new.php', {
+        id_member: id_member,
+        customer: customer
+      })
+      .then(res => {
+        console.log('jml', res.data[0].kode)
+        setJML(res.data[0].kode);
+        setData(res.data);
+      });
+  };
+  const _renderItem = ({ item, index }) => {
+    return (
+      <View
+        style={{
+          marginVertical: 2,
+          borderBottomWidth: 1,
+          borderColor: colors.primary,
+          //   padding: 10,
+          overflow: 'hidden',
+        }}>
+        <View
+          style={{
+            backgroundColor: colors.white,
+            justifyContent: 'center',
+            flexDirection: 'row',
+            padding: 10,
+          }}>
+          <View style={{ flex: 1 }}>
+            <Text
+              style={{
+                fontFamily: fonts.secondary[600],
+                fontSize: 14,
+                color: colors.background,
+              }}>
+              {item.nama}
+            </Text>
+            <Text
+              style={{
+                fontFamily: fonts.secondary[600],
+                fontSize: 14,
+                color: colors.black,
+              }}>
+              {item.customer}
+            </Text>
+          </View>
+
+          <Text
+            style={{
+              fontFamily: fonts.secondary[600],
+              fontSize: 12,
+              color: colors.secondary,
+            }}>
+            {item.ekspedisi}
+          </Text>
+        </View>
+
+
+
+
+      </View>
+    );
+  };
+
+  const _hapusData = (id_member, id) => {
+    axios
+      .post('https://zavalabs.com/api/zavascan_delete.php', {
+        id_member: id_member,
+        id: id,
+      })
+      .then(res => {
+        _getData(id_member, customer);
+      });
+  };
+
+
 
   return (
     <SafeAreaView
@@ -140,7 +216,7 @@ export default function Scanner({ navigation }) {
                   left: 10,
                   fontSize: 14,
                 }}>
-                Masukan Barcode / Resi ( {customer} )
+                Masukan Barcode / Resi ( {customer} ) / {jml}
               </Text>
             </View>
             <TextInput
@@ -159,6 +235,7 @@ export default function Scanner({ navigation }) {
               ref={ref_input}
             />
           </View>
+          <FlatList data={data} renderItem={_renderItem} />
         </View>
 
 

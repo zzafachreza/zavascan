@@ -12,9 +12,10 @@ import {
 import { colors } from '../../utils/colors';
 import { fonts } from '../../utils/fonts';
 import { color } from 'react-native-reanimated';
-import { getData } from '../../utils/localStorage';
+import { getData, storeData } from '../../utils/localStorage';
 import { PermissionsAndroid } from 'react-native';
 import LottieView from 'lottie-react-native';
+import DeviceInfo from 'react-native-device-info';
 
 export default function Splash({ navigation }) {
   const windowWidth = Dimensions.get('window').width;
@@ -50,6 +51,14 @@ export default function Splash({ navigation }) {
   }).start();
 
   useEffect(() => {
+
+
+    DeviceInfo.getDeviceName().then((display) => {
+      // "OPM2.171026.006.G1"
+      console.warn(display)
+      storeData('device', display);
+    });
+
     const unsubscribe = getData('user').then(res => {
       if (!res) {
         setTimeout(() => {

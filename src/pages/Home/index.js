@@ -25,10 +25,19 @@ export default function Home({ navigation }) {
 
   const [user, setUser] = useState([]);
   const [currentDate, setCurrentDate] = useState('');
+  const [device, setDivice] = useState('');
 
   useEffect(() => {
     getData('user').then(res => {
       setUser(res);
+      getData('device').then(res2 => {
+        setDivice(res2);
+
+        if (res.token !== res2) {
+          alert(`Maaf Akun ini hanya untuk ${res.token} saja, silahkan hubungi Admin untuk tambah device`);
+          navigation.replace('Login')
+        }
+      });
     });
 
     var date = new Date().getDate(); //Current Date
@@ -165,6 +174,11 @@ export default function Home({ navigation }) {
             color: colors.white,
             fontSize: 22,
           }}>ZAVASCAN</Text>
+          <Text style={{
+            fontFamily: fonts.secondary[400],
+            color: colors.white,
+            fontSize: 12,
+          }}>{device}</Text>
         </View>
 
         {/* <TouchableOpacity

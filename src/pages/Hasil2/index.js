@@ -19,8 +19,6 @@ import { colors } from '../../utils/colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Icon } from 'react-native-elements';
 import DatePicker from 'react-native-datepicker'
-import RNFetchBlob from 'rn-fetch-blob'
-import { WebView } from 'react-native-webview';
 const wait = timeout => {
     return new Promise(resolve => {
         setTimeout(resolve, timeout);

@@ -38,10 +38,21 @@ export default function Login({ navigation }) {
     }
   };
   const [token, setToken] = useState('');
+  const [device, setDevice] = useState('');
   const [data, setData] = useState({
     email: '',
     password: '',
   });
+
+  useEffect(() => {
+    getData('device').then(res => {
+      setDevice(res);
+      setData({
+        ...data,
+        device: res
+      })
+    })
+  }, [])
 
 
   // login ok
