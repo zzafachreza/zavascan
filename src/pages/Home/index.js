@@ -236,17 +236,17 @@ export default function Home({ navigation }) {
           }}>
           <DataKategori
             warna={colors.primary}
-            onPress={() => navigation.navigate('LaporanTanggal')}
+            onPress={() => navigation.navigate('Laporan')}
             icon="calendar-outline"
             nama="LAPORAN"
             nama2="Laporan Berdasarkan Tanggal"
           />
           <DataKategori
             warna={colors.primary}
-            onPress={() => navigation.navigate('Hasil')}
-            icon="file-tray-stacked-outline"
-            nama="HASIL SCAN"
-            nama2="Hasil Scan Hari ini"
+            onPress={() => navigation.navigate('SerahTerima')}
+            icon="open-outline"
+            nama="SERAH TERIMA"
+            nama2="Scan Serah Terima"
           />
         </View>
       </ImageBackground>

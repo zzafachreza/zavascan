@@ -82,6 +82,15 @@ export default function Router() {
 
 
       <Stack.Screen
+        name="Laporan"
+        component={Laporan}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+
+      <Stack.Screen
         name="Splash"
         component={Splash}
         options={{
