@@ -41,7 +41,7 @@ export default function PilihanSerahTerima({ navigation }) {
                 <Text
                     style={{
                         fontFamily: fonts.secondary[600],
-                        fontSize: windowWidth / 20,
+                        fontSize: windowWidth / 25,
                         color: colors.white,
                     }}>
                     Serah Terima Dengan Kamera
@@ -68,7 +68,7 @@ export default function PilihanSerahTerima({ navigation }) {
                 <Text
                     style={{
                         fontFamily: fonts.secondary[600],
-                        fontSize: windowWidth / 15,
+                        fontSize: windowWidth / 25,
                         color: colors.white,
                     }}>
                     Serah Terima Dengan Alat

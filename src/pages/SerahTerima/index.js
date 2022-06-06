@@ -84,7 +84,7 @@ export default function ({ navigation, route }) {
 
                 if (res.data == 404) {
                     showMessage({
-                        message: 'Belum Pernah discan !',
+                        message: 'Anda belum pernah scan barcode ini !',
                         type: 'danger',
                     });
 
