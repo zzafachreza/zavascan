@@ -1,37 +1,24 @@
 import React, { useEffect } from 'react';
 import {
   StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  ImageBackground,
   SafeAreaView,
   Image,
-  Animated,
   StatusBar
 } from 'react-native';
 import { colors } from '../../utils/colors';
-import { fonts } from '../../utils/fonts';
-import { color } from 'react-native-reanimated';
 import { getData, storeData } from '../../utils/localStorage';
-import { PermissionsAndroid } from 'react-native';
-import LottieView from 'lottie-react-native';
 import DeviceInfo from 'react-native-device-info';
 export default function Utama({ navigation }) {
 
 
-  useEffect(() => {
-
-
-    DeviceInfo.getDeviceName().then((name) => {
-      DeviceInfo.getMacAddress().then((id) => {
-        storeData('device', {
-          deviceID: id,
-          deviceName: name
-        });
-      });
+  DeviceInfo.getDeviceName().then((name) => {
+    storeData('device', {
+      deviceID: DeviceInfo.getDeviceId(),
+      deviceName: name
     });
+  });
 
+  useEffect(() => {
 
 
     const unsubscribe = getData('user').then(res => {
@@ -45,6 +32,9 @@ export default function Utama({ navigation }) {
         }, 2000);
       }
     });
+
+
+
   }, []);
 
 

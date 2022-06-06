@@ -19,7 +19,6 @@ import { showMessage } from 'react-native-flash-message';
 
 export default function Login({ navigation }) {
   const windowWidth = Dimensions.get('window').width;
-  const windowHeight = Dimensions.get('window').height;
   const [loading, setLoading] = useState(false);
   const [valid, setValid] = useState(true);
 
@@ -35,8 +34,7 @@ export default function Login({ navigation }) {
       setValid(true);
     }
   };
-  const [token, setToken] = useState('');
-  const [device, setDevice] = useState('');
+
   const [data, setData] = useState({
     email: '',
     password: '',
@@ -44,7 +42,6 @@ export default function Login({ navigation }) {
 
   useEffect(() => {
     getData('device').then(res => {
-      setDevice(res);
       setData({
         ...data,
         deviceID: res.deviceID,
