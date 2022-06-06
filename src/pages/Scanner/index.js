@@ -235,6 +235,11 @@ export default function Scanner({ navigation }) {
               ref={ref_input}
             />
           </View>
+          <Text style={{
+            fontFamily: fonts.secondary[600],
+            fontSize: 12,
+            marginVertical: 5,
+          }}>Resi Dibawah adalah resi terakhir perhari ini</Text>
           <FlatList data={data} renderItem={_renderItem} />
         </View>
 
@@ -250,21 +255,6 @@ export default function Scanner({ navigation }) {
           </View>
         )}
       </ScrollView>
-      {/* {cek && (
-        <LottieView
-          source={require('../../assets/error.json')}
-          autoPlay
-          loop={false}
-        />
-      )}
-      {cek2 && (
-        <LottieView
-          style={{margin: 40}}
-          source={require('../../assets/success.json')}
-          autoPlay
-          loop={false}
-        />
-      )} */}
     </SafeAreaView>
   );
 }

@@ -33,6 +33,9 @@ import LaporanByCustomer from './LaporanByCustomer';
 import Kurir from './Kurir';
 import Hasil2 from './Hasil2';
 import LaporanDownload from './LaporanDownload';
+import PilihanSerahTerima from './PilihanSerahTerima';
+import SerahTerimaScan from './SerahTerimaScan';
+
 
 
 
@@ -71,4 +74,6 @@ export {
   LaporanHarian,
   BarcodeHasil,
   Utama,
+  PilihanSerahTerima,
+  SerahTerimaScan,
 };

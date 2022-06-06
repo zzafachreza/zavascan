@@ -41,6 +41,8 @@ import {
   Kurir,
   Hasil2,
   LaporanDownload,
+  PilihanSerahTerima,
+  SerahTerimaScan,
 } from '../pages';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigator } from '../components';
@@ -84,6 +86,15 @@ export default function Router() {
       <Stack.Screen
         name="Laporan"
         component={Laporan}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+
+      <Stack.Screen
+        name="PilihanSerahTerima"
+        component={PilihanSerahTerima}
         options={{
           headerShown: false,
         }}
@@ -744,6 +755,65 @@ export default function Router() {
       <Stack.Screen
         name="SerahTerima"
         component={SerahTerima}
+        options={({ route, navigation }) => ({
+          title: 'SCAN SERAH TERIMA',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.background,
+            elevation: 0, // remove shadow on Android
+          },
+          headerRight: () => (
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                padding: 10,
+              }}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('HasilSerah')}
+                style={{
+                  position: 'relative',
+                  padding: 5,
+                  marginHorizontal: 10,
+                }}>
+                <Icon name="list" type="ionicon" color="white" size={25} />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => navigation.replace('MainApp')}
+                style={{
+                  position: 'relative',
+                  padding: 5,
+                  marginHorizontal: 10,
+                }}>
+                <Icon name="home" type="ionicon" color="white" size={25} />
+              </TouchableOpacity>
+            </View>
+          ),
+          cardStyleInterpolator: ({ current, layouts }) => {
+            return {
+              cardStyle: {
+                transform: [
+                  {
+                    translateX: current.progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layouts.screen.width, 0],
+                    }),
+                  },
+                ],
+              },
+            };
+          },
+        })}
+      />
+
+
+
+
+      <Stack.Screen
+        name="SerahTerimaScan"
+        component={SerahTerimaScan}
         options={({ route, navigation }) => ({
           title: 'SCAN SERAH TERIMA',
           headerTintColor: 'white',

@@ -25,18 +25,13 @@ export default function Home({ navigation }) {
 
   const [user, setUser] = useState([]);
   const [currentDate, setCurrentDate] = useState('');
-  const [device, setDivice] = useState('');
+  const [device, setDivice] = useState({});
 
   useEffect(() => {
     getData('user').then(res => {
       setUser(res);
       getData('device').then(res2 => {
         setDivice(res2);
-
-        if (res.token !== res2) {
-          alert(`Maaf Akun ini hanya untuk ${res.token} saja, silahkan hubungi Admin untuk tambah device`);
-          navigation.replace('Login')
-        }
       });
     });
 
@@ -178,23 +173,10 @@ export default function Home({ navigation }) {
             fontFamily: fonts.secondary[400],
             color: colors.white,
             fontSize: 12,
-          }}>{device}</Text>
+          }}>{device.deviceName}</Text>
         </View>
 
-        {/* <TouchableOpacity
-          onPress={() => navigation.navigate('SerahTerima')}
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: 10,
-          }}>
-          <Icon
-            type="ionicon"
-            name="open-outline"
-            color={colors.white}
-            size={windowWidth / 15}
-          />
-        </TouchableOpacity> */}
+
       </View>
       <MyCarouser />
       <ImageBackground
@@ -243,7 +225,7 @@ export default function Home({ navigation }) {
           />
           <DataKategori
             warna={colors.primary}
-            onPress={() => navigation.navigate('SerahTerima')}
+            onPress={() => navigation.navigate('PilihanSerahTerima')}
             icon="open-outline"
             nama="SERAH TERIMA"
             nama2="Scan Serah Terima"

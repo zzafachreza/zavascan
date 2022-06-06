@@ -49,7 +49,8 @@ export default function Login({ navigation }) {
       setDevice(res);
       setData({
         ...data,
-        device: res
+        deviceID: res.deviceID,
+        deviceName: res.deviceName
       })
     })
   }, [])
@@ -74,6 +75,7 @@ export default function Login({ navigation }) {
       setTimeout(() => {
         axios.post('https://zavalabs.com/api/login.php', data).then(res => {
           setLoading(false);
+          console.log('cek login', res.data)
           if (res.data.kode == 50) {
             showMessage({
               type: 'danger',

@@ -53,11 +53,25 @@ export default function Splash({ navigation }) {
   useEffect(() => {
 
 
-    DeviceInfo.getDeviceName().then((display) => {
+    DeviceInfo.getDeviceName().then((name) => {
       // "OPM2.171026.006.G1"
-      console.warn(display)
-      storeData('device', display);
+      console.warn(name);
+
+      DeviceInfo.getMacAddress().then((id) => {
+        // "OPM2.171026.006.G1"
+
+        storeData('device', {
+          deviceID: id,
+          deviceName: name
+        });
+      });
+
+
+
+      // storeData('device', display);
     });
+
+
 
     const unsubscribe = getData('user').then(res => {
       if (!res) {
