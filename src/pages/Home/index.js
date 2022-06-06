@@ -96,7 +96,6 @@ export default function Home({ navigation }) {
               color: colors.white,
               fontSize: windowWidth / 30,
               textAlign: 'center',
-              // marginHorizontal: 10,
             }}>
             {nama}
           </Text>
@@ -187,7 +186,6 @@ export default function Home({ navigation }) {
           justifyContent: 'center',
         }}>
 
-        {/* <MyDashboard /> */}
 
         <View
           style={{

@@ -6,22 +6,15 @@ import {
   SafeAreaView,
   ScrollView,
   ActivityIndicator,
-  Picker,
-  Alert,
   FlatList,
-  TouchableOpacity,
   TextInput,
 } from 'react-native';
-import { MyInput, MyGap, MyButton } from '../../components';
 import { getData } from '../../utils/localStorage';
 import axios from 'axios';
 import { colors } from '../../utils/colors';
 import { showMessage } from 'react-native-flash-message';
-import DropDownPicker from 'react-native-dropdown-picker';
 import { Icon } from 'react-native-elements';
 import { fonts } from '../../utils/fonts';
-import LottieView from 'lottie-react-native';
-import { Button } from 'react-native-elements/dist/buttons/Button';
 import Sound from 'react-native-sound';
 
 var whoosh = new Sound(
@@ -117,7 +110,6 @@ export default function Scanner({ navigation }) {
           marginVertical: 2,
           borderBottomWidth: 1,
           borderColor: colors.primary,
-          //   padding: 10,
           overflow: 'hidden',
         }}>
         <View
@@ -155,23 +147,8 @@ export default function Scanner({ navigation }) {
             {item.ekspedisi}
           </Text>
         </View>
-
-
-
-
       </View>
     );
-  };
-
-  const _hapusData = (id_member, id) => {
-    axios
-      .post('https://zavalabs.com/api/zavascan_delete.php', {
-        id_member: id_member,
-        id: id,
-      })
-      .then(res => {
-        _getData(id_member, customer);
-      });
   };
 
 
@@ -186,15 +163,7 @@ export default function Scanner({ navigation }) {
           style={{
             padding: 10,
           }}>
-          {/* <MyInput
-            ref={x => (ref_input = x)}
-            value={key}
-            onChangeText={value => setKey(value)}
-            onSubmitEditing={_kirimData}
-            // autoFocus
-            label="Masukan barcode"
-            iconname="barcode-outline"
-          /> */}
+
 
           <View>
             <View

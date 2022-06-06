@@ -24,17 +24,15 @@ export default function Login({ navigation }) {
   const [valid, setValid] = useState(true);
 
   const validate = text => {
-    // console.log(text);
+
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (reg.test(text) === false) {
-      // console.log('Email is Not Correct');
       setData({ ...data, email: text });
       setValid(false);
       return false;
     } else {
       setData({ ...data, email: text });
       setValid(true);
-      // console.log('Email is Correct');
     }
   };
   const [token, setToken] = useState('');
@@ -75,7 +73,6 @@ export default function Login({ navigation }) {
       setTimeout(() => {
         axios.post('https://zavalabs.com/api/login.php', data).then(res => {
           setLoading(false);
-          console.log('cek login', res.data)
           if (res.data.kode == 50) {
             showMessage({
               type: 'danger',
@@ -108,12 +105,6 @@ export default function Login({ navigation }) {
             padding: 10,
             borderRadius: 10,
           }}>
-          {/* <LottieView
-            style={{flex: 1}}
-            source={require('../../assets/getstarted.json')}
-            autoPlay
-            loop
-          /> */}
           <Image
             source={require('../../assets/logo1.png')}
             style={{
@@ -128,7 +119,6 @@ export default function Login({ navigation }) {
               fontFamily: fonts.secondary[400],
               fontSize: windowWidth / 20,
               color: colors.black,
-              // maxWidth: 230,
               textAlign: 'center',
             }}>
             Silahkan login untuk masuk ke aplikasi

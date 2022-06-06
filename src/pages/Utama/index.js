@@ -1,19 +1,54 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleSheet,
   Text,
   View,
+  Dimensions,
+  ImageBackground,
   SafeAreaView,
   Image,
-  StatusBar,
+  Animated,
+  StatusBar
 } from 'react-native';
-import {fonts} from '../../utils/fonts';
-import {colors} from '../../utils/colors';
+import { colors } from '../../utils/colors';
+import { fonts } from '../../utils/fonts';
+import { color } from 'react-native-reanimated';
+import { getData, storeData } from '../../utils/localStorage';
+import { PermissionsAndroid } from 'react-native';
+import LottieView from 'lottie-react-native';
+import DeviceInfo from 'react-native-device-info';
+export default function Utama({ navigation }) {
 
-export default function Utama({navigation}) {
-  setTimeout(() => {
-    navigation.replace('Splash');
-  }, 1000);
+
+  useEffect(() => {
+
+
+    DeviceInfo.getDeviceName().then((name) => {
+      DeviceInfo.getMacAddress().then((id) => {
+        storeData('device', {
+          deviceID: id,
+          deviceName: name
+        });
+      });
+    });
+
+
+
+    const unsubscribe = getData('user').then(res => {
+      if (!res) {
+        setTimeout(() => {
+          navigation.replace('Login');
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          navigation.replace('MainApp');
+        }, 2000);
+      }
+    });
+  }, []);
+
+
+
   return (
     <SafeAreaView
       style={{
@@ -22,21 +57,12 @@ export default function Utama({navigation}) {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <StatusBar backgroundColor={'#044cc2'} barStyle="light-content" />
-
+      <StatusBar backgroundColor={colors.primary} barStyle="light-content" />
       <Image
         source={require('../../assets/logo1.png')}
         resizeMode="contain"
-        style={{width: 300}}
+        style={{ width: 300 }}
       />
-      {/* <Text
-        style={{
-          fontFamily: fonts.secondary[600],
-          fontSize: 20,
-          color: '#e5e8e4',
-        }}>
-        By ZAVALABS Mobile Apps
-      </Text> */}
     </SafeAreaView>
   );
 }
