@@ -3,6 +3,7 @@ import {
     StyleSheet,
     Text,
     View,
+    Alert,
     Image,
     Dimensions,
     SafeAreaView,
@@ -49,17 +50,39 @@ export default function LaporanTanggal({ navigation }) {
 
     const clearResi = () => {
 
+
+
+
         if (awal.length > 1 && akhir.length > 1) {
 
             // Linking.openURL('https://zavalabs.com/api/zavascan_download.php?id_member=' +
             //     user.id + '&awal=' + awal + '&akhir=' + akhir);
 
-            axios.get('https://zavalabs.com/api/zavascan_clear.php?id_member=' +
-                user.id + '&awal=' + awal + '&akhir=' + akhir
-            ).then(res => {
-                console.log(res);
-                alert('Data berhasil di clear')
-            })
+
+
+
+            Alert.alert(
+                "ZAVASCAN",
+                "Apakah Anda yakin akan hapus resi ini ?",
+                [
+                    {
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                    },
+                    {
+                        text: "OK", onPress: () => {
+
+                            axios.get('https://zavalabs.com/api/zavascan_clear.php?id_member=' +
+                                user.id + '&awal=' + awal + '&akhir=' + akhir
+                            ).then(res => {
+                                console.log(res);
+                                alert('Data berhasil di clear')
+                            });
+                        }
+                    }
+                ]
+            );
 
 
 
