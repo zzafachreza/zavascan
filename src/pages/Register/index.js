@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,52 +8,118 @@ import {
   ScrollView,
   ImageBackground,
 } from 'react-native';
-import {colors} from '../../utils/colors';
-import {fonts} from '../../utils/fonts';
-import {MyInput, MyGap, MyButton} from '../../components';
+import { colors } from '../../utils/colors';
+import { fonts } from '../../utils/fonts';
+import { MyInput, MyGap, MyButton } from '../../components';
 import axios from 'axios';
-import {showMessage} from 'react-native-flash-message';
+import { showMessage } from 'react-native-flash-message';
 import LottieView from 'lottie-react-native';
 
-export default function Register({navigation}) {
+export default function Register({ navigation }) {
   const [loading, setLoading] = useState(false);
+
+  const [valid, setValid] = useState(true);
+
+  const validate = text => {
+
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (reg.test(text) === false) {
+      setData({ ...data, email: text });
+      setValid(false);
+      return false;
+    } else {
+      setData({ ...data, email: text });
+      setValid(true);
+    }
+  };
+
+
   const [data, setData] = useState({
-    nama_lengkap: null,
-    email: null,
-    password: null,
-    telepon: null,
-    alamat: null,
+    nama_lengkap: '',
+    email: '',
+    password: '',
+    telepon: '62',
+    alamat: '',
   });
 
   const simpan = () => {
-    setLoading(true);
-    console.log(data);
-    axios.post('https://zavalabs.com/api/register.php', data).then(res => {
-      console.log(res);
-      let err = res.data.split('#');
 
-      // console.log(err[0]);
-      if (err[0] == 50) {
-        setTimeout(() => {
+    console.log(data);
+    if (data.nama_lengkap.length === 0) {
+      showMessage({
+        message: 'Maaf nama lengkap masih kosong !',
+      });
+    } else if (data.email.length === 0) {
+      showMessage({
+        message: 'Maaf email masih kosong !',
+      });
+    } else if (data.alamat.length === 0) {
+      showMessage({
+        message: 'Maaf alamat masih kosong !',
+      });
+    } else if (data.telepon.length <= 2) {
+      showMessage({
+        message: 'Maaf whatsapp masih kosong !',
+      });
+    } else if (data.password.length === 0) {
+      showMessage({
+        message: 'Maaf password masih kosong !',
+      });
+    } else {
+      setLoading(true);
+      axios.post('https://zavalabs.com/api/register.php', data).then(res => {
+        console.log(res.data);
+
+        if (parseInt(res.data) === 404) {
           setLoading(false);
           showMessage({
-            message: err[1],
-            type: 'danger',
-          });
-        }, 1200);
-      } else {
-        setTimeout(() => {
+            message: 'Maaf nomor whatsapp Anda sudah terdaftar !',
+            type: 'danger'
+          })
+        } else if (parseInt(res.data) === 405) {
           setLoading(false);
-          navigation.replace('Success', {
-            messege: res.data,
-          });
-        }, 1200);
-        showMessage({
-          message: res.data,
-          type: 'success',
-        });
-      }
-    });
+          showMessage({
+            message: 'Maaf email Anda sudah terdaftar !',
+            type: 'danger'
+          })
+        } else {
+
+          setData({
+            ...data,
+            otp: res.data,
+          })
+
+          setTimeout(() => {
+            setLoading(false);
+            navigation.navigate('Otp', data)
+          }, 1500)
+        }
+
+
+
+        // console.log(err[0]);
+        // if (err[0] == 50) {
+        //   setTimeout(() => {
+        //     setLoading(false);
+        //     showMessage({
+        //       message: err[1],
+        //       type: 'danger',
+        //     });
+        //   }, 1200);
+        // } else {
+        //   setTimeout(() => {
+        //     setLoading(false);
+        //     navigation.replace('Success', {
+        //       messege: res.data,
+        //     });
+        //   }, 1200);
+        //   showMessage({
+        //     message: res.data,
+        //     type: 'success',
+        //   });
+        // }
+      });
+    }
   };
   return (
     <ImageBackground style={styles.page}>
@@ -80,13 +146,19 @@ export default function Register({navigation}) {
           label="Email"
           iconname="mail"
           value={data.email}
-          onChangeText={value =>
-            setData({
-              ...data,
-              email: value,
-            })
-          }
+          onChangeText={value => validate(value)}
         />
+        {!valid && (
+          <Text
+            style={{
+              color: colors.danger,
+              fontFamily: fonts.primary[600],
+              textAlign: 'right',
+              right: 10,
+            }}>
+            Maaf Email Anda Tidak Valid !
+          </Text>
+        )}
         <MyGap jarak={10} />
         <MyInput
           label="Alamat"
@@ -101,8 +173,8 @@ export default function Register({navigation}) {
         />
         <MyGap jarak={10} />
         <MyInput
-          label="Telepon"
-          iconname="call"
+          label="Nomor Whatsapp (6281....)"
+          iconname="logo-whatsapp"
           keyboardType="number-pad"
           value={data.telepon}
           onChangeText={value =>
@@ -126,12 +198,12 @@ export default function Register({navigation}) {
           }
         />
         <MyGap jarak={40} />
-        <MyButton
+        {valid && <MyButton
           warna={colors.secondary}
-          title="MASUK"
+          title="DAFTAR SEKARANG"
           Icons="log-in"
           onPress={simpan}
-        />
+        />}
         <Text
           style={{
             marginTop: 20,
@@ -141,7 +213,7 @@ export default function Register({navigation}) {
             // maxWidth: 230,
           }}>
           Silahkan melakukan pendaftaran terlebih dahulu, sebelum masuk ke
-          Aplikasi Sobat Beton
+          Aplikasi Zavascan
         </Text>
       </ScrollView>
       {loading && (
@@ -151,7 +223,7 @@ export default function Register({navigation}) {
           loop
           style={{
             flex: 1,
-            backgroundColor: colors.white,
+            backgroundColor: colors.primary,
           }}
         />
       )}

@@ -128,6 +128,7 @@ export default function Login({ navigation }) {
             value={data.nama_lengkap}
             onChangeText={value => validate(value)}
           />
+
           {!valid && (
             <Text
               style={{
@@ -160,6 +161,13 @@ export default function Login({ navigation }) {
               onPress={masuk}
             />
           )}
+          <MyGap jarak={10} />
+          <MyButton
+            warna={colors.secondary}
+            title="DAFTAR"
+            Icons="book"
+            onPress={() => navigation.navigate('Register')}
+          />
         </View>
       </ScrollView>
       {loading && (

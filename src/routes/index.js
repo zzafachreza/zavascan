@@ -43,6 +43,7 @@ import {
   LaporanDownload,
   PilihanSerahTerima,
   SerahTerimaScan,
+  Otp,
 } from '../pages';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigator } from '../components';
@@ -77,6 +78,14 @@ export default function Router() {
       <Stack.Screen
         name="LaporanDownload"
         component={LaporanDownload}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="Otp"
+        component={Otp}
         options={{
           headerShown: false,
         }}

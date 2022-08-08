@@ -35,6 +35,8 @@ import Hasil2 from './Hasil2';
 import LaporanDownload from './LaporanDownload';
 import PilihanSerahTerima from './PilihanSerahTerima';
 import SerahTerimaScan from './SerahTerimaScan';
+import Otp from './Otp';
+
 
 
 
@@ -76,4 +78,5 @@ export {
   Utama,
   PilihanSerahTerima,
   SerahTerimaScan,
+  Otp,
 };

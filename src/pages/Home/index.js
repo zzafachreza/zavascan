@@ -19,17 +19,48 @@ import { FlatListSlider } from 'react-native-flatlist-slider';
 import { Preview, MyDashboard } from '../../components';
 import { Icon } from 'react-native-elements';
 import MyNews from '../../components/MyNews';
+import axios from 'axios';
+import moment from 'moment';
 import MyCarouser from '../../components/MyCarouser';
+import { Alert } from 'react-native';
+import { Linking } from 'react-native';
 
 export default function Home({ navigation }) {
 
   const [user, setUser] = useState([]);
   const [currentDate, setCurrentDate] = useState('');
   const [device, setDivice] = useState({});
+  const [open, setOpen] = useState(true);
+
+  const [expired, setExpired] = useState('');
+  const today = moment().format('YYYY-MM-DD');
+
 
   useEffect(() => {
     getData('user').then(res => {
       setUser(res);
+      axios.post('https://zavalabs.com/api/zavascan_expired.php', {
+        id: res.id
+      }).then(cek => {
+        console.log('expired', cek.data);
+
+        if (today == cek.data) {
+          console.log('Expired !');
+
+          Alert.alert(
+            "ZAVASCAN INFO",
+            "Mohon maaf masa berlaku akun Anda telah berakhir, silahkan hubungi admin untuk mengaktifkan kembali",
+            [
+
+              { text: "Hubungi Admin", onPress: () => Linking.openURL('https://wa.me/6281319456595') }
+            ]
+          );
+          setOpen(false);
+        } else {
+          console.log('Masih jalan')
+          setOpen(true);
+        }
+      })
       getData('device').then(res2 => {
         setDivice(res2);
       });
@@ -173,20 +204,19 @@ export default function Home({ navigation }) {
             color: colors.white,
             fontSize: 12,
           }}>{device.deviceName}</Text>
+
         </View>
 
 
       </View>
       <MyCarouser />
-      <ImageBackground
+      {open && <ImageBackground
         source={require('../../assets/back.jpeg')}
         style={{
           flex: 1,
           backgroundColor: colors.white,
           justifyContent: 'center',
         }}>
-
-
         <View
           style={{
             flexDirection: 'row',
@@ -201,7 +231,21 @@ export default function Home({ navigation }) {
           />
           <DataKategori
             warna={colors.primary}
-            onPress={() => navigation.navigate('Kamera')}
+            onPress={() => {
+
+              Alert.alert(
+                "ZAVASCAN INFO",
+                "Scan kamera ini hanya alternatif, tergantung kamera handphone masing-masing. Untuk membaca barcode resi dengan maksimal di rekomendasikan menggunakan alat scanner",
+                [
+                  {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                  },
+                  { text: "TETAP PAKAI KAMERA", onPress: () => navigation.navigate('Kamera') }
+                ]
+              );
+            }}
             icon="camera-outline"
             nama="SCAN KAMERA"
             nama2="Menggunakan Kamera HP"
@@ -229,7 +273,48 @@ export default function Home({ navigation }) {
             nama2="Scan Serah Terima"
           />
         </View>
-      </ImageBackground>
+        <TouchableOpacity onPress={() => Linking.openURL('https://wa.me/6281319456595')} style={{
+          padding: 10,
+          borderRadius: 5,
+          marginVertical: 10,
+          marginHorizontal: 20,
+          backgroundColor: colors.tertiary,
+
+        }}>
+          <Text style={{
+            fontFamily: fonts.secondary[600],
+            color: colors.primary,
+            fontSize: windowWidth / 30,
+            textAlign: 'center',
+          }}>Klik disini untuk membuka Aplikasi ZAVASCAN via website</Text>
+        </TouchableOpacity>
+      </ImageBackground>}
+
+      {!open && <View style={{
+        flex: 1,
+        padding: 30,
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        <Text style={{
+          color: colors.white,
+          fontFamily: fonts.secondary[400],
+          textAlign: 'center',
+          fontSize: 25,
+        }}>Silahkan hubungi admin untuk melakukan upgrade</Text>
+        <TouchableOpacity onPress={() => Linking.openURL('https://wa.me/6281319456595')}>
+          <Text style={{
+            backgroundColor: colors.success,
+            padding: 10,
+            borderRadius: 10,
+            marginVertical: 10,
+            color: colors.white,
+            fontFamily: fonts.secondary[800],
+            textAlign: 'center',
+            fontSize: 25,
+          }}>0813-1945-5695</Text>
+        </TouchableOpacity>
+      </View>}
     </SafeAreaView>
   );
 }
