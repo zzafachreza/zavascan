@@ -67,7 +67,7 @@ export default function SerahTerimaScan({ navigation }) {
             };
 
             axios
-                .post('https://zavalabs.com/api/zavascan_kamera_add_serah_terima.php', kirim)
+                .post('https://zavalabs.com/api/zavascan_kamera_add_retur.php', kirim)
                 .then(res => {
                     setKey('');
                     ref_input.current.focus();
@@ -100,7 +100,7 @@ export default function SerahTerimaScan({ navigation }) {
 
     const _getData = (id_member, customer) => {
         axios
-            .post('https://zavalabs.com/api/zavascan_data_new_serah_terima.php', {
+            .post('https://zavalabs.com/api/zavascan_data_new_retur.php', {
                 id_member: id_member,
                 customer: customer
             })

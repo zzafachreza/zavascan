@@ -5,6 +5,8 @@ import {
     View,
     SafeAreaView,
     TouchableOpacity,
+    Alert,
+    Linking,
 } from 'react-native';
 import { fonts } from '../../utils/fonts';
 import { colors } from '../../utils/colors';
@@ -21,7 +23,22 @@ export default function PilihanSerahTerima({ navigation }) {
             }}>
 
             <TouchableOpacity
-                onPress={() => navigation.navigate('SerahTerima')}
+                onPress={() => {
+
+                    navigation.navigate('SerahTerima')
+                    // Alert.alert(
+                    //     "ZAVASCAN INFO",
+                    //     "Untuk mengunakan fitur kamera, silahkan hubungi admin terlebih dahulu",
+                    //     [
+                    //         {
+                    //             text: "Cancel",
+                    //             onPress: () => console.log("Cancel Pressed"),
+                    //             style: "cancel"
+                    //         },
+                    //         { text: "HUBUNGI ADMIN", onPress: () => Linking.openURL('https://wa.me/6281319456595?text=Hallo%20admin%20mau%20tanya%20fitur%20aplikasi%20*ZAVASCAN*%20dong...') }
+                    //     ]
+                    // );
+                }}
                 style={{
                     flex: 1,
                     marginVertical: 20,
@@ -44,7 +61,7 @@ export default function PilihanSerahTerima({ navigation }) {
                         fontSize: windowWidth / 25,
                         color: colors.white,
                     }}>
-                    Serah Terima Dengan Kamera
+                    Scan Retur Dengan Kamera
                 </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -71,7 +88,7 @@ export default function PilihanSerahTerima({ navigation }) {
                         fontSize: windowWidth / 25,
                         color: colors.white,
                     }}>
-                    Serah Terima Dengan Alat
+                    Scan Retur Dengan Alat
                 </Text>
             </TouchableOpacity>
         </View>

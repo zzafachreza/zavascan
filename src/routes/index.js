@@ -317,7 +317,7 @@ export default function Router() {
         name="HasilSerah"
         component={HasilSerah}
         options={({ route, navigation }) => ({
-          title: 'HASIL SERAH TERIMA',
+          title: 'HASIL SCAN RETUR',
           headerTintColor: 'white',
           headerStyle: {
             backgroundColor: colors.primary,
@@ -765,7 +765,7 @@ export default function Router() {
         name="SerahTerima"
         component={SerahTerima}
         options={({ route, navigation }) => ({
-          title: 'SCAN SERAH TERIMA',
+          title: 'SCAN RETUR',
           headerTintColor: 'white',
           headerStyle: {
             backgroundColor: colors.background,
@@ -824,7 +824,7 @@ export default function Router() {
         name="SerahTerimaScan"
         component={SerahTerimaScan}
         options={({ route, navigation }) => ({
-          title: 'SCAN SERAH TERIMA',
+          title: 'SCAN RETUR',
           headerTintColor: 'white',
           headerStyle: {
             backgroundColor: colors.background,

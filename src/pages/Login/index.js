@@ -4,6 +4,7 @@ import {
   Text,
   Button,
   View,
+  Linking,
   Image,
   ScrollView,
   Dimensions,
@@ -164,9 +165,9 @@ export default function Login({ navigation }) {
           <MyGap jarak={10} />
           <MyButton
             warna={colors.secondary}
-            title="DAFTAR"
+            title="COBA DEMO"
             Icons="book"
-            onPress={() => navigation.navigate('Register')}
+            onPress={() => Linking.openURL('https://wa.me/6281319456595?text=Hallo%20admin%20mau%20coba%20demo%20aplikasi%20*ZAVASCAN*%20dong...')}
           />
         </View>
       </ScrollView>

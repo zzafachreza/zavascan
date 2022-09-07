@@ -233,18 +233,20 @@ export default function Home({ navigation }) {
             warna={colors.primary}
             onPress={() => {
 
-              Alert.alert(
-                "ZAVASCAN INFO",
-                "Scan kamera ini hanya alternatif, tergantung kamera handphone masing-masing. Untuk membaca barcode resi dengan maksimal di rekomendasikan menggunakan alat scanner",
-                [
-                  {
-                    text: "Cancel",
-                    onPress: () => console.log("Cancel Pressed"),
-                    style: "cancel"
-                  },
-                  { text: "TETAP PAKAI KAMERA", onPress: () => navigation.navigate('Kamera') }
-                ]
-              );
+              navigation.navigate('Kamera')
+
+              // Alert.alert(
+              //   "ZAVASCAN INFO",
+              //   "Untuk mengunakan fitur kamera, silahkan hubungi admin terlebih dahulu",
+              //   [
+              //     {
+              //       text: "Cancel",
+              //       onPress: () => console.log("Cancel Pressed"),
+              //       style: "cancel"
+              //     },
+              //     { text: "HUBUNGI ADMIN", onPress: () => Linking.openURL('https://wa.me/6281319456595?text=Hallo%20admin%20mau%20tanya%20fitur%20aplikasi%20*ZAVASCAN*%20dong...') }
+              //   ]
+              // );
             }}
             icon="camera-outline"
             nama="SCAN KAMERA"
@@ -268,9 +270,9 @@ export default function Home({ navigation }) {
           <DataKategori
             warna={colors.primary}
             onPress={() => navigation.navigate('PilihanSerahTerima')}
-            icon="open-outline"
-            nama="SERAH TERIMA"
-            nama2="Scan Serah Terima"
+            icon="arrow-back-circle-outline"
+            nama="SCAN RETUR"
+            nama2="Scan Barang Retur"
           />
         </View>
         <TouchableOpacity onPress={() => Linking.openURL('https://wa.me/6281319456595')} style={{

@@ -48,7 +48,7 @@ export default function () {
 
     const _getData = id_member => {
         axios
-            .post('https://zavalabs.com/api/zavascan_data_serah_terima.php', {
+            .post('https://zavalabs.com/api/zavascan_data_retur.php', {
                 id_member: id_member,
             })
             .then(res => {
@@ -59,7 +59,7 @@ export default function () {
     const _searchData = (id_member, kata_kunci) => {
         setLoading(true);
         axios
-            .post('https://zavalabs.com/api/zavascan_data_serah_terima.php', {
+            .post('https://zavalabs.com/api/zavascan_data_retur.php', {
                 id_member: id_member,
                 key: kata_kunci,
             })

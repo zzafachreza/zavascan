@@ -131,12 +131,13 @@ android {
     }
 
     defaultConfig {
+    
         missingDimensionStrategy 'react-native-camera', 'general'
         applicationId "com.zavascan"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "3.0"
     }
     splits {
         abi {
@@ -195,7 +196,6 @@ android {
 dependencies {
 
      implementation 'com.facebook.fresco:animated-gif:2.0.0'
-
      
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
