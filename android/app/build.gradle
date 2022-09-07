@@ -136,8 +136,9 @@ android {
         applicationId "com.zavascan"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName "3.0"
+        versionCode 4
+        versionName "4.0"
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -195,6 +196,7 @@ android {
 
 dependencies {
 
+implementation 'com.android.support:multidex:1.0.3'
      implementation 'com.facebook.fresco:animated-gif:2.0.0'
      
     implementation fileTree(dir: "libs", include: ["*.jar"])

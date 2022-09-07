@@ -162,13 +162,13 @@ export default function Login({ navigation }) {
               onPress={masuk}
             />
           )}
-          <MyGap jarak={10} />
+          {/* <MyGap jarak={10} />
           <MyButton
             warna={colors.secondary}
             title="COBA DEMO"
             Icons="book"
             onPress={() => Linking.openURL('https://wa.me/6281319456595?text=Hallo%20admin%20mau%20coba%20demo%20aplikasi%20*ZAVASCAN*%20dong...')}
-          />
+          /> */}
         </View>
       </ScrollView>
       {loading && (
