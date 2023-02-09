@@ -8,6 +8,7 @@ import {
   Image,
   ScrollView,
   Dimensions,
+  SafeAreaView,
   ImageBackground,
 } from 'react-native';
 import { colors } from '../../utils/colors';
@@ -124,6 +125,7 @@ export default function Login({ navigation }) {
 
           <MyGap jarak={20} />
           <MyInput
+            placeholder="Masukan email Anda"
             label="Email"
             iconname="mail"
             value={data.nama_lengkap}
@@ -144,6 +146,7 @@ export default function Login({ navigation }) {
           <MyGap jarak={20} />
           <MyInput
             label="Password"
+            placeholder="Masukan password Anda"
             iconname="key"
             secureTextEntry
             onChangeText={value =>
@@ -162,13 +165,13 @@ export default function Login({ navigation }) {
               onPress={masuk}
             />
           )}
-          {/* <MyGap jarak={10} />
+          <MyGap jarak={10} />
           <MyButton
-            warna={colors.secondary}
-            title="COBA DEMO"
-            Icons="book"
+            warna={colors.success}
+            title="HUBUNGI ADMIN UNTUK LOGIN"
+            Icons="call"
             onPress={() => Linking.openURL('https://wa.me/6281319456595?text=Hallo%20admin%20mau%20coba%20demo%20aplikasi%20*ZAVASCAN*%20dong...')}
-          /> */}
+          />
         </View>
       </ScrollView>
       {loading && (

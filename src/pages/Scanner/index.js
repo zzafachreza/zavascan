@@ -65,7 +65,7 @@ export default function Scanner({ navigation }) {
           setKey('');
           ref_input.current.focus();
           console.log(res.data);
-          if (res.data == 404) {
+          if (res.data.status == 404) {
             showMessage({
               type: 'danger',
               message: key + ' Sudah Pernah Di Scan !',

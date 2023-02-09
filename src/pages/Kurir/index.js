@@ -76,11 +76,11 @@ export default function Kurir() {
         return (
             <View
                 style={{
-                    marginVertical: 10,
+                    flex: 1,
+                    margin: 5,
                     borderRadius: 10,
                     borderWidth: 1,
-                    borderColor: colors.primary,
-                    //   padding: 10,
+                    borderColor: colors.zavalabs,
                     overflow: 'hidden',
                 }}>
                 <View
@@ -101,7 +101,7 @@ export default function Kurir() {
                     <Image source={{
                         uri: item.image
                     }} style={{
-                        height: 80,
+                        height: 75,
                         resizeMode: 'contain',
                     }} />
 
@@ -145,7 +145,7 @@ export default function Kurir() {
                         <ActivityIndicator color={colors.primary} />
                     </View>
                 )}
-                {!loading && <FlatList data={data} renderItem={_renderItem} />}
+                {!loading && <FlatList numColumns={3} data={data} renderItem={_renderItem} />}
             </ScrollView>
         </SafeAreaView>
     );
