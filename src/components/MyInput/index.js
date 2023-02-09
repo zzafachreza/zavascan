@@ -1,102 +1,91 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Icon, ListItem, Button } from 'react-native-elements';
 import { colors } from '../../utils/colors';
 import { fonts } from '../../utils/fonts';
 import { TextInput } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
 
 export default function MyInput({
-  onFocus,
   label,
-  icon = true,
-  maxLength,
   iconname,
   onChangeText,
+  autoFocus,
   value,
   keyboardType,
   secureTextEntry,
+  onSubmitEditing,
   styleInput,
+  borderRadius = 10,
+  ref,
   placeholder,
-  autoFocus,
-  multiline,
-  label2,
   styleLabel,
   colorIcon = colors.primary,
 }) {
 
+
+
   const [tutup, setTutup] = useState(true);
+
   return (
-    <View style={{
-
-    }}>
-
+    <>
       <View
         style={{
-
           flexDirection: 'row',
           alignItems: 'center',
           paddingVertical: 5,
         }}>
-        {icon && <Icon type="ionicon" name={iconname} color={colorIcon} size={16} />}
+        <Icon type="ionicon" name={iconname} color={colorIcon} size={16} />
         <Text
           style={{
             fontFamily: fonts.secondary[600],
-            color: colors.black,
-            left: icon ? 10 : 5,
-            fontSize: 12,
+            color: colors.primary,
+            left: 10,
+            fontSize: 16,
             ...styleLabel,
           }}>
           {label}
         </Text>
       </View>
-      <View style={{
-        position: 'relative'
-      }}>
-        <TextInput
-          maxLength={maxLength}
-          multiline={multiline}
-          autoFocus={autoFocus}
-          onFocus={onFocus}
-          placeholderTextColor={colors.border}
-          placeholder={placeholder}
-          secureTextEntry={secureTextEntry ? tutup : false}
-          keyboardType={keyboardType}
-          value={value}
-          onChangeText={onChangeText}
-          autoCapitalize="none"
-          style={{
-            backgroundColor: colors.white,
-            borderColor: colors.primary,
-            borderRadius: 10,
-            borderWidth: 1,
-            paddingLeft: 10,
-            color: colors.black,
-            fontSize: 12,
-            fontFamily: fonts.primary[400],
-            ...styleInput,
-          }}
-        />
-        {secureTextEntry &&
-          <TouchableOpacity onPress={() => {
-            if (tutup) {
-              setTutup(false);
-            } else {
-              setTutup(true);
-            }
-          }} style={{
-            position: 'absolute',
-            right: 0,
-            bottom: 0,
-            paddingHorizontal: 20,
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100%'
-          }}>
-            <Icon type="ionicon" name={!tutup ? 'eye-off' : 'eye'} color={colorIcon} size={18} />
-          </TouchableOpacity>}
-      </View>
-
-    </View>
+      <TextInput
+        ref={ref}
+        autoFocus={autoFocus}
+        onSubmitEditing={onSubmitEditing}
+        placeholder={placeholder}
+        secureTextEntry={secureTextEntry ? tutup : false}
+        keyboardType={keyboardType}
+        value={value}
+        onChangeText={onChangeText}
+        autoCapitalize="none"
+        style={{
+          borderColor: colors.primary,
+          borderRadius: borderRadius,
+          borderWidth: 1,
+          paddingLeft: 10,
+          fontSize: 18,
+          fontFamily: fonts.primary[400],
+          ...styleInput,
+        }}
+      />
+      {secureTextEntry &&
+        <TouchableOpacity onPress={() => {
+          if (tutup) {
+            setTutup(false);
+          } else {
+            setTutup(true);
+          }
+        }} style={{
+          position: 'absolute',
+          right: 0,
+          bottom: 0,
+          paddingHorizontal: 20,
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%'
+        }}>
+          <Icon type="ionicon" name={!tutup ? 'eye-off' : 'eye'} color={colorIcon} size={18} />
+        </TouchableOpacity>}
+    </>
   );
 }
 
