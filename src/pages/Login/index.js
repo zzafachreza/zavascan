@@ -169,7 +169,7 @@ export default function Login({ navigation }) {
           <MyButton
             warna={colors.success}
             title="HUBUNGI ADMIN UNTUK LOGIN"
-            Icons="call"
+            Icons="logo-whatsapp"
             onPress={() => Linking.openURL('https://wa.me/6281319456595?text=Hallo%20admin%20mau%20coba%20demo%20aplikasi%20*ZAVASCAN*%20dong...')}
           />
         </View>
