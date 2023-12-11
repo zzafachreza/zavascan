@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { StyleSheet, Text, View, TouchableWithoutFeedback, ImageBackground, TouchableOpacity, SafeAreaView, Alert } from 'react-native';
+;
 import {
   Avatar,
   Accessory,
@@ -8,9 +8,11 @@ import {
   ListItem,
   // Icon,
   Button,
+  Icon,
 } from 'react-native-elements';
 import { storeData, getData } from '../../utils/localStorage';
 import { colors } from '../../utils/colors';
+import { MyDimensi, fonts } from '../../utils';
 
 export default function Account({ navigation }) {
   const [user, setUser] = useState({});
@@ -24,18 +26,58 @@ export default function Account({ navigation }) {
     });
   }, []);
 
-  const handleSave = () => {
-    storeData('user', null);
+  const btnKeluar = () => {
+    Alert.alert('ZAVASCAN', 'Apakah kamu yakin akan keluar ?', [
+      {
+        text: 'Batal',
+        style: "cancel"
+      },
+      {
+        text: 'Keluar',
+        onPress: () => {
+          storeData('user', null);
 
-    navigation.replace('Login');
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'Utama' }],
+          });
+        }
+      }
+    ])
   };
 
   return (
-    <ImageBackground
-      source={require('../../assets/back.jpeg')}
+    <SafeAreaView
+
       style={{
         flex: 1,
       }}>
+      <View style={{
+        padding: 10,
+        flexDirection: 'row',
+        alignItems: 'center'
+      }}>
+        <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+          <View style={{
+            height: 50,
+            width: 50,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 10,
+            backgroundColor: colors.primary
+          }}>
+            <Icon type='ionicon' name='chevron-back' color={colors.white} />
+          </View>
+
+        </TouchableWithoutFeedback>
+        <Text style={{
+          fontFamily: fonts.secondary[600],
+          flex: 1,
+          paddingLeft: 20,
+          fontSize: MyDimensi / 18,
+          color: colors.primary
+        }}>Scan packing</Text>
+      </View>
       <View
         style={{
           padding: 10,
@@ -95,8 +137,8 @@ export default function Account({ navigation }) {
           }}>
           <ListItem bottomDivider>
             <Icon
-              name="envelope"
-              type="font-awesome"
+              name="mail"
+              type="ionicon"
               color={colors.primary}
               size={20}
             />
@@ -115,8 +157,8 @@ export default function Account({ navigation }) {
 
           <ListItem bottomDivider>
             <Icon
-              name="home"
-              type="font-awesome"
+              name="ribbon"
+              type="ionicon"
               color={colors.primary}
               size={20}
             />
@@ -126,14 +168,14 @@ export default function Account({ navigation }) {
                   style={{
                     fontFamily: 'Montserrat-SemiBold',
                   }}>
-                  Alamat
+                  Status
                 </Text>
               </ListItem.Title>
-              <ListItem.Subtitle>{user.alamat}</ListItem.Subtitle>
+              <ListItem.Subtitle>Enterprise Account</ListItem.Subtitle>
             </ListItem.Content>
           </ListItem>
 
-          <TouchableOpacity onPress={() => {
+          {/* <TouchableOpacity onPress={() => {
             navigation.navigate('Customer')
           }}>
             <ListItem bottomDivider>
@@ -158,23 +200,24 @@ export default function Account({ navigation }) {
                 }}>Klik disini untuk masuk ke menu customer</ListItem.Subtitle>
               </ListItem.Content>
             </ListItem>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <Button
-            onPress={handleSave}
-            title="Sign Out"
+            onPress={btnKeluar}
+            title="Logout"
             icon={
               <Icon
                 style={{
                   marginRight: 5,
                 }}
-                name="sign-out"
+                type='ionicon'
+                name="log-out-outline"
                 size={15}
                 color="white"
               />
             }
             buttonStyle={{
-              backgroundColor: 'grey',
-              height: 45,
+              backgroundColor: colors.primary,
+              height: 50,
               marginTop: '5%',
               borderRadius: 10,
               marginBottom: 20,
@@ -184,7 +227,7 @@ export default function Account({ navigation }) {
           />
         </View>
       </View>
-    </ImageBackground>
+    </SafeAreaView>
   );
 }
 

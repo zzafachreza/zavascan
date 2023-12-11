@@ -207,7 +207,7 @@ export default function LaporanTanggal({ navigation }) {
             <MyGap jarak={20} />
             <MyButton onPress={ViewByEkspedisi} title="Lihat Berdasarkan Ekspedisi" warna={colors.primary} Icons="file-tray-stacked-outline" />
             <MyGap jarak={20} />
-            <MyButton onPress={ViewByCustomer} title="Lihat Berdasarkan Customer" warna={colors.secondary} Icons="people-outline" />
+            <MyButton onPress={ViewByCustomer} title="Lihat Berdasarkan Admin" warna={colors.tertiary} Icons="people-outline" />
             <MyGap jarak={20} />
             <MyButton onPress={download} title="Download" warna={colors.success} Icons="download-outline" />
             <MyGap jarak={20} />
