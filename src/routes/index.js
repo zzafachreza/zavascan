@@ -44,6 +44,9 @@ import {
   PilihanSerahTerima,
   SerahTerimaScan,
   Otp,
+  Resi,
+  Packing,
+  Retur,
 } from '../pages';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomNavigator } from '../components';
@@ -57,8 +60,8 @@ const MainApp = () => {
   return (
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Customer" component={Customer} />
-      <Tab.Screen name="Kurir" component={Kurir} />
+      {/* <Tab.Screen name="Customer" component={Customer} /> */}
+      {/* <Tab.Screen name="Kurir" component={Kurir} /> */}
       <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
@@ -70,6 +73,31 @@ export default function Router() {
       <Stack.Screen
         name="Utama"
         component={Utama}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+
+      <Stack.Screen
+        name="Resi"
+        component={Resi}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="Packing"
+        component={Packing}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="Retur"
+        component={Retur}
         options={{
           headerShown: false,
         }}

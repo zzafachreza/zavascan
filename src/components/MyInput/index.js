@@ -1,91 +1,116 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Icon, ListItem, Button } from 'react-native-elements';
 import { colors } from '../../utils/colors';
-import { fonts } from '../../utils/fonts';
+import { MyDimensi, fonts } from '../../utils/fonts';
 import { TextInput } from 'react-native-gesture-handler';
-import { TouchableOpacity } from 'react-native';
 
 export default function MyInput({
+  onFocus,
   label,
+  nolabel = false,
+  borderColor,
+  backgroundColor = colors.bgform,
+  editable,
+  icon = true,
+  maxLength,
   iconname,
   onChangeText,
-  autoFocus,
   value,
+  borderWidth = 0,
+  textColor = colors.white,
   keyboardType,
   secureTextEntry,
-  onSubmitEditing,
   styleInput,
-  borderRadius = 10,
-  ref,
   placeholder,
+  autoFocus,
+  onSubmitEditing,
+  onEndEditing,
+  multiline,
+  label2,
   styleLabel,
-  colorIcon = colors.primary,
+  colorIcon = colors.white,
 }) {
 
-
-
   const [tutup, setTutup] = useState(true);
-
   return (
-    <>
+    <View style={{
+
+    }}>
+
       <View
         style={{
+
           flexDirection: 'row',
           alignItems: 'center',
-          paddingVertical: 5,
+          paddingVertical: !nolabel ? 5 : 0,
         }}>
-        <Icon type="ionicon" name={iconname} color={colorIcon} size={16} />
-        <Text
+        {icon && !nolabel && <Icon type="ionicon" name={iconname} color={colorIcon} size={MyDimensi / 25} />}
+
+
+        {!nolabel && <Text
           style={{
-            fontFamily: fonts.secondary[600],
-            color: colors.primary,
-            left: 10,
-            fontSize: 16,
+            fontFamily: fonts.secondary[400],
+            color: textColor,
+            left: icon ? 10 : 5,
+            fontSize: MyDimensi / 25,
             ...styleLabel,
           }}>
           {label}
-        </Text>
+        </Text>}
       </View>
-      <TextInput
-        ref={ref}
-        autoFocus={autoFocus}
-        onSubmitEditing={onSubmitEditing}
-        placeholder={placeholder}
-        secureTextEntry={secureTextEntry ? tutup : false}
-        keyboardType={keyboardType}
-        value={value}
-        onChangeText={onChangeText}
-        autoCapitalize="none"
-        style={{
-          borderColor: colors.primary,
-          borderRadius: borderRadius,
-          borderWidth: 1,
-          paddingLeft: 10,
-          fontSize: 18,
-          fontFamily: fonts.primary[400],
-          ...styleInput,
-        }}
-      />
-      {secureTextEntry &&
-        <TouchableOpacity onPress={() => {
-          if (tutup) {
-            setTutup(false);
-          } else {
-            setTutup(true);
-          }
-        }} style={{
-          position: 'absolute',
-          right: 0,
-          bottom: 0,
-          paddingHorizontal: 20,
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100%'
-        }}>
-          <Icon type="ionicon" name={!tutup ? 'eye-off' : 'eye'} color={colorIcon} size={18} />
-        </TouchableOpacity>}
-    </>
+      <View style={{
+        position: 'relative'
+      }}>
+        <TextInput
+          editable={editable}
+          placeholderTextColor={colors.placeholder}
+          maxLength={maxLength}
+          multiline={multiline}
+          autoFocus={autoFocus}
+          onSubmitEditing={onSubmitEditing}
+          onEndEditing={onEndEditing}
+          onFocus={onFocus}
+          placeholder={placeholder}
+          secureTextEntry={secureTextEntry ? tutup : false}
+          keyboardType={keyboardType}
+
+          value={value}
+          onChangeText={onChangeText}
+          autoCapitalize="none"
+          style={{
+            backgroundColor: backgroundColor,
+            borderColor: borderColor,
+            borderRadius: 10,
+            borderWidth: borderWidth,
+            paddingLeft: 10,
+            color: colors.black,
+            fontSize: MyDimensi / 25,
+            fontFamily: fonts.primary[400],
+            ...styleInput,
+          }}
+        />
+        {secureTextEntry &&
+          <TouchableOpacity onPress={() => {
+            if (tutup) {
+              setTutup(false);
+            } else {
+              setTutup(true);
+            }
+          }} style={{
+            position: 'absolute',
+            right: 0,
+            bottom: 0,
+            paddingHorizontal: 20,
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%'
+          }}>
+            <Icon type="ionicon" name={!tutup ? 'eye-off' : 'eye'} color={colors.border} size={18} />
+          </TouchableOpacity>}
+      </View>
+
+    </View>
   );
 }
 

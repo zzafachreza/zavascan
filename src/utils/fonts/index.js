@@ -1,3 +1,8 @@
+import { Dimensions } from 'react-native';
+
+export const MyDimensi = (Dimensions.get('window').width * Dimensions.get('window').height) / 1000;
+
+
 export const fonts = {
   primary: {
     200: 'Nunito-ExtraLight',

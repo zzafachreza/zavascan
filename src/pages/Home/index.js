@@ -12,9 +12,9 @@ import {
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { colors } from '../../utils/colors';
-import { fonts } from '../../utils/fonts';
+import { MyDimensi, fonts } from '../../utils/fonts';
 import LottieView from 'lottie-react-native';
-import { getData } from '../../utils/localStorage';
+import { APIurl, getData } from '../../utils/localStorage';
 import { FlatListSlider } from 'react-native-flatlist-slider';
 import { Preview, MyDashboard } from '../../components';
 import { Icon } from 'react-native-elements';
@@ -31,6 +31,11 @@ export default function Home({ navigation }) {
   const [currentDate, setCurrentDate] = useState('');
   const [device, setDivice] = useState({});
   const [open, setOpen] = useState(true);
+  const [rekap, setRekap] = useState({
+    resi: 0,
+    packing: 0,
+    retur: 0,
+  })
 
   const [expired, setExpired] = useState('');
   const today = moment().format('YYYY-MM-DD');
@@ -39,12 +44,25 @@ export default function Home({ navigation }) {
   useEffect(() => {
     getData('user').then(res => {
       setUser(res);
+
+
+      // setLoading(true);
+      axios.get(APIurl + 'rekap?id_member=' + res.id).then(resp => {
+        console.log(resp.data);
+        setRekap(resp.data)
+
+      }).finally(() => {
+
+      })
+
+
+
       axios.post('https://zavalabs.com/api/zavascan_expired.php', {
         id: res.id
       }).then(cek => {
         console.log('expired', cek.data);
 
-        if (today == cek.data) {
+        if (cek.data <= today) {
           console.log('Expired !');
 
           Alert.alert(
@@ -94,11 +112,11 @@ export default function Home({ navigation }) {
   };
 
   const DataKategori = ({
-    icon,
+    img,
     nama,
     nama2,
     onPress,
-    warna = colors.primary,
+    warna = colors.secondary,
   }) => {
     return (
       <TouchableOpacity
@@ -108,25 +126,25 @@ export default function Home({ navigation }) {
           padding: 5,
           borderRadius: 10,
           width: windowWidth / 2.5,
-          height: windowHeight / 5,
-          elevation: 5,
+          height: windowHeight / 4.5,
           justifyContent: 'center',
+          alignItems: 'center',
         }}>
         <View>
-          <Icon
-            type="ionicon"
-            name={icon}
-            color={colors.white}
-            size={windowWidth / 5}
-          />
+          <Image source={img} style={{
+            width: windowWidth / 7,
+            height: windowWidth / 7,
+            marginBottom: 10,
+          }} />
         </View>
         <View>
           <Text
             style={{
               fontFamily: fonts.secondary[600],
-              color: colors.white,
-              fontSize: windowWidth / 30,
+              color: colors.black,
+              fontSize: MyDimensi / 22,
               textAlign: 'center',
+              marginBottom: 5,
             }}>
             {nama}
           </Text>
@@ -134,8 +152,9 @@ export default function Home({ navigation }) {
             style={{
               fontFamily: fonts.secondary[600],
               color: colors.white,
-              fontSize: windowWidth / 35,
+              fontSize: MyDimensi / 28,
               textAlign: 'center',
+              color: '#82A6B0'
               // marginHorizontal: 10,
             }}>
             {nama2}
@@ -149,44 +168,33 @@ export default function Home({ navigation }) {
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: colors.primary,
+        backgroundColor: colors.white,
       }}>
       <View
         style={{
           padding: 10,
-
+          backgroundColor: colors.primary,
           height: windowHeight / 10,
           flexDirection: 'row',
+          alignItems: 'center'
         }}>
         <View style={{ flex: 1 }}>
+
           <Text
             style={{
-              fontFamily: fonts.secondary[400],
-              fontSize: 12,
-              maxWidth: '80%',
-              color: colors.white,
-            }}>
-            Selamat datang,
-          </Text>
-          <Text
-            style={{
-              marginTop: 2,
               fontFamily: fonts.secondary[600],
-              fontSize: 14,
-              maxWidth: '80%',
+              fontSize: MyDimensi / 22,
               color: colors.white,
             }}>
-            {user.nama_lengkap}
+            Hi, {user.nama_lengkap}
           </Text>
           <Text
             style={{
-              marginTop: 2,
               fontFamily: fonts.secondary[400],
-              fontSize: 12,
-              maxWidth: '80%',
+              fontSize: MyDimensi / 25,
               color: colors.white,
             }}>
-            {user.email}
+            Welcome to zavascan
           </Text>
         </View>
         <View style={{
@@ -194,24 +202,33 @@ export default function Home({ navigation }) {
           alignItems: 'center',
           flex: 1,
         }}>
-          <Text style={{
-            fontFamily: fonts.secondary[800],
-            color: colors.white,
-            fontSize: 22,
-          }}>ZAVASCAN</Text>
+          <Image source={require('../../assets/logohr.png')} style={{
+            width: windowWidth / 4,
+            resizeMode: 'contain',
+            height: 30,
+          }} />
           <Text style={{
             fontFamily: fonts.secondary[400],
             color: colors.white,
-            fontSize: 12,
+            fontSize: MyDimensi / 25,
           }}>{device.deviceName}</Text>
 
         </View>
-
-
       </View>
-      <MyCarouser />
-      {open && <ImageBackground
-        source={require('../../assets/back.jpeg')}
+      <View style={{
+        height: windowHeight / 7,
+        // borderBottomLeftRadius: 50,
+        // borderBottomRightRadius: 50,
+        backgroundColor: colors.primary,
+      }} />
+      <View style={{
+        marginTop: -80,
+      }}>
+        <MyCarouser />
+      </View>
+
+      {open && <View
+
         style={{
           flex: 1,
           backgroundColor: colors.white,
@@ -223,34 +240,16 @@ export default function Home({ navigation }) {
             justifyContent: 'space-around',
           }}>
           <DataKategori
-            warna={colors.primary}
-            onPress={() => navigation.navigate('Scanner')}
-            icon="qr-code-outline"
-            nama="SCAN ALAT / MANUAL"
-            nama2="Menggunakan Alat Scanner"
+            onPress={() => navigation.navigate('Resi', user)}
+            img={require('../../assets/a1.png')}
+            nama="Scan Resi"
+            nama2={rekap.resi + ' Scanned'}
           />
           <DataKategori
-            warna={colors.primary}
-            onPress={() => {
-
-              navigation.navigate('Kamera')
-
-              // Alert.alert(
-              //   "ZAVASCAN INFO",
-              //   "Untuk mengunakan fitur kamera, silahkan hubungi admin terlebih dahulu",
-              //   [
-              //     {
-              //       text: "Cancel",
-              //       onPress: () => console.log("Cancel Pressed"),
-              //       style: "cancel"
-              //     },
-              //     { text: "HUBUNGI ADMIN", onPress: () => Linking.openURL('https://wa.me/6281319456595?text=Hallo%20admin%20mau%20tanya%20fitur%20aplikasi%20*ZAVASCAN*%20dong...') }
-              //   ]
-              // );
-            }}
-            icon="camera-outline"
-            nama="SCAN KAMERA"
-            nama2="Menggunakan Kamera HP"
+            onPress={() => navigation.navigate('Packing', user)}
+            img={require('../../assets/a2.png')}
+            nama="Scan Packing"
+            nama2={rekap.packing + ' Scanned'}
           />
         </View>
 
@@ -261,21 +260,22 @@ export default function Home({ navigation }) {
             marginTop: 20,
           }}>
           <DataKategori
-            warna={colors.primary}
-            onPress={() => navigation.navigate('Laporan')}
-            icon="calendar-outline"
-            nama="LAPORAN"
-            nama2="Laporan Berdasarkan Tanggal"
+
+            onPress={() => navigation.navigate('Retur', user)}
+            img={require('../../assets/a3.png')}
+            nama="Scan Return"
+            nama2={rekap.retur + ' Scanned'}
           />
           <DataKategori
-            warna={colors.primary}
-            onPress={() => navigation.navigate('PilihanSerahTerima')}
-            icon="arrow-back-circle-outline"
-            nama="SCAN RETUR"
-            nama2="Scan Barang Retur"
+
+
+            onPress={() => navigation.navigate('Laporan')}
+            img={require('../../assets/a4.png')}
+            nama="Laporan"
+            nama2={(rekap.resi + rekap.packing + rekap.retur) + ' Scanned'}
           />
         </View>
-        <TouchableOpacity onPress={() => Linking.openURL('https://wa.me/6281319456595')} style={{
+        {/* <TouchableOpacity onPress={() => Linking.openURL('https://wa.me/6281319456595')} style={{
           padding: 10,
           borderRadius: 5,
           marginVertical: 10,
@@ -289,8 +289,8 @@ export default function Home({ navigation }) {
             fontSize: windowWidth / 30,
             textAlign: 'center',
           }}>Klik disini untuk membuka Aplikasi ZAVASCAN via website</Text>
-        </TouchableOpacity>
-      </ImageBackground>}
+        </TouchableOpacity> */}
+      </View >}
 
       {!open && <View style={{
         flex: 1,

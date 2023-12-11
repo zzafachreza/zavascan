@@ -1,14 +1,15 @@
 export const colors = {
-  primary: '#044cc2',
-  secondary: '#F7543D',
+  primary: '#00A896',
+  secondary: '#E1F2F0',
   tertiary: '#FBCB2D',
   background: '#04A15A',
   success: 'green',
-  warning: 'yellow',
-  danger: 'red',
+  warning: '#FFD66B',
+  danger: '#FF8F6B',
   black: 'black',
   white: 'white',
   border: '#8E8E96',
   zavalabs: '#E0E0E0',
   zavalabs2: '#F0EEEE',
+  bgform: '#E1F2F0'
 };

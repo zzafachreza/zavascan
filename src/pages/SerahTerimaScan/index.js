@@ -75,7 +75,7 @@ export default function SerahTerimaScan({ navigation }) {
                     if (res.data.status == 404) {
                         showMessage({
                             type: 'danger',
-                            message: key + ' Belum Pernah Di Scan !',
+                            message: key + ' Sudah Pernah Di Scan !',
                         });
                         whoosh.play();
                         // alert(cek);

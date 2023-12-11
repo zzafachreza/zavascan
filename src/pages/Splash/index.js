@@ -84,6 +84,8 @@ export default function Splash({ navigation }) {
         }, 2000);
       }
     });
+
+
   }, []);
   return (
     <SafeAreaView style={styles.page}>

@@ -9,10 +9,12 @@ import {
   ScrollView,
   Dimensions,
   SafeAreaView,
+  Animated,
   ImageBackground,
+  TouchableNativeFeedback,
 } from 'react-native';
 import { colors } from '../../utils/colors';
-import { fonts } from '../../utils/fonts';
+import { MyDimensi, fonts } from '../../utils/fonts';
 import { MyInput, MyGap, MyButton } from '../../components';
 import LottieView from 'lottie-react-native';
 import axios from 'axios';
@@ -23,6 +25,8 @@ export default function Login({ navigation }) {
   const windowWidth = Dimensions.get('window').width;
   const [loading, setLoading] = useState(false);
   const [valid, setValid] = useState(true);
+
+
 
   const validate = text => {
 
@@ -42,7 +46,11 @@ export default function Login({ navigation }) {
     password: '',
   });
 
+
   useEffect(() => {
+
+
+
     getData('device').then(res => {
       setData({
         ...data,
@@ -55,7 +63,12 @@ export default function Login({ navigation }) {
 
   // login ok
   const masuk = () => {
-    if (data.email.length === 0 && data.password.length === 0) {
+    if (!valid) {
+      showMessage({
+        message: 'Maaf Email tidak valid !',
+      });
+    }
+    else if (data.email.length === 0 && data.password.length === 0) {
       showMessage({
         message: 'Maaf Email dan Password masih kosong !',
       });
@@ -71,7 +84,7 @@ export default function Login({ navigation }) {
       setLoading(true);
       setTimeout(() => {
         axios.post('https://zavalabs.com/api/login.php', data).then(res => {
-          setLoading(false);
+
           if (res.data.kode == 50) {
             showMessage({
               type: 'danger',
@@ -81,97 +94,88 @@ export default function Login({ navigation }) {
             storeData('user', res.data);
             navigation.replace('MainApp');
           }
+        }).finally(() => {
+          setLoading(false);
         });
       }, 1200);
     }
   };
+
+
   return (
-    <ImageBackground
-      source={require('../../assets/back.jpeg')}
-      style={styles.page}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={{
-          flex: 1,
+    <SafeAreaView style={{
+      flex: 1,
+      backgroundColor: colors.primary
+    }}>
+      <ScrollView>
+        <View style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingTop: 10,
         }}>
-        <View
-          style={{
-            height: 220,
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: colors.primary,
-            padding: 10,
-            borderRadius: 10,
-          }}>
-          <Image
-            source={require('../../assets/logo1.png')}
-            style={{
-              resizeMode: 'contain',
-              aspectRatio: 0.3,
-            }}
-          />
+          <Image source={require('../../assets/logo.png')} style={{
+            width: MyDimensi / 1.2,
+            height: MyDimensi / 1.3,
+          }} />
         </View>
-        <View style={styles.page}>
-          <Text
-            style={{
-              fontFamily: fonts.secondary[400],
-              fontSize: windowWidth / 20,
-              color: colors.black,
-              textAlign: 'center',
-            }}>
-            Silahkan login untuk masuk ke aplikasi
-          </Text>
+        <View style={{
+          paddingHorizontal: 20,
+        }}>
+          <Text style={{
+            fontFamily: fonts.secondary[600],
+            color: colors.white,
+            fontSize: MyDimensi / 14,
+            marginBottom: 30,
+          }}>Login</Text>
 
-          <MyGap jarak={20} />
-          <MyInput
-            placeholder="Masukan email Anda"
-            label="Email"
-            iconname="mail"
-            value={data.nama_lengkap}
-            onChangeText={value => validate(value)}
-          />
+          <MyInput iconname="mail-outline" label="Email" placeholder="example@gmail.com" value={data.email}
+            onChangeText={value => validate(value)} />
+          <View style={{
+            height: 20,
+          }}>
+            {!valid && (
+              <Text
+                style={{
+                  color: colors.warning,
+                  fontFamily: fonts.secondary[400],
+                  textAlign: 'right',
+                  fontSize: MyDimensi / 25,
+                  marginTop: 10,
+                  right: 10,
+                }}>
+                Maaf Email Anda Tidak Valid !
+              </Text>
+            )}
+          </View>
 
-          {!valid && (
-            <Text
-              style={{
-                color: colors.danger,
-                fontFamily: fonts.primary[600],
-                textAlign: 'right',
-                right: 10,
-              }}>
-              Maaf Email Anda Tidak Valid !
-            </Text>
-          )}
-          <MyGap jarak={20} />
-          <MyInput
-            label="Password"
-            placeholder="Masukan password Anda"
-            iconname="key"
-            secureTextEntry
-            onChangeText={value =>
-              setData({
-                ...data,
-                password: value,
-              })
-            }
-          />
-          <MyGap jarak={40} />
-          {valid && (
+          <MyInput onChangeText={value =>
+            setData({
+              ...data,
+              password: value,
+            })
+          } iconname="lock-closed-outline" placeholder="******" label="Password" secureTextEntry />
+          <MyGap jarak={35} />
+          <View style={{
+            paddingHorizontal: 40,
+          }}>
             <MyButton
-              warna={colors.primary}
-              title="LOGIN"
+              warna={colors.bgform}
+              colorText={colors.black}
+              iconColor={colors.black}
+              title="Login"
               Icons="log-in"
               onPress={masuk}
             />
-          )}
-          <MyGap jarak={10} />
-          <MyButton
-            warna={colors.success}
-            title="HUBUNGI ADMIN UNTUK LOGIN"
-            Icons="logo-whatsapp"
-            onPress={() => Linking.openURL('https://wa.me/6281319456595?text=Hallo%20admin%20mau%20coba%20demo%20aplikasi%20*ZAVASCAN*%20dong...')}
-          />
+            <TouchableNativeFeedback onPress={() => Linking.openURL('https://wa.me/6281312924040?text=Hallo%20admin%20mau%20coba%20demo%20aplikasi%20*ZAVASCAN*%20dong...')}>
+              <Text style={{
+                fontFamily: fonts.secondary[600],
+                color: colors.white,
+                textAlign: 'center',
+                marginTop: 30,
+              }}>Hubungi Admin untuk login</Text>
+            </TouchableNativeFeedback>
+          </View>
+
         </View>
       </ScrollView>
       {loading && (
@@ -182,7 +186,7 @@ export default function Login({ navigation }) {
           style={{ backgroundColor: colors.primary }}
         />
       )}
-    </ImageBackground>
+    </SafeAreaView>
   );
 }
 

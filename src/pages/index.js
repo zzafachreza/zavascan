@@ -36,6 +36,11 @@ import LaporanDownload from './LaporanDownload';
 import PilihanSerahTerima from './PilihanSerahTerima';
 import SerahTerimaScan from './SerahTerimaScan';
 import Otp from './Otp';
+import Resi from './Scan/Resi';
+import Packing from './Scan/Packing';
+import Retur from './Scan/Retur';
+
+
 
 
 
@@ -79,4 +84,7 @@ export {
   PilihanSerahTerima,
   SerahTerimaScan,
   Otp,
+  Resi,
+  Packing,
+  Retur
 };

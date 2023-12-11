@@ -113,7 +113,7 @@ export default function BottomNavigator({ state, descriptors, navigation }) {
                     fontSize: windowWidth / 45,
                     color: isFocused ? colors.white : colors.white,
                   }}>
-                  {label == 'ChatWa' ? 'Chat' : label}
+                  {label == 'Customer' ? 'Admin' : label}
                 </Text>
               </View>
             </View>
