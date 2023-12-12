@@ -140,7 +140,7 @@ export default function Packing({ navigation, route }) {
                         paddingLeft: 20,
                         fontSize: MyDimensi / 18,
                         color: colors.primary
-                    }}>Scan packing</Text>
+                    }}>Scan Packing</Text>
                 </View>
                 <View style={{
                     flexDirection: 'row',
@@ -206,8 +206,7 @@ export default function Packing({ navigation, route }) {
                     marginHorizontal: 10,
                     height: 40,
                     marginVertical: 10,
-                    width: '35%',
-                    alignSelf: 'flex-end',
+
                     position: 'relative'
                 }}>
                     <TextInput
@@ -346,10 +345,10 @@ export default function Packing({ navigation, route }) {
                 });
             }}>
 
-                <Icon type='ionicon' name='camera-outline' color={colors.white} size={MyDimensi / 10} />
+                <Icon type='ionicon' name='barcode-outline' color={colors.white} size={MyDimensi / 10} />
                 <Text style={{
-                    fontFamily: fonts.secondary[400],
-                    fontSize: MyDimensi / 25,
+                    fontFamily: fonts.secondary[600],
+                    fontSize: MyDimensi / 30,
                     color: colors.white
                 }}>SCAN</Text>
 

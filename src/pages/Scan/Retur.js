@@ -205,8 +205,7 @@ export default function Retur({ navigation, route }) {
                     marginHorizontal: 10,
                     height: 40,
                     marginVertical: 10,
-                    width: '35%',
-                    alignSelf: 'flex-end',
+
                     position: 'relative'
                 }}>
                     <TextInput
@@ -345,10 +344,10 @@ export default function Retur({ navigation, route }) {
                 });
             }}>
 
-                <Icon type='ionicon' name='camera-outline' color={colors.white} size={MyDimensi / 10} />
+                <Icon type='ionicon' name='barcode-outline' color={colors.white} size={MyDimensi / 10} />
                 <Text style={{
-                    fontFamily: fonts.secondary[400],
-                    fontSize: MyDimensi / 25,
+                    fontFamily: fonts.secondary[600],
+                    fontSize: MyDimensi / 30,
                     color: colors.white
                 }}>SCAN</Text>
 

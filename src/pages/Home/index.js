@@ -24,6 +24,7 @@ import moment from 'moment';
 import MyCarouser from '../../components/MyCarouser';
 import { Alert } from 'react-native';
 import { Linking } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function Home({ navigation }) {
 
@@ -40,60 +41,62 @@ export default function Home({ navigation }) {
   const [expired, setExpired] = useState('');
   const today = moment().format('YYYY-MM-DD');
 
-
+  const isFocused = useIsFocused()
   useEffect(() => {
-    getData('user').then(res => {
-      setUser(res);
+    if (isFocused) {
+      getData('user').then(res => {
+        setUser(res);
 
 
-      // setLoading(true);
-      axios.get(APIurl + 'rekap?id_member=' + res.id).then(resp => {
-        console.log(resp.data);
-        setRekap(resp.data)
+        // setLoading(true);
+        axios.get(APIurl + 'rekap?id_member=' + res.id).then(resp => {
+          console.log(resp.data);
+          setRekap(resp.data)
 
-      }).finally(() => {
+        }).finally(() => {
 
-      })
+        })
 
 
 
-      axios.post('https://zavalabs.com/api/zavascan_expired.php', {
-        id: res.id
-      }).then(cek => {
-        console.log('expired', cek.data);
+        axios.post('https://zavalabs.com/api/zavascan_expired.php', {
+          id: res.id
+        }).then(cek => {
+          console.log('expired', cek.data);
 
-        if (cek.data <= today) {
-          console.log('Expired !');
+          if (cek.data <= today) {
+            console.log('Expired !');
 
-          Alert.alert(
-            "ZAVASCAN INFO",
-            "Mohon maaf masa berlaku akun Anda telah berakhir, silahkan hubungi admin untuk mengaktifkan kembali",
-            [
+            Alert.alert(
+              "ZAVASCAN INFO",
+              "Mohon maaf masa berlaku akun Anda telah berakhir, silahkan hubungi admin untuk mengaktifkan kembali",
+              [
 
-              { text: "Hubungi Admin", onPress: () => Linking.openURL('https://wa.me/6281319456595') }
-            ]
-          );
-          setOpen(false);
-        } else {
-          console.log('Masih jalan')
-          setOpen(true);
-        }
-      })
-      getData('device').then(res2 => {
-        setDivice(res2);
+                { text: "Hubungi Admin", onPress: () => Linking.openURL('https://wa.me/6281319456595') }
+              ]
+            );
+            setOpen(false);
+          } else {
+            console.log('Masih jalan')
+            setOpen(true);
+          }
+        })
+        getData('device').then(res2 => {
+          setDivice(res2);
+        });
       });
-    });
 
-    var date = new Date().getDate(); //Current Date
-    var month = new Date().getMonth() + 1; //Current Month
-    var year = new Date().getFullYear(); //Current Year
-    var hours = new Date().getHours(); //Current Hours
-    var min = new Date().getMinutes(); //Current Minutes
-    var sec = new Date().getSeconds(); //Current Seconds
-    setCurrentDate(
-      date + '/' + month + '/' + year + ' ' + hours + ':' + min + ':' + sec,
-    );
-  }, []);
+      var date = new Date().getDate(); //Current Date
+      var month = new Date().getMonth() + 1; //Current Month
+      var year = new Date().getFullYear(); //Current Year
+      var hours = new Date().getHours(); //Current Hours
+      var min = new Date().getMinutes(); //Current Minutes
+      var sec = new Date().getSeconds(); //Current Seconds
+      setCurrentDate(
+        date + '/' + month + '/' + year + ' ' + hours + ':' + min + ':' + sec,
+      );
+    }
+  }, [isFocused]);
 
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
@@ -172,13 +175,14 @@ export default function Home({ navigation }) {
       }}>
       <View
         style={{
-          padding: 10,
+          paddingHorizontal: 10,
+          paddingTop: 15,
           backgroundColor: colors.primary,
           height: windowHeight / 10,
           flexDirection: 'row',
           alignItems: 'center'
         }}>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, paddingLeft: 10, }}>
 
           <Text
             style={{
@@ -186,7 +190,7 @@ export default function Home({ navigation }) {
               fontSize: MyDimensi / 22,
               color: colors.white,
             }}>
-            Hi, {user.nama_lengkap}
+            Hi, {user.nama_lengkap} ZAVALABS
           </Text>
           <Text
             style={{

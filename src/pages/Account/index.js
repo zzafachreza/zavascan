@@ -157,7 +157,7 @@ export default function Account({ navigation }) {
 
           <ListItem bottomDivider>
             <Icon
-              name="ribbon"
+              name="location"
               type="ionicon"
               color={colors.primary}
               size={20}
@@ -168,10 +168,10 @@ export default function Account({ navigation }) {
                   style={{
                     fontFamily: 'Montserrat-SemiBold',
                   }}>
-                  Status
+                  Alamat
                 </Text>
               </ListItem.Title>
-              <ListItem.Subtitle>Enterprise Account</ListItem.Subtitle>
+              <ListItem.Subtitle>{user.alamat}</ListItem.Subtitle>
             </ListItem.Content>
           </ListItem>
 
