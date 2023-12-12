@@ -76,7 +76,7 @@ export default function Account({ navigation }) {
           paddingLeft: 20,
           fontSize: MyDimensi / 18,
           color: colors.primary
-        }}>Scan packing</Text>
+        }}>Profile</Text>
       </View>
       <View
         style={{

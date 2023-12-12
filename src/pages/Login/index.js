@@ -166,14 +166,16 @@ export default function Login({ navigation }) {
               Icons="log-in"
               onPress={masuk}
             />
-            <TouchableNativeFeedback onPress={() => Linking.openURL('https://wa.me/6281312924040?text=Hallo%20admin%20mau%20coba%20demo%20aplikasi%20*ZAVASCAN*%20dong...')}>
-              <Text style={{
-                fontFamily: fonts.secondary[600],
-                color: colors.white,
-                textAlign: 'center',
-                marginTop: 30,
-              }}>Hubungi Admin untuk login</Text>
-            </TouchableNativeFeedback>
+            <MyGap jarak={20} />
+            <MyButton
+              warna={colors.bgform}
+              colorText={colors.black}
+              iconColor={colors.black}
+              title="Hubungi Admin untuk login"
+              Icons="logo-whatsapp"
+              onPress={() => Linking.openURL('https://wa.me/6281312924040?text=Hallo%20admin%20mau%20coba%20demo%20aplikasi%20*ZAVASCAN*%20dong...')}
+            />
+
           </View>
 
         </View>

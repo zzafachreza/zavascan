@@ -51,6 +51,7 @@ export default function Packing({ navigation, route }) {
         axios.post(APIurl + 'packing', {
             id_member: user.id,
             key: barcode,
+            customer: customer
         }).then(res => {
             console.log(res.data)
             if (tipe == 'scan') {
@@ -160,6 +161,25 @@ export default function Packing({ navigation, route }) {
                             }}
                         />
 
+                    </View>
+                    <View style={{
+                        flex: 0.7,
+                        paddingLeft: 5,
+                        position: 'relative'
+                    }}>
+
+                        <MyInput value={customer} onChangeText={x => {
+                            setCustomer(x)
+                        }} nolabel backgroundColor={colors.white} borderWidth={1} borderColor={colors.primary} />
+                        <Text style={{
+                            fontFamily: fonts.secondary[400],
+                            fontSize: MyDimensi / 28,
+                            position: 'absolute',
+                            // left: 10,
+                            left: '35%',
+                            top: -15,
+                            color: colors.border
+                        }}>Scanned by</Text>
                     </View>
 
                 </View>
