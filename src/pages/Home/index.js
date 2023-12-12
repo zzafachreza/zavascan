@@ -190,7 +190,7 @@ export default function Home({ navigation }) {
               fontSize: MyDimensi / 22,
               color: colors.white,
             }}>
-            Hi, {user.nama_lengkap} ZAVALABS
+            Hi, {user.nama_lengkap}
           </Text>
           <Text
             style={{
