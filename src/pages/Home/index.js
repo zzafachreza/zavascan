@@ -200,7 +200,7 @@ export default function Home({ navigation }) {
         <View style={{
           justifyContent: 'center',
           alignItems: 'center',
-          flex: 1,
+          // flex: 1,
         }}>
           <Image source={require('../../assets/logohr.png')} style={{
             width: windowWidth / 4,

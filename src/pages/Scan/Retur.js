@@ -48,28 +48,41 @@ export default function Retur({ navigation, route }) {
     }
 
     const __insertData = (barcode, tipe = 'scan') => {
-        axios.post(APIurl + 'retur', {
-            id_member: user.id,
-            key: barcode,
-            customer: customer
-        }).then(res => {
-            if (tipe == 'scan') {
-                setKey('');
-                inputRef.current.focus();
-            }
+
+        if (barcode.length < 10) {
+            showMessage({
+                message: 'Minimal 10 karakter !'
+            })
+        } else if (barcode.length > 18) {
+            showMessage({
+                message: 'Maksimal 18 karakter !'
+            })
+        } else {
+            axios.post(APIurl + 'retur', {
+                id_member: user.id,
+                key: barcode,
+                customer: customer
+            }).then(res => {
+                if (tipe == 'scan') {
+                    setKey('');
+                    inputRef.current.focus();
+                }
 
 
-            if (res.data.status == 200) {
-                SoundPlayer.playSoundFile('scan', 'mp3')
-                __getTransaction();
-            } else {
-                showMessage({
-                    type: 'danger',
-                    message: res.data.message
-                });
-                SoundPlayer.playSoundFile('errscan', 'mp3')
-            }
-        })
+                if (res.data.status == 200) {
+                    SoundPlayer.playSoundFile('scan', 'mp3')
+                    __getTransaction();
+                } else {
+                    showMessage({
+                        type: 'danger',
+                        message: res.data.message
+                    });
+                    SoundPlayer.playSoundFile('errscan', 'mp3')
+                }
+            })
+
+        }
+
     }
 
 
@@ -139,6 +152,7 @@ export default function Retur({ navigation, route }) {
                         <TextInput
                             ref={inputRef}
                             value={key}
+                            maxLength={18}
                             placeholder='Add Resi'
                             onChangeText={x => setKey(x)}
                             onSubmitEditing={x => {

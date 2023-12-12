@@ -764,7 +764,7 @@ export default function Router() {
         name="LaporanByCustomer"
         component={LaporanByCustomer}
         options={({ route, navigation }) => ({
-          title: 'LAPORAN CUSTOMER',
+          title: 'LAPORAN ADMIN',
           headerTintColor: 'white',
           headerStyle: {
             backgroundColor: colors.primary,
