@@ -211,7 +211,7 @@ export default function LaporanTanggal({ navigation }) {
             <MyGap jarak={20} />
             <MyButton onPress={download} title="Download" warna={colors.success} Icons="download-outline" />
             <MyGap jarak={20} />
-            <MyButton onPress={clearResi} title="Hapus Resi" warna={colors.danger} Icons="trash-outline" />
+            {/* <MyButton onPress={clearResi} title="Hapus Resi" warna={colors.danger} Icons="trash-outline" /> */}
         </SafeAreaView>
     )
 }

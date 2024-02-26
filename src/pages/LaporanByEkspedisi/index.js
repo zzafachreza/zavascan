@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import WebView from 'react-native-webview';
 import { colors } from '../../utils/colors';
-import { getData } from '../../utils/localStorage';
+import { APIurl, getData, urlWeb } from '../../utils/localStorage';
 
 export default function LaporanByEkspedisi({ route }) {
 
@@ -20,7 +20,7 @@ export default function LaporanByEkspedisi({ route }) {
         setVisible(false);
     };
 
-    const myUrl = 'https://zavalabs.com/api/zavascan_data_ekspedisi.php?id_member=' +
+    const myUrl = urlWeb + 'laporan/by_expedisi?id_member=' +
         item.id_member + '&awal=' + item.awal + '&akhir=' + item.akhir
     return (
         <SafeAreaView

@@ -282,7 +282,7 @@ export default function Packing({ navigation, route }) {
                                     fontFamily: fonts.secondary[600],
                                     fontSize: MyDimensi / 28,
                                     color: colors.border,
-                                }}>{item.customer}</Text>
+                                }}>{item.by_packing}</Text>
                                 <Text style={{
                                     fontFamily: fonts.secondary[600],
                                     fontSize: MyDimensi / 28,
@@ -302,7 +302,7 @@ export default function Packing({ navigation, route }) {
                                     fontFamily: fonts.secondary[600],
                                     fontSize: MyDimensi / 28,
                                     color: '#F08F5F',
-                                }}>{item.tanggal} {item.jam}</Text>
+                                }}>{item.tanggal_packing} {item.jam_packing}</Text>
                             </View>
                             <TouchableOpacity onPress={(() => {
                                 Alert.alert('ZAVASCAN', 'Apakah kamu yakin akan hapus resi ' + item.nama + ' ?', [

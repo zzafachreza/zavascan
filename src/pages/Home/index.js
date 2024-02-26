@@ -59,9 +59,7 @@ export default function Home({ navigation }) {
 
 
 
-        axios.post('https://zavalabs.com/api/zavascan_expired.php', {
-          id: res.id
-        }).then(cek => {
+        axios.get(APIurl + 'expired?id_member=' + res.id).then(cek => {
           console.log('expired', cek.data);
 
           if (cek.data <= today) {
@@ -72,7 +70,7 @@ export default function Home({ navigation }) {
               "Mohon maaf masa berlaku akun Anda telah berakhir, silahkan hubungi admin untuk mengaktifkan kembali",
               [
 
-                { text: "Hubungi Admin", onPress: () => Linking.openURL('https://wa.me/6281319456595') }
+                { text: "Hubungi Admin", onPress: () => Linking.openURL('https://wa.me/6281312924040') }
               ]
             );
             setOpen(false);
@@ -308,7 +306,7 @@ export default function Home({ navigation }) {
           textAlign: 'center',
           fontSize: 25,
         }}>Silahkan hubungi admin untuk melakukan upgrade</Text>
-        <TouchableOpacity onPress={() => Linking.openURL('https://wa.me/6281319456595')}>
+        <TouchableOpacity onPress={() => Linking.openURL('https://wa.me/6281312924040')}>
           <Text style={{
             backgroundColor: colors.success,
             padding: 10,
@@ -318,7 +316,7 @@ export default function Home({ navigation }) {
             fontFamily: fonts.secondary[800],
             textAlign: 'center',
             fontSize: 25,
-          }}>0813-1945-5695</Text>
+          }}>0813-1292-4040</Text>
         </TouchableOpacity>
       </View>}
     </SafeAreaView>

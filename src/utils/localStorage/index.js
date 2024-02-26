@@ -19,4 +19,5 @@ export const getData = async (key) => {
   }
 };
 
-export const APIurl = 'https://api.zavalabs.com/zavascan/';
+export const APIurl = 'https://zavascan.zavalabs.com/api/';
+export const urlWeb = 'https://zavascan.zavalabs.com/';

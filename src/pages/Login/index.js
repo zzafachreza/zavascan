@@ -18,7 +18,7 @@ import { MyDimensi, fonts } from '../../utils/fonts';
 import { MyInput, MyGap, MyButton } from '../../components';
 import LottieView from 'lottie-react-native';
 import axios from 'axios';
-import { storeData, getData } from '../../utils/localStorage';
+import { storeData, getData, APIurl } from '../../utils/localStorage';
 import { showMessage } from 'react-native-flash-message';
 
 export default function Login({ navigation }) {
@@ -63,6 +63,7 @@ export default function Login({ navigation }) {
 
   // login ok
   const masuk = () => {
+    console.log(data);
     if (!valid) {
       showMessage({
         message: 'Maaf Email tidak valid !',
@@ -83,7 +84,8 @@ export default function Login({ navigation }) {
     } else {
       setLoading(true);
       setTimeout(() => {
-        axios.post('https://zavalabs.com/api/login.php', data).then(res => {
+        axios.post(APIurl + 'login', data).then(res => {
+          console.log(res.data);
 
           if (res.data.kode == 50) {
             showMessage({

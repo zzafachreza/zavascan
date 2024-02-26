@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { MyInput } from '../../components';
-import { getData } from '../../utils/localStorage';
+import { APIurl, getData } from '../../utils/localStorage';
 import axios from 'axios';
 import { FlatList } from 'react-native-gesture-handler';
 import { fonts } from '../../utils/fonts';
@@ -49,11 +49,10 @@ export default function Hasil({ route }) {
 
   const _getData = id_member => {
     axios
-      .post('https://zavalabs.com/api/zavascan_data.php', {
-        id_member: id_member,
-      })
+      .get(APIurl + 'scan?id_member=' + id_member)
       .then(res => {
-        setData(res.data);
+        console.log(res.data.data)
+        setData(res.data.data);
       });
   };
 
