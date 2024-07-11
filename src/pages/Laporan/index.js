@@ -73,7 +73,7 @@ export default function Laporan({ navigation }) {
           {
             text: "OK", onPress: () => {
 
-              axios.get(urlWeb + 'laporan/delete_laporan?id_member=' +
+              axios.get('https://zavalabs.com/api/zavascan_clear.php?id_member=' +
                 user.id + '&awal=' + awal + '&akhir=' + akhir
               ).then(res => {
                 console.log(res.data);

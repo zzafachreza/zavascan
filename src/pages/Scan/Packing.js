@@ -33,7 +33,7 @@ export default function Packing({ navigation, route }) {
     const __getTransaction = () => {
         // setLoading(true);
         axios.get(APIurl + 'packing?id_member=' + route.params.id).then(res => {
-            // console.log(res.data.data[0]);
+            console.log(res.data.data[0]);
             setData(res.data.data)
         }).finally(() => {
             setLoading(false);
@@ -282,7 +282,7 @@ export default function Packing({ navigation, route }) {
                                     fontFamily: fonts.secondary[600],
                                     fontSize: MyDimensi / 28,
                                     color: colors.border,
-                                }}>{item.by_packing}</Text>
+                                }}>{item.customer}</Text>
                                 <Text style={{
                                     fontFamily: fonts.secondary[600],
                                     fontSize: MyDimensi / 28,
@@ -302,7 +302,7 @@ export default function Packing({ navigation, route }) {
                                     fontFamily: fonts.secondary[600],
                                     fontSize: MyDimensi / 28,
                                     color: '#F08F5F',
-                                }}>{item.tanggal_packing} {item.jam_packing}</Text>
+                                }}>{item.tanggal_terima} {item.jam_terima}</Text>
                             </View>
                             <TouchableOpacity onPress={(() => {
                                 Alert.alert('ZAVASCAN', 'Apakah kamu yakin akan hapus resi ' + item.nama + ' ?', [
