@@ -129,6 +129,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    
+
+    
 
     defaultConfig {
     
@@ -136,8 +139,8 @@ android {
         applicationId "com.zavascan"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 9
-        versionName "9.0"
+        versionCode 11
+        versionName "11.0"
         multiDexEnabled true
     }
     splits {

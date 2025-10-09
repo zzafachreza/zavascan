@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,15 +9,15 @@ import {
   Image,
   Animated,
 } from 'react-native';
-import { colors } from '../../utils/colors';
-import { fonts } from '../../utils/fonts';
-import { color } from 'react-native-reanimated';
-import { getData, storeData } from '../../utils/localStorage';
-import { PermissionsAndroid } from 'react-native';
+import {colors} from '../../utils/colors';
+import {fonts} from '../../utils/fonts';
+import {color} from 'react-native-reanimated';
+import {getData, storeData} from '../../utils/localStorage';
+import {PermissionsAndroid} from 'react-native';
 import LottieView from 'lottie-react-native';
 import DeviceInfo from 'react-native-device-info';
 
-export default function Splash({ navigation }) {
+export default function Splash({navigation}) {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
 
@@ -51,27 +51,21 @@ export default function Splash({ navigation }) {
   }).start();
 
   useEffect(() => {
-
-
-    DeviceInfo.getDeviceName().then((name) => {
+    DeviceInfo.getDeviceName().then(name => {
       // "OPM2.171026.006.G1"
       console.warn(name);
 
-      DeviceInfo.getMacAddress().then((id) => {
+      DeviceInfo.getMacAddress().then(id => {
         // "OPM2.171026.006.G1"
 
         storeData('device', {
           deviceID: id,
-          deviceName: name
+          deviceName: name,
         });
       });
 
-
-
       // storeData('device', display);
     });
-
-
 
     const unsubscribe = getData('user').then(res => {
       if (!res) {
@@ -84,8 +78,6 @@ export default function Splash({ navigation }) {
         }, 2000);
       }
     });
-
-
   }, []);
   return (
     <SafeAreaView style={styles.page}>
@@ -128,7 +120,7 @@ export default function Splash({ navigation }) {
         }}>
         <Image
           resizeMode="contain"
-          style={{ width: 200, height: 200, alignSelf: 'center' }}
+          style={{width: 200, height: 200, alignSelf: 'center'}}
           source={require('../../assets/logo5.png')}
         />
       </View>

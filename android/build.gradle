@@ -7,8 +7,10 @@ buildscript {
         minSdkVersion = 21
 
         compileSdkVersion = 33
-        targetSdkVersion = 34
+        targetSdkVersion = 35
         ndkVersion = "20.1.5948944"
+        // Ubah flipper ke versi stabil
+        flipperVersion = "0.54.0"
     }
     repositories {
         google()
